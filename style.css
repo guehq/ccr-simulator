@@ -1,0 +1,101 @@
+body {
+  font-family: monospace;
+  background-color: steelblue;
+}
+
+section.underwater-video {
+  position: absolute;
+  width: calc(100vw - 3px);
+  height: calc(100vh - 8px);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border: none;
+}
+
+section.controller {
+  position: absolute;
+  padding: 1em;
+  width: calc(100vw - 3em);
+  background-color: black;
+  z-index: 9;
+  color: white;
+}
+
+section.controller #setpoint {
+  display: inline;
+}
+
+section.nerd {
+  position: absolute;
+  right: 3em;
+  bottom: 3em;
+  height: 12em;
+  width: 16em;
+  border-radius: 100%;
+  padding: 5em 3em;
+  background-color: black;
+  color: white;
+  text-align: center;
+}
+
+section.nerd th {
+  color: skyblue;
+  text-align: center;
+}
+
+section.nerd .danger {
+  color: tomato;
+  -webkit-animation: dangerColorChange 1s infinite;
+  animation: 1s infinite dangerColorChange;
+}
+
+@keyframes dangerColorChange {
+  0% { background-color: tomato; color: black; }
+  50% { background-color: black; color: tomato; }
+  100% { background-color: tomato; color: black; }
+}
+
+@-webkit-keyframes dangerColorChange {
+  0% { background-color: tomato; color: black; }
+  50% { background-color: black; color: tomato; }
+  100% { background-color: tomato; color: black; }
+}
+
+section.nerd table {
+  margin-bottom: .5em;
+  width: 100%;
+}
+
+section.nerd table td {
+  font-size: 2em;
+  text-align: right;
+}
+
+section.nerd table.center {
+  width: 100%;
+  text-align: center;
+  font-size: 1.1em;
+  margin-left: -.75em;
+}
+
+section.nerd-buttons {
+  position: absolute;
+  right: 3em;
+  bottom: 3em;
+  height: 2em;
+  width: 22em;
+}
+
+section.nerd-buttons .btn {
+  border-radius: 100%;
+  width: 3em;
+  height: 3em;
+  background-color: black;
+  cursor: pointer;
+}
+
+section.nerd-buttons .btn-right {
+  float: right;
+}
