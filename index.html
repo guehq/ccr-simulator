@@ -5,88 +5,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Online CCR Simulator</title>
-  <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <section class="underwater-video">
-    <!-- <iframe width="100%" height="100%" src="https://www.youtube.com/embed/W6Aw5_kGprU?controls=0&autoplay=1&mute=1"></iframe> -->
-  </section>
+<body style="font-family: monospace; background-color: steelblue;">
+  <section style="text-align: center; padding-top: 12rem;">
+    <h1 style="font-size: 2rem;">Pick your CCR</h1>
+    <a href="./sf2.html">
+      <img src="./images/sf2-logo.jpeg" alt="SF2" style="height: 100px;">
+    </a>
 
-  <section class="controller">
-    <img src="images/sf2-logo.jpeg" alt="SF2">
-    <button id="sink" onclick="sink()">Depth +</button>
-    <button id="surface" onclick="surface()">Depth -</button>
-    <button id="surface" onclick="diluentFlash()">Diluent Flash</button>
-    <button id="surface" onclick="oxygenFlash()">Oxygen Flash</button>
-    <button id="surface" onclick="mavDiluent()">MAV Diluent</button>
-    <button id="surface" onclick="mavOxygen()">MAV Oxygen</button>
-    <section id="setpoint">
-      <label class="sp.19">
-        <input type="radio" value="0.19" name="radio" checked>
-        <span>SP .19</span>
-      </label>
-      <label class="sp.5">
-        <input type="radio" value="0.48" name="radio">
-        <span>SP .5</span>
-      </label>
-      <label class="sp1.3">
-          <input type="radio" value="1.28" name="radio">
-          <span>SP 1.3</span>
-      </label>
-    </section>
+    <a href="./jj.html">
+      <img src="./images/jj-logo.jpeg" alt="JJ" style="height: 100px;">
+    </a>
   </section>
-
-  <section class="nerd">
-    <table class="top">
-      <thead>
-        <tr>
-          <th>DEPTH</th>
-          <th>TIME</th>
-          <th>STOP</th>
-          <th>TIME</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><span id="depth"></span></td>
-          <td><label id="minutes">00</label><label id="seconds" style="font-size: .5em">00</label></td>
-          <td>-</td>
-          <td>-</td>
-        </tr>
-      </tbody>
-    </table>
-    <table class="center">
-      <tr>
-        <td><span id="sensor1"></span></td>
-        <td><span id="sensor2"></span></td>
-        <td><span id="sensor3"></span></td>
-      </tr>
-    </table>
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th>O2/HE</th>
-          <th>NDL</th>
-          <th>TTS</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>CC</td>
-          <td>21/00</td>
-          <td>-</td>
-          <td><span id="tts"></span></td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-
-  <section class="nerd-buttons">
-    <button class="btn btn-left"></button>
-    <button class="btn btn-right"></button>
-  </section>
-
-  <script src="script.js"></script>
 </body>
 </html>

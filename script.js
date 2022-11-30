@@ -7,7 +7,7 @@ let fo2 = 0.21
 let ambiantPressure = depth.value / 10 + 1
 let ascentRate = 10
 
-depth.value = 5
+depth.value = 0
 depth.innerHTML = depth.value
 
 tts.value = Math.ceil(depth.value / ascentRate)
@@ -39,8 +39,8 @@ function checkSensors () {
   ambiantPressure = depth.value / 10 + 1
 
   sensor1.value = fo2 * ambiantPressure
-  sensor2.value = fo2 * ambiantPressure
-  sensor3.value = fo2 * ambiantPressure
+  sensor2.value = fo2 * ambiantPressure * 1.01
+  sensor3.value = fo2 * ambiantPressure * 0.99
 
   sensor1.innerHTML = sensor1.value.toFixed(2)
   sensor2.innerHTML = sensor2.value.toFixed(2)
@@ -79,7 +79,7 @@ function o2consumption () {
 o2consumption ()
 
 // DEPTH CHANGES
-function sink() {
+function descend() {
   if(depth.value < 30) {
     depth.value = depth.value + 5;
     depth.innerHTML = depth.value;
@@ -91,8 +91,8 @@ function sink() {
   }
 }
 
-function surface() {
-  if(depth.value > 5) {
+function ascend() {
+  if(depth.value > 0) {
     depth.value = depth.value - 5;
     depth.innerHTML = depth.value;
     tts.value = Math.ceil(depth.value / ascentRate);
@@ -103,16 +103,18 @@ function surface() {
   }
 }
 
-function diluentFlash () {
+// FLUSHES
+function diluentFlush () {
   fo2 = 0.21
   checkSensors ()
 }
 
-function oxygenFlash () {
+function oxygenFlush () {
   fo2 = 1
   checkSensors ()
 }
 
+// MANUEL ADDITION VALVES
 function mavDiluent () {
   if (fo2 > 0.25) {
     fo2 = fo2 - 0.05
@@ -131,11 +133,17 @@ function mavOxygen () {
   checkSensors ()
 }
 
+
 // SETPOINT
 function checkSetpoint () {
   let setpoint = document.querySelector('#setpoint input:checked')
   if (sensor1.value < setpoint.value) {
     mavOxygen ()
+    document.getElementById('solenoid_valve').textContent = 'Solenoid Valve [ACTIVE]'
+    document.getElementById('solenoid_valve').classList.add('active')
+  } else {
+    document.getElementById('solenoid_valve').textContent = 'Solenoid Valve'
+    document.getElementById('solenoid_valve').classList.remove('active')
   }
 }
 
