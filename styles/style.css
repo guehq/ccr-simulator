@@ -158,3 +158,67 @@ section.nerd input[type=number] {
 #failures {
   height: calc(100vh - 32px);
 }
+
+/* HUD */
+#hud {
+  border-radius: 3em 0 0 3em;
+  margin-right: 0 !important;
+}
+
+.hud-light {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 100%;
+  margin: .5rem auto;
+}
+
+.light-red.is-blinking {
+  -webkit-animation: redLightBlinking 1s infinite;
+  animation: 1s infinite redLightBlinking;
+}
+
+@keyframes redLightBlinking {
+  0% { background-color: #f14668; }
+  50% { background-color: #363636; }
+  100% { background-color: #f14668; }
+}
+
+@-webkit-keyframes redLightBlinking {
+  0% { background-color: #f14668; }
+  50% { background-color: #363636; }
+  100% { background-color: #f14668; }
+}
+
+.light-green.is-blinking {
+  -webkit-animation: greenLightBlinking 1s infinite;
+  animation: 1s infinite greenLightBlinking;
+}
+
+@keyframes greenLightBlinking {
+  0% { background-color: #48c78e; }
+  50% { background-color: #363636; }
+  100% { background-color: #48c78e; }
+}
+
+@-webkit-keyframes greenLightBlinking {
+  0% { background-color: #48c78e; }
+  50% { background-color: #363636; }
+  100% { background-color: #48c78e; }
+}
+
+.light-yellow.is-blinking {
+  -webkit-animation: yellowLightBlinking 1s infinite;
+  animation: 1s infinite yellowLightBlinking;
+}
+
+@keyframes yellowLightBlinking {
+  0% { background-color: #ffe08a; }
+  50% { background-color: #363636; }
+  100% { background-color: #ffe08a; }
+}
+
+@-webkit-keyframes yellowLightBlinking {
+  0% { background-color: #ffe08a; }
+  50% { background-color: #363636; }
+  100% { background-color: #ffe08a; }
+}
