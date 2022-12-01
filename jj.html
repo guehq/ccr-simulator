@@ -75,11 +75,20 @@
         <aside class="menu">
           <p class="menu-label p-4 has-text-white">Potential Failures</p>
           <ul class="menu-list">
-            <li><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;O<sub>2</sub> Sensor Failure</a></li>
-            <li><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;Solenoid Valve Failure</a></li>
-            <li><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;... Failure</a></li>
-            <li><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;... Failure</a></li>
-            <li><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;... Failure</a></li>
+            <li title="O2 sensor discrepancy"><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;FC1</a></li>
+            <li title="Moderately hight but safe PO2"><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;FC2</a></li>
+            <li title="Hight unsafe PO2 - Hyperoxic warning"><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;FC3</a></li>
+            <li title="Low unsafe PO2 - Hypoxic warning"><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;FC4</a></li>
+            <li title="Sensor current limitation and voting logic failure"><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;FC5</a></li>
+            <li title="Controller failure"><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;FC6</a></li>
+            <li title="Solenoid alert, interrupted O2 supply"><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;FC7</a></li>
+            <li title="O2 runaway - Malfunctioning addition"><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;FC8</a></li>
+            <li title="Diluent runaway - Malfunctioning ADV"><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;FC9</a></li>
+            <li title="Voting failed - Voting logic failure"><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;FC10</a></li>
+            <li title="Hypercapnia - CO2 absorbent failure"><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;FC11</a></li>
+            <li title="Released counterlung OPV"><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;FC12</a></li>
+            <li title="Semi-closed operation"><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;FC13</a></li>
+            <li title="Caustic Cocktail"><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;FC14</a></li>
           </ul>
           <button class="button is-small is-fullwidth is-black m-1"><i class="fa-solid fa-play"></i>&nbsp;Play random failures</button>
         </aside>
@@ -89,7 +98,6 @@
         <aside class="menu">
           <p class="menu-label p-4 has-text-white">Upcoming Features</p>
           <ul class="menu-list px-4">
-            <li class="has-text-white m-2"><i class="fa-solid fa-lightbulb"></i>&nbsp;Potential Failures</li>
             <li class="has-text-white m-2"><i class="fa-solid fa-lightbulb"></i>&nbsp;Show HUD</li>
           </ul>
         </aside>
@@ -122,8 +130,27 @@
           </div>
 
           <div class="column is-5">
-            <section id="hud">
-              HUD
+            <section id="hud" class="has-background-black m-5">
+              <div class="columns">
+                <div id="hud_sensor1" class="column">
+                  <div class="hud-light light-red is-blinking"></div>
+                  <div class="hud-light light-green is-blinking"></div>
+                  <div class="hud-light light-yellow is-blinking"></div>
+                  <div class="hud-light light-red is-blinking"></div>
+                </div>
+                <div id="hud_sensor2" class="column">
+                  <div class="hud-light light-top has-background-danger"></div>
+                  <div class="hud-light light-green has-background-success"></div>
+                  <div class="hud-light light-yellow has-background-warning"></div>
+                  <div class="hud-light light-bottom has-background-danger"></div>
+                </div>
+                <div id="hud_sensor3" class="column">
+                  <div class="hud-light light-top has-background-grey-darker"></div>
+                  <div class="hud-light light-green has-background-grey-darker"></div>
+                  <div class="hud-light light-yellow has-background-grey-darker"></div>
+                  <div class="hud-light light-bottom has-background-grey-darker"></div>
+                </div>
+              </div>
             </section>
 
             <section id="nerd" class="nerd visible">
