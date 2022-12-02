@@ -21,9 +21,9 @@
       <div class="navbar-start">
         <div class="navbar-item">
           <div class="buttons are-small">
-            <button id="descend" class="button is-info is-rounded" onclick="descend ()">Depth +5</button>
-            <button id="ascend" class="button is-info is-rounded" onclick="ascend ()">Depth -5</button>
-            <button id="auto_ascend" class="button is-info is-rounded" onclick="autoAscend ()">Auto Ascend</button>
+            <button id="descend" class="button is-info is-rounded" onclick="descend ()" title="Descend 5 meters">Descend</button>
+            <button id="ascend" class="button is-info is-rounded" onclick="ascend ()" title="Ascend 5 meters">Ascend</button>
+            <button id="auto_ascend" class="button is-info is-rounded" onclick="autoAscend ()" title="Ascend 1m/sec speed">Auto Ascend</button>
           </div>
         </div>
         <div class="navbar-item">
@@ -75,7 +75,12 @@
         <aside class="menu">
           <p class="menu-label p-4 has-text-white">Potential Failures</p>
           <ul class="menu-list">
-            <li title="O2 sensor discrepancy"><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;FC1</a></li>
+            <li title="O2 sensor discrepancy">
+              <a class="has-text-white" onclick="runFC1 ()">
+                <i id="fc1icon" class="fa-regular fa-circle-exclamation has-text-success"></i>&nbsp;FC1
+              </a>
+            </li>
+
             <li title="Moderately hight but safe PO2"><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;FC2</a></li>
             <li title="Hight unsafe PO2 - Hyperoxic warning"><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;FC3</a></li>
             <li title="Low unsafe PO2 - Hypoxic warning"><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;FC4</a></li>
@@ -98,7 +103,7 @@
         <aside class="menu">
           <p class="menu-label p-4 has-text-white">Upcoming Features</p>
           <ul class="menu-list px-4">
-            <li class="has-text-white m-2"><i class="fa-solid fa-lightbulb"></i>&nbsp;Show HUD</li>
+            <li class="has-text-white m-2"><i class="fa-solid fa-lightbulb"></i>&nbsp; HUD</li>
           </ul>
         </aside>
       </div>
@@ -123,7 +128,7 @@
               </section>
     
               <section id="messages" class="passive">
-                <p class="title has-text-white">You Dead!</p>
+                <p class="title has-text-white">You Are Dead!</p>
                 <p class="subtitle has-text-white">"<span id="reason"></span>"</p>
               </section>
             </section>

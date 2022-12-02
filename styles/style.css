@@ -10,6 +10,14 @@ body {
   background-color: #333;
 }
 
+.menu-list li {
+  padding-left: .75em;
+}
+
+.menu-list li a:hover {
+  background-color: #161616;
+}
+
 .status > div {
   padding: .25rem;
   width: 50%;

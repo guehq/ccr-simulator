@@ -19,6 +19,8 @@ let tts = document.getElementById('tts')
 tts.value = Math.ceil(depth.value / ascentRate)
 tts.innerHTML = tts.value
 
+let discrepancyFactor = 1
+
 // TIMER
 let minutesLabel = document.getElementById("minutes");
 let secondsLabel = document.getElementById("seconds");
@@ -49,7 +51,7 @@ function checkSensors () {
 
   sensor1.value = loopO2
   sensor2.value = loopO2 * 1.01
-  sensor3.value = loopO2 * 0.99
+  sensor3.value = loopO2 * 0.99 * discrepancyFactor
 
   sensor1.innerHTML = sensor1.value.toFixed(2)
   sensor2.innerHTML = sensor2.value.toFixed(2)
@@ -264,4 +266,19 @@ function resetData () {
   depth.innerHTML = depth.value
 
   diluentFlush ()
+}
+
+/* ---------- FAILURE CARDS ---------- */
+
+// FC1
+function runFC1 () {
+  if (discrepancyFactor == 1) {
+    discrepancyFactor = .7
+    document.getElementById('fc1icon').classList.remove('has-text-success')
+    document.getElementById('fc1icon').classList.add('has-text-danger')
+  } else {
+    discrepancyFactor = 1
+    document.getElementById('fc1icon').classList.remove('has-text-danger')
+    document.getElementById('fc1icon').classList.add('has-text-success')
+  }
 }
