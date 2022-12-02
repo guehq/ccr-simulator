@@ -231,17 +231,23 @@ function oxygenFlush () {
 }
 
 // SETPOINT
-function checkSetpoint () {
-  let setpoint = document.querySelector('#setpoint input:checked')
-  let sv = document.getElementById('solenoid_valve')
+let svFailure = false
+let sv = document.getElementById('solenoid_valve')
 
-  if (sensor1.value < setpoint.value) {
-    mavOxygen ()
-    sv.textContent = '- Solenoid Valve [ACTIVE]'
-    sv.classList.add('active')
+function checkSetpoint () {
+  if ( svFailure ) {
+    return
   } else {
-    sv.textContent = '- Solenoid Valve'
-    sv.classList.remove('active')
+    let setpoint = document.querySelector('#setpoint input:checked')
+    
+    if (sensor1.value < setpoint.value) {
+      mavOxygen ()
+      sv.textContent = '- Solenoid Valve [ACTIVE]'
+      sv.classList.add('active')
+    } else {
+      sv.textContent = '- Solenoid Valve'
+      sv.classList.remove('active')
+    }
   }
 }
 
@@ -280,5 +286,47 @@ function runFC1 () {
     discrepancyFactor = 1
     document.getElementById('fc1icon').classList.remove('has-text-danger')
     document.getElementById('fc1icon').classList.add('has-text-success')
+  }
+}
+
+// FC2
+function runFC2 () {
+  loopO2 = 1.44
+}
+
+// FC3
+function runFC3 () {
+  loopO2 = 1.91
+}
+
+// FC4
+function runFC4 () {
+  loopO2 = 0.31
+}
+
+// FC5
+function runFC5 () {
+  alert('FC5')
+}
+
+// FC6
+function runFC6 () {
+  document.getElementById('nerd').classList.toggle('visible')
+  document.getElementById('fc6icon').classList.toggle('has-text-danger')
+  document.getElementById('fc6icon').classList.toggle('has-text-success')
+}
+
+// FC7
+function runFC7 () {
+  if (svFailure == false) {
+    svFailure = true
+    sv.textContent = '- Solenoid Valve [FAIL]'
+    document.getElementById('fc7icon').classList.remove('has-text-success')
+    document.getElementById('fc7icon').classList.add('has-text-danger')
+  } else {
+    svFailure = false
+    sv.textContent = '- Solenoid Valve'
+    document.getElementById('fc7icon').classList.remove('has-text-danger')
+    document.getElementById('fc7icon').classList.add('has-text-success')
   }
 }
