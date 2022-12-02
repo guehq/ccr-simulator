@@ -19,6 +19,8 @@ let tts = document.getElementById('tts')
 tts.value = Math.ceil(depth.value / ascentRate)
 tts.innerHTML = tts.value
 
+let discrepancyFactor = 1
+
 // TIMER
 let minutesLabel = document.getElementById("minutes");
 let secondsLabel = document.getElementById("seconds");
@@ -49,7 +51,7 @@ function checkSensors () {
 
   sensor1.value = loopO2
   sensor2.value = loopO2 * 1.01
-  sensor3.value = loopO2 * 0.99
+  sensor3.value = loopO2 * 0.99 * discrepancyFactor
 
   sensor1.innerHTML = sensor1.value.toFixed(2)
   sensor2.innerHTML = sensor2.value.toFixed(2)
@@ -229,17 +231,23 @@ function oxygenFlush () {
 }
 
 // SETPOINT
-function checkSetpoint () {
-  let setpoint = document.querySelector('#setpoint input:checked')
-  let sv = document.getElementById('solenoid_valve')
+let svFailure = false
+let sv = document.getElementById('solenoid_valve')
 
-  if (sensor1.value < setpoint.value) {
-    mavOxygen ()
-    sv.textContent = '- Solenoid Valve [ACTIVE]'
-    sv.classList.add('active')
+function checkSetpoint () {
+  if ( svFailure ) {
+    return
   } else {
-    sv.textContent = '- Solenoid Valve'
-    sv.classList.remove('active')
+    let setpoint = document.querySelector('#setpoint input:checked')
+    
+    if (sensor1.value < setpoint.value) {
+      mavOxygen ()
+      sv.textContent = '- Solenoid Valve [ACTIVE]'
+      sv.classList.add('active')
+    } else {
+      sv.textContent = '- Solenoid Valve'
+      sv.classList.remove('active')
+    }
   }
 }
 
@@ -264,4 +272,61 @@ function resetData () {
   depth.innerHTML = depth.value
 
   diluentFlush ()
+}
+
+/* ---------- FAILURE CARDS ---------- */
+
+// FC1
+function runFC1 () {
+  if (discrepancyFactor == 1) {
+    discrepancyFactor = .7
+    document.getElementById('fc1icon').classList.remove('has-text-success')
+    document.getElementById('fc1icon').classList.add('has-text-danger')
+  } else {
+    discrepancyFactor = 1
+    document.getElementById('fc1icon').classList.remove('has-text-danger')
+    document.getElementById('fc1icon').classList.add('has-text-success')
+  }
+}
+
+// FC2
+function runFC2 () {
+  loopO2 = 1.44
+}
+
+// FC3
+function runFC3 () {
+  loopO2 = 1.91
+}
+
+// FC4
+function runFC4 () {
+  loopO2 = 0.31
+}
+
+// FC5
+function runFC5 () {
+  alert('FC5')
+}
+
+// FC6
+function runFC6 () {
+  document.getElementById('nerd').classList.toggle('visible')
+  document.getElementById('fc6icon').classList.toggle('has-text-danger')
+  document.getElementById('fc6icon').classList.toggle('has-text-success')
+}
+
+// FC7
+function runFC7 () {
+  if (svFailure == false) {
+    svFailure = true
+    sv.textContent = '- Solenoid Valve [FAIL]'
+    document.getElementById('fc7icon').classList.remove('has-text-success')
+    document.getElementById('fc7icon').classList.add('has-text-danger')
+  } else {
+    svFailure = false
+    sv.textContent = '- Solenoid Valve'
+    document.getElementById('fc7icon').classList.remove('has-text-danger')
+    document.getElementById('fc7icon').classList.add('has-text-success')
+  }
 }
