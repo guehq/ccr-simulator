@@ -34,6 +34,7 @@ let adv = document.getElementById('adv_valve')
 adv.textContent = '- ADV'
 let refreshADV
 let causticCocktail = false
+let randomNo
 
 // TIMER
 let minutesLabel = document.getElementById("minutes");
@@ -307,10 +308,12 @@ function runFC1 () {
     discrepancyFactor = .7
     document.getElementById('fc1icon').classList.remove('has-text-success')
     document.getElementById('fc1icon').classList.add('has-text-danger')
+    document.getElementById('sensor3').classList.add('has-text-warning')
   } else {
     discrepancyFactor = 1
     document.getElementById('fc1icon').classList.remove('has-text-danger')
     document.getElementById('fc1icon').classList.add('has-text-success')
+    document.getElementById('sensor3').classList.remove('has-text-warning')
   }
 }
 
@@ -455,14 +458,18 @@ function runFC12 () {
 
 // FC13
 function runFC13 () {
-  if (x == false) {
-    x = true
-    document.getElementById('fc13icon').classList.remove('has-text-success')
-    document.getElementById('fc13icon').classList.add('has-text-danger')
+  if (o2RunawayFailure) {
+    o2RunawayFailure = false
+    document.getElementById('oxygenFlush').removeAttribute('disabled')
+    document.getElementById('mavOxygen').removeAttribute('disabled')
+    document.getElementById('fc13icon').classList.toggle('has-text-danger')
+    document.getElementById('fc13icon').classList.toggle('has-text-success')
   } else {
-    counterlungADVFailure = false
-    document.getElementById('fc13icon').classList.remove('has-text-danger')
-    document.getElementById('fc13icon').classList.add('has-text-success')
+    o2RunawayFailure = true
+    document.getElementById('oxygenFlush').setAttribute('disabled', '')
+    document.getElementById('mavOxygen').setAttribute('disabled', '')
+    document.getElementById('fc13icon').classList.toggle('has-text-danger')
+    document.getElementById('fc13icon').classList.toggle('has-text-success')
   }
 }
 
@@ -482,4 +489,47 @@ function runFC14 () {
     document.getElementById('symptoms').classList.add('is-hidden')
     document.getElementById('fc14symptoms').classList.add('is-hidden')
   }
+}
+
+function toggleHint () {
+  document.getElementById('failuresHintButton').classList.toggle('has-text-success')
+  document.getElementById('FC1hint').classList.toggle('is-hidden')
+  document.getElementById('FC2hint').classList.toggle('is-hidden')
+  document.getElementById('FC3hint').classList.toggle('is-hidden')
+  document.getElementById('FC4hint').classList.toggle('is-hidden')
+  document.getElementById('FC5hint').classList.toggle('is-hidden')
+  document.getElementById('FC6hint').classList.toggle('is-hidden')
+  document.getElementById('FC7hint').classList.toggle('is-hidden')
+  document.getElementById('FC8hint').classList.toggle('is-hidden')
+  document.getElementById('FC9hint').classList.toggle('is-hidden')
+  document.getElementById('FC10hint').classList.toggle('is-hidden')
+  document.getElementById('FC11hint').classList.toggle('is-hidden')
+  document.getElementById('FC12hint').classList.toggle('is-hidden')
+  document.getElementById('FC13hint').classList.toggle('is-hidden')
+  document.getElementById('FC14hint').classList.toggle('is-hidden')
+}
+
+function toggleSolution () {
+  document.getElementById('failuresSolutionButton').classList.toggle('has-text-success')
+  document.getElementById('solutions').classList.toggle('is-hidden')
+  document.getElementById('fc1solution').classList.toggle('is-hidden')
+}
+
+function randomFailure () {
+  randomNo = Math.floor(Math.random() * 14) + 1;
+  
+  if ( randomNo == 1 ) { runFC1 () } 
+  else if ( randomNo == 2 ) { runFC2 () }
+  else if ( randomNo == 3 ) { runFC3 () }
+  else if ( randomNo == 4 ) { runFC4 () }
+  else if ( randomNo == 5 ) { runFC5 () }
+  else if ( randomNo == 6 ) { runFC6 () }
+  else if ( randomNo == 7 ) { runFC7 () }
+  else if ( randomNo == 8 ) { runFC8 () }
+  else if ( randomNo == 9 ) { runFC9 () }
+  else if ( randomNo == 10 ) { runFC10 () }
+  else if ( randomNo == 11 ) { runFC11 () }
+  else if ( randomNo == 12 ) { runFC12 () }
+  else if ( randomNo == 13 ) { runFC13 () }
+  else if ( randomNo == 14 ) { runFC14 () }
 }
