@@ -1,57 +1,67 @@
 <!DOCTYPE html>
-<html lang="en" class="has-navbar-fixed-top">
+<html lang='en' class='has-navbar-fixed-top'>
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset='UTF-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
   <title>SF-2 CCR Simulator</title>
-  <link rel="stylesheet" href="./styles/bulma.min.css">
-  <link rel="stylesheet" href="./styles/style.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css' integrity='sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==' crossorigin='anonymous' referrerpolicy='no-referrer' />
+  <link rel='stylesheet' href='./styles/bulma.min.css'>
+  <link rel='stylesheet' href='./styles/style.css'>
 </head>
 <body>
-  <nav class="navbar is-fixed-top is-black">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="index.html">
-        <img src="./images/sf2-logo.jpeg" alt="JJ">
+  <nav class='navbar is-fixed-top is-black'>
+    <div class='navbar-brand'>
+      <a class='navbar-item' href='index.html'>
+        <img src='./images/sf2-logo.jpeg' alt='JJ'>
       </a>
     </div>
 
-    <div class="navbar-menu">
-      <div class="navbar-start">
-        <div class="navbar-item">
-          <div class="buttons are-small">
-            <button id="descend" class="button is-info is-rounded" onclick="descend()">Depth +</button>
-            <button id="ascend" class="button is-info is-rounded" onclick="ascend()">Depth -</button>
+    <div class='navbar-menu'>
+      <div class='navbar-start'>
+        <div class='navbar-item'>
+          <div class='buttons are-small'>
+            <button id='descend' class='button is-info is-rounded' onclick='descend ()' title='Descend 5 meters'>Descend</button>
+            <button id='ascend' class='button is-info is-rounded' onclick='ascend ()' title='Ascend 5 meters'>Ascend</button>
+            <button id='auto_ascend' class='button is-info is-rounded' onclick='autoAscend ()' title='Ascend 1m/sec speed'>Auto Ascend</button>
           </div>
         </div>
-        <div class="navbar-item">
-          <div class="buttons are-small">
-            <button id="diluentFlush" class="button is-warning is-rounded" onclick="diluentFlush()">Diluent Flush</button>
-            <button id="oxygenFlush" class="button is-warning is-rounded" onclick="oxygenFlush()">Oxygen Flush</button>
+        <div class='navbar-item'>
+          <div class='buttons are-small'>
+            <button id='diluentFlush' class='button is-warning is-rounded' onclick='diluentFlush ()'>Diluent Flush</button>
+            <button id='oxygenFlush' class='button is-warning is-rounded' onclick='oxygenFlush ()'>Oxygen Flush</button>
           </div>
         </div>
-        <div class="navbar-item">
-          <div class="buttons are-small">
-            <button id="mavDiluent" class="button is-success is-rounded" onclick="mavDiluent()">MAV Diluent</button>
-            <button id="mavOxygen" class="button is-success is-rounded" onclick="mavOxygen()">MAV Oxygen</button>
+        <div class='navbar-item'>
+          <div class='buttons are-small'>
+            <button id='mavDiluent' class='button is-success is-rounded' onclick='mavDiluent ()'>MAV Diluent</button>
+            <button id='mavOxygen' class='button is-success is-rounded' onclick='mavOxygen ()'>MAV Oxygen</button>
+          </div>
+        </div>
+        <div class='navbar-item'>
+          <div class='buttons are-small'>
+            <button id='hideNerd' class='button is-dark is-rounded' onclick='hideNerd ()'><i class='fa-solid fa-eye-slash'></i>&nbsp;Hide Nerd</button>
+            <button id='showNerd' class='button is-dark is-rounded is-hidden' onclick='showNerd ()'><i class='fa-solid fa-eye'></i>&nbsp;Show Nerd</button>
+            <button id='reset_data' class='button is-danger has-background-black-ter is-rounded' onclick='resetData ()'>Reset Data</button>
           </div>
         </div>
       </div>
 
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <section id="setpoint">
-            <label class="sp.19">
-              <input type="radio" value="0.18" name="radio" checked>
-              <span>SP 0.19</span>
+      <div class='navbar-end'>
+        <div class='navbar-item'>
+          <p class='is-size-7'>setpoint:</p>
+          <section id='setpoint'>
+            <label class='sp.19'>
+              <input type='radio' value='0.18' name='radio' checked>
+              <span>0.19</span>
             </label>
-            <label class="sp.5">
-              <input type="radio" value="0.48" name="radio">
-              <span>SP 0.5</span>
+            <label class='sp.5'>
+              <input type='radio' value='0.48' name='radio'>
+              <span>0.5</span>
             </label>
-            <label class="sp1.3">
-              <input type="radio" value="1.28" name="radio">
-              <span>SP 1.3</span>
+            <label class='sp1.3'>
+              <input type='radio' value='1.28' name='radio'>
+              <span>1.3</span>
             </label>
           </section>
         </div>
@@ -59,89 +69,148 @@
     </div>
   </nav>
 
-  <section class="">
-    <div class="columns">
-      <div id="failures" class="column is-one-fifth has-background-dark">
-        <aside class="menu">
-          <p class="menu-label p-4 has-text-white">Potential Failures</p>
-          <ul class="menu-list">
-            <li><a class="has-text-white">O<sub>2</sub> Sensor Failure</a></li>
+  <section class='main'>
+    <div class='columns'>
+      <div id='failures' class='column is-one-fifth has-background-dark p-0'>
+        <aside class='menu'>
+          <p class='menu-label p-5 mb-0 has-text-white' style='line-height: 2.5em'>
+            Potential Failures 
+            <button class='button is-small is-ghost is-black' title='Show Hints' onclick='toggleHint ()'><i id='failuresHintButton' class='fa-solid fa-lightbulb has-text-success'></i></button>
+            <button class='button is-small is-ghost is-black' title='Show Solution' onclick='toggleSolution ()'><i id="failuresSolutionButton" class='fa-solid fa-book'></i></button>
+          </p>
+          <ul class='menu-list'>
           </ul>
-          <button class="button is-small is-warning">Play random failures</button>
+          <button class='button is-small is-fullwidth is-black mt-4' onclick='randomFailure ()'><i class='fa-solid fa-play'></i>&nbsp;Play random failures</button>
         </aside>
       </div>
       
-      <div class="column is-four-fifth">
-        <section class="section">
-          <section class="status">
-            <div id="solenoid_valve" class="">Solenoid Valve</div>
-          </section>
+      <div id='app' class='column is-four-fifth has-background-info'>
+        <div class='columns'>
+          <div class='column is-7'>
+            <section class='section'>
+              <section class='status notification is-primary has-text-black'>
+                <label>STATUS:</label>
+                <div id='solenoid_valve'></div>
+                <div id='adv_valve'></div>
+              </section>
 
-          <section class="nerd">
-            <table id="top">
-              <thead>
-                <tr>
-                  <th>DEPTH</th>
-                  <th>TIME</th>
-                  <th>STOP</th>
-                  <th>TIME</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><span id="depth"></span></td>
-                  <td>
-                    <label id="minutes">00</label><span style="font-size: .5em">:</span><label id="seconds" style="font-size: .5em">00</label></td>
-                  <td>-</td>
-                  <td>-</td>
-                </tr>
-              </tbody>
-            </table>
+              <section class='notifications mt-5'>
+                <div id='gas_density' class='notification is-warning is-hidden'>
+                  High <strong>Gas Density</strong> Risk!
+                </div>
 
-            <table id="center">
-              <tr>
-                <td><span id="sensor1"></span></td>
-                <td><span id="sensor2"></span></td>
-                <td><span id="sensor3"></span></td>
-              </tr>
-            </table>
+                <div id='gas_narcosis' class='notification is-warning is-hidden'>
+                  High <strong>Gas Narcosis</strong> Risk!
+                </div>
 
-            <table id="bottom">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>O2/HE</th>
-                  <th>NDL</th>
-                  <th>TTS</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>CC</td>
-                  <td>21/00</td>
-                  <td>-</td>
-                  <td><span id="tts"></span></td>
-                </tr>
-              </tbody>
-            </table>
-          </section>
-      
-          <section class="nerd-buttons">
-            <button class="btn btn-left"></button>
-            <button class="btn btn-right"></button>
-          </section>
+                <div id='symptoms' class='notification is-warning is-hidden'>
+                  <label>SYMPTOMS:</label>
+                  <ul id='fc11symptoms' class='is-hidden' style='list-style-type: circle; margin-left: 1.5em'>
+                    <li>Increased breathing rate</li>
+                    <li>Gasping</li>
+                    <li>Headache</li>
+                    <li>Anxiety</li>
+                  </ul>
 
-        </section>
+                  <ul id='fc14symptoms' class='is-hidden' style='list-style-type: circle; margin-left: 1.5em'>
+                    <li>Gurgling sound</li>
+                    <li>Loss of bouyancy</li>
+                    <li>Breathing resistance</li>
+                    <li>Bitter taste</li>
+                    <li>Coughing and gagging</li>
+                  </ul>
+                </div>
+
+                <div id='solutions' class='notification is-success is-hidden'>
+                  <ol id='fc1solution' class='is-hidden' style='list-style-type: numbers; margin-left: 1.5em'>
+                    <p class="mb-3"><strong>FC1 SOLUTION:</strong></p>
+                    <li>Signal team and stabilize</li>
+                    <li>Switch CTRL to low setpoint 0.7</li>
+                    <li>Check CTRL diluent pO2</li>
+                    <li>One handed diluent flush</li>
+                    <li>Evaluate circumtances</li>
+                  </ol>
+                </div>
+              </section>
+    
+              <section id='messages' class='passive'>
+                <p class='title has-text-white'>You Are Dead!</p>
+                <p class='subtitle has-text-white'>'<span id='reason'></span>'</p>
+              </section>
+            </section>
+          </div>
+
+          <div class='column is-5'>
+            <section id='nerd' class='nerd visible'>
+              <table id='nerd-top'>
+                <thead>
+                  <tr>
+                    <th>DEPTH</th>
+                    <th>TIME</th>
+                    <th>STOP</th>
+                    <th>TIME</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span id='depth'></span></td>
+                    <td>
+                      <label id='minutes'>00</label><span style='font-size: .5em'>:</span><label id='seconds' style='font-size: .5em'>00</label></td>
+                    <td>-</td>
+                    <td>-</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <table id='nerd-center'>
+                <tr>
+                  <td><span id='sensor1'></span></td>
+                  <td><span id='sensor2'></span></td>
+                  <td><span id='sensor3'></span></td>
+                </tr>
+              </table>
+
+              <div id='nerd-warning-FC10' class='nerd-warning is-hidden' style='padding: 4px 0'>
+                <p class='is-size-3 has-text-warning has-text-centered'>VOTING FAILED</p>
+              </div>
+
+              <table id='nerd-bottom'>
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>O2/HE</th>
+                    <th>NDL</th>
+                    <th>TTS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>CC</td>
+                    <td><input id='fO2' type='number' value='21' onfocusout='resetData ()'>/<input id='fHe' type='number' value='0' onfocusout='resetData ()'></td>
+                    <td>-</td>
+                    <td><span id='tts'></span></td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <section class='nerd-buttons'>
+                <button class='btn btn-left'></button>
+                <button class='btn btn-right'></button>
+              </section>
+            </section>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <footer class="footer has-text-white has-background-black">
-    <div class="content has-text-centered">
+  <footer class='footer has-text-white has-background-black'>
+    <div class='content has-text-centered'>
       <p>Copyright &copy; nev[at]gue.com</p>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src='./js/script.js'></script>
+  <script src='./js/gue-gas-dynamics.js'></script>
 </body>
 </html>
