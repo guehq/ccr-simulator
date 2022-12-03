@@ -23,7 +23,7 @@ body {
   width: 50%;
 }
 
-#solenoid_valve.active {
+.active {
   color: orange;
   -webkit-animation: solenoidValveActivationColorChange .9s infinite;
   animation: .9s infinite solenoidValveActivationColorChange;
@@ -186,15 +186,15 @@ section.nerd input[type=number] {
 }
 
 @keyframes redLightBlinking {
-  0% { background-color: #f14668; }
+  0% { background-color: tomato; }
   50% { background-color: #363636; }
-  100% { background-color: #f14668; }
+  100% { background-color: tomato; }
 }
 
 @-webkit-keyframes redLightBlinking {
-  0% { background-color: #f14668; }
+  0% { background-color: tomato; }
   50% { background-color: #363636; }
-  100% { background-color: #f14668; }
+  100% { background-color: tomato; }
 }
 
 .light-green.is-blinking {
