@@ -99,7 +99,11 @@
               </a>
             </li>
 
-            <li title="Sensor current limitation and voting logic failure"><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;FC5</a></li>
+            <li title="Sensor current limitation and voting logic failure">
+              <a class="has-text-white" onclick="runFC5 ()">
+                <i id="fc5icon" class="fa-regular fa-circle-exclamation has-text-success"></i>&nbsp;FC5
+              </a>
+            </li>
 
             <li title="Controller failure">
               <a class="has-text-white" onclick="runFC6 ()">
@@ -113,13 +117,47 @@
               </a>
             </li>
 
-            <li title="O2 runaway - Malfunctioning addition"><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;FC8</a></li>
-            <li title="Diluent runaway - Malfunctioning ADV"><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;FC9</a></li>
-            <li title="Voting failed - Voting logic failure"><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;FC10</a></li>
-            <li title="Hypercapnia - CO2 absorbent failure"><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;FC11</a></li>
-            <li title="Released counterlung OPV"><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;FC12</a></li>
-            <li title="Semi-closed operation"><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;FC13</a></li>
-            <li title="Caustic Cocktail"><a class="has-text-white"><i class="fa-regular fa-circle-exclamation"></i>&nbsp;FC14</a></li>
+            <li title="O2 runaway - Malfunctioning addition">
+              <a class="has-text-white" onclick="runFC8 ()">
+                <i id="fc8icon" class="fa-regular fa-circle-exclamation has-text-success"></i>&nbsp;FC8
+              </a>
+            </li>
+
+            <li title="Diluent runaway - Malfunctioning ADV">
+              <a class="has-text-white" onclick="runFC9 ()">
+                <i id="fc9icon" class="fa-regular fa-circle-exclamation has-text-success"></i>&nbsp;FC9
+              </a>
+            </li>
+            
+            <li title="Voting failed - Voting logic failure">
+              <a class="has-text-white" onclick="runFC10 ()">
+                <i id="fc10icon" class="fa-regular fa-circle-exclamation has-text-success"></i>&nbsp;FC10
+              </a>
+            </li>
+            
+            <li title="Hypercapnia - CO2 absorbent failure">
+              <a class="has-text-white" onclick="runFC11 ()">
+                <i id="fc11icon" class="fa-regular fa-circle-exclamation has-text-success"></i>&nbsp;FC11
+              </a>
+            </li>
+            
+            <li title="Released counterlung OPV">
+              <a class="has-text-white" onclick="runFC12 ()">
+                <i id="fc12icon" class="fa-regular fa-circle-exclamation has-text-success"></i>&nbsp;FC12
+              </a>
+            </li>
+            
+            <li title="Semi-closed operation">
+              <a class="has-text-white"  onclick="runFC13 ()">
+                <i id="fc13icon" class="fa-regular fa-circle-exclamation has-text-warning"></i>&nbsp;FC13
+              </a>
+            </li>
+            
+            <li title="Caustic Cocktail">
+              <a class="has-text-white"  onclick="runFC14 ()">
+                <i id="fc14icon" class="fa-regular fa-circle-exclamation has-text-success"></i>&nbsp;FC14
+              </a>
+            </li>
           </ul>
           <button class="button is-small is-fullwidth is-black m-1"><i class="fa-solid fa-play"></i>&nbsp;Play random failures</button>
         </aside>
@@ -130,6 +168,7 @@
           <p class="menu-label p-4 has-text-white">Upcoming Features</p>
           <ul class="menu-list px-4">
             <li class="has-text-white m-2"><i class="fa-solid fa-lightbulb"></i>&nbsp; HUD</li>
+            <li class="has-text-white m-2"><i class="fa-solid fa-lightbulb"></i>&nbsp; FC solution/hint</li>
           </ul>
         </aside>
       </div>
@@ -141,6 +180,7 @@
               <section class="status has-text-white">
                 <label>Status:</label>
                 <div id="solenoid_valve"></div>
+                <div id="adv_valve"></div>
               </section>
 
               <section class="notifications mt-5">
@@ -150,6 +190,24 @@
 
                 <div id="gas_narcosis" class="notification is-warning is-hidden">
                   High <strong>Gas Narcosis</strong> Risk!
+                </div>
+
+                <div id="symptoms" class="notification is-warning is-hidden">
+                  <label>SYMPTOMS</label>
+                  <ul id="fc11symptoms" class="is-hidden" style="list-style-type: circle; margin-left: 1.5em">
+                    <li>Increased breathing rate</li>
+                    <li>Gasping</li>
+                    <li>Headache</li>
+                    <li>Anxiety</li>
+                  </ul>
+
+                  <ul id="fc14symptoms" class="is-hidden" style="list-style-type: circle; margin-left: 1.5em">
+                    <li>Gurgling sound</li>
+                    <li>Loss of bouyancy</li>
+                    <li>Breathing resistance</li>
+                    <li>Bitter taste</li>
+                    <li>Coughing and gagging</li>
+                  </ul>
                 </div>
               </section>
     
@@ -185,7 +243,7 @@
             </section>
 
             <section id="nerd" class="nerd visible">
-              <table id="top">
+              <table id="nerd-top">
                 <thead>
                   <tr>
                     <th>DEPTH</th>
@@ -204,16 +262,20 @@
                   </tr>
                 </tbody>
               </table>
-    
-              <table id="center">
+
+              <table id="nerd-center">
                 <tr>
                   <td><span id="sensor1"></span></td>
                   <td><span id="sensor2"></span></td>
                   <td><span id="sensor3"></span></td>
                 </tr>
               </table>
-    
-              <table id="bottom">
+
+              <div id="nerd-warning-FC10" class="nerd-warning is-hidden" style="padding: 4px 0">
+                <p class="is-size-3 has-text-warning has-text-centered">VOTING FAILED</p>
+              </div>
+
+              <table id="nerd-bottom">
                 <thead>
                   <tr>
                     <th></th>
@@ -225,13 +287,13 @@
                 <tbody>
                   <tr>
                     <td>CC</td>
-                    <td><input id="fO2" type="number" value="21" onfocusout="resetData ()">/<input id="fHe" type="number" value="0" onfocusout="resetData ()"></td>
+                    <td><input id="fO2" type="number" value="21" onfocusout="resetData ()">/<input id="fHe" type="number" value="35" onfocusout="resetData ()"></td>
                     <td>-</td>
                     <td><span id="tts"></span></td>
                   </tr>
                 </tbody>
               </table>
-    
+
               <section class="nerd-buttons">
                 <button class="btn btn-left"></button>
                 <button class="btn btn-right"></button>
