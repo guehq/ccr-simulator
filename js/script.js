@@ -25,7 +25,6 @@ let sv = document.getElementById('solenoid_valve')
 let votingFailure = false
 let nerdCenter = document.getElementById('nerd-center')
 let warningMessageFC10 = document.getElementById('nerd-warning-FC10')
-let sensorLimitationFailure = false
 let o2RunawayFailure = false
 let diluentRunawayFailure = false
 let co2AbsorbentFailure = false
@@ -35,6 +34,22 @@ adv.textContent = '- ADV'
 let refreshADV
 let causticCocktail = false
 let randomNo
+
+let showSolutions = false
+let isFC1Active = false
+let isFC2Active = false
+let isFC3Active = false
+let isFC4Active = false
+let isFC5Active = false
+let isFC6Active = false
+let isFC7Active = false
+let isFC8Active = false
+let isFC9Active = false
+let isFC10Active = false
+let isFC11Active = false
+let isFC12Active = false
+let isFC13Active = false
+let isFC14Active = false
 
 // TIMER
 let minutesLabel = document.getElementById("minutes");
@@ -64,7 +79,7 @@ function checkSensors () {
   fHe = document.getElementById('fHe').value / 100
   fN2 = 1 - fO2 - fHe
 
-  if (sensorLimitationFailure && sensor1.value > 1.1) {
+  if ( isFC5Active && sensor1.value > 1.1 ) {
     sensor1.value = 1.11
     sensor2.value = 1.15
   } else {
