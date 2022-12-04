@@ -1,43 +1,86 @@
+function toggleSolutions () {
+  showSolutions = !showSolutions
+  document.getElementById('failuresSolutionButton').classList.toggle('has-text-success')
+  document.getElementById('solutions').classList.toggle('is-hidden')
+}
+
 /* ---------- FAILURE CARDS for GUE-JJ CONFIGURATION ---------- */
 
 // FC1
 function runFC1 () {
-  if (discrepancyFactor == 1) {
+  if ( !isFC1Active ) {
+    isFC1Active = true
     discrepancyFactor = .7
+    document.getElementById('sensor3').classList.add('has-text-warning')
     document.getElementById('fc1icon').classList.remove('has-text-success')
     document.getElementById('fc1icon').classList.add('has-text-danger')
-    document.getElementById('sensor3').classList.add('has-text-warning')
+    document.getElementById('solutionFC1').classList.remove('is-hidden')
   } else {
+    isFC1Active = false
     discrepancyFactor = 1
+    document.getElementById('sensor3').classList.remove('has-text-warning')
     document.getElementById('fc1icon').classList.remove('has-text-danger')
     document.getElementById('fc1icon').classList.add('has-text-success')
-    document.getElementById('sensor3').classList.remove('has-text-warning')
+    document.getElementById('solutionFC1').classList.add('is-hidden')
   }
 }
 
 // FC2
 function runFC2 () {
-  loopO2 = 1.44
+  if ( !isFC2Active ) {
+    isFC2Active = true
+    loopO2 = 1.44
+    document.getElementById('fc2icon').classList.remove('has-text-success')
+    document.getElementById('fc2icon').classList.add('has-text-danger')
+    document.getElementById('solutionFC2').classList.remove('is-hidden')
+  } else {
+    isFC2Active = false
+    document.getElementById('fc2icon').classList.remove('has-text-danger')
+    document.getElementById('fc2icon').classList.add('has-text-success')
+    document.getElementById('solutionFC2').classList.add('is-hidden')
+  }
 }
 
 // FC3
 function runFC3 () {
-  loopO2 = 1.91
+  if ( !isFC3Active ) {
+    isFC3Active = true
+    loopO2 = 1.91
+    document.getElementById('fc3icon').classList.remove('has-text-success')
+    document.getElementById('fc3icon').classList.add('has-text-danger')
+    document.getElementById('solutionFC3').classList.remove('is-hidden')
+  } else {
+    isFC3Active = false
+    document.getElementById('fc3icon').classList.remove('has-text-danger')
+    document.getElementById('fc3icon').classList.add('has-text-success')
+    document.getElementById('solutionFC3').classList.add('is-hidden')
+  }
 }
 
 // FC4
 function runFC4 () {
-  loopO2 = 0.31
+  if ( !isFC4Active ) {
+    isFC4Active = true
+    loopO2 = 0.31
+    document.getElementById('fc4icon').classList.remove('has-text-success')
+    document.getElementById('fc4icon').classList.add('has-text-danger')
+    document.getElementById('solutionFC4').classList.remove('is-hidden')
+  } else {
+    isFC4Active = false
+    document.getElementById('fc4icon').classList.remove('has-text-danger')
+    document.getElementById('fc4icon').classList.add('has-text-success')
+    document.getElementById('solutionFC4').classList.add('is-hidden')
+  }
 }
 
 // FC5
 function runFC5 () {
-  if (sensorLimitationFailure == false) {
-    sensorLimitationFailure = true
+  if ( !isFC5Active ) {
+    isFC5Active = true
     document.getElementById('fc5icon').classList.remove('has-text-success')
     document.getElementById('fc5icon').classList.add('has-text-danger')
   } else {
-    sensorLimitationFailure = false
+    isFC5Active = false
     document.getElementById('fc5icon').classList.remove('has-text-danger')
     document.getElementById('fc5icon').classList.add('has-text-success')
   }
@@ -45,9 +88,14 @@ function runFC5 () {
 
 // FC6
 function runFC6 () {
+  !isFC6Active
   document.getElementById('nerd').classList.toggle('visible')
   document.getElementById('fc6icon').classList.toggle('has-text-danger')
   document.getElementById('fc6icon').classList.toggle('has-text-success')
+  document.getElementById('hideNerd').classList.toggle('is-hidden')
+  document.getElementById('showNerd').classList.toggle('is-hidden')
+  document.getElementById('hideNerd').disabled = true
+  document.getElementById('showNerd').disabled = true
 }
 
 // FC7
@@ -188,30 +236,6 @@ function runFC14 () {
   }
 }
 
-function toggleHint () {
-  document.getElementById('failuresHintButton').classList.toggle('has-text-success')
-  document.getElementById('FC1hint').classList.toggle('is-hidden')
-  document.getElementById('FC2hint').classList.toggle('is-hidden')
-  document.getElementById('FC3hint').classList.toggle('is-hidden')
-  document.getElementById('FC4hint').classList.toggle('is-hidden')
-  document.getElementById('FC5hint').classList.toggle('is-hidden')
-  document.getElementById('FC6hint').classList.toggle('is-hidden')
-  document.getElementById('FC7hint').classList.toggle('is-hidden')
-  document.getElementById('FC8hint').classList.toggle('is-hidden')
-  document.getElementById('FC9hint').classList.toggle('is-hidden')
-  document.getElementById('FC10hint').classList.toggle('is-hidden')
-  document.getElementById('FC11hint').classList.toggle('is-hidden')
-  document.getElementById('FC12hint').classList.toggle('is-hidden')
-  document.getElementById('FC13hint').classList.toggle('is-hidden')
-  document.getElementById('FC14hint').classList.toggle('is-hidden')
-}
-
-function toggleSolution () {
-  document.getElementById('failuresSolutionButton').classList.toggle('has-text-success')
-  document.getElementById('solutions').classList.toggle('is-hidden')
-  document.getElementById('fc1solution').classList.toggle('is-hidden')
-}
-
 function randomFailure () {
   randomNo = Math.floor(Math.random() * 14) + 1;
 
@@ -229,4 +253,22 @@ function randomFailure () {
   else if ( randomNo == 12 ) { runFC12 () }
   else if ( randomNo == 13 ) { runFC13 () }
   else if ( randomNo == 14 ) { runFC14 () }
+}
+
+function toggleHint () {
+  document.getElementById('failuresHintButton').classList.toggle('has-text-success')
+  document.getElementById('FC1hint').classList.toggle('is-hidden')
+  document.getElementById('FC2hint').classList.toggle('is-hidden')
+  document.getElementById('FC3hint').classList.toggle('is-hidden')
+  document.getElementById('FC4hint').classList.toggle('is-hidden')
+  document.getElementById('FC5hint').classList.toggle('is-hidden')
+  document.getElementById('FC6hint').classList.toggle('is-hidden')
+  document.getElementById('FC7hint').classList.toggle('is-hidden')
+  document.getElementById('FC8hint').classList.toggle('is-hidden')
+  document.getElementById('FC9hint').classList.toggle('is-hidden')
+  document.getElementById('FC10hint').classList.toggle('is-hidden')
+  document.getElementById('FC11hint').classList.toggle('is-hidden')
+  document.getElementById('FC12hint').classList.toggle('is-hidden')
+  document.getElementById('FC13hint').classList.toggle('is-hidden')
+  document.getElementById('FC14hint').classList.toggle('is-hidden')
 }
