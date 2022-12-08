@@ -81,25 +81,25 @@
           <ul class='menu-list'>
             <li title='O2 sensor discrepancy'>
               <a class='has-text-white' onclick='runFC1 ()'>
-                <i id='fc1icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC1 <span id='FC1hint'>- O2 Sensor</span>
+                <i id='fc1icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC1 <span id='FC1hint'>- O<sub>2</sub> Sensor</span>
               </a>
             </li>
 
             <li title='Moderately hight but safe PO2'>
               <a class='has-text-white' onclick='runFC2 ()'>
-                <i id='fc2icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC2 <span id='FC2hint'>- Hight PO2 safe</span>
+                <i id='fc2icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC2 <span id='FC2hint'>- Hight PO<sub>2</sub> safe</span>
               </a>
             </li>
 
             <li title='Hight unsafe PO2 - Hyperoxic warning'>
               <a class='has-text-white' onclick='runFC3 ()'>
-                <i id='fc3icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC3 <span id='FC3hint'>- High PO2 unsafe</span>
+                <i id='fc3icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC3 <span id='FC3hint'>- High PO<sub>2</sub> unsafe</span>
               </a>
             </li>
 
             <li title='Low unsafe PO2 - Hypoxic warning'>
               <a class='has-text-white' onclick='runFC4 ()'>
-                <i id='fc4icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC4 <span id='FC4hint'>- Low PO2</span>
+                <i id='fc4icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC4 <span id='FC4hint'>- Low PO<sub>2</sub></span>
               </a>
             </li>
 
@@ -123,7 +123,7 @@
 
             <li title='O2 runaway - Malfunctioning addition'>
               <a class='has-text-white' onclick='runFC8 ()'>
-                <i id='fc8icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC8 <span id='FC8hint'>- O2 Runaway</span>
+                <i id='fc8icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC8 <span id='FC8hint'>- O<sub>2</sub> Runaway</span>
               </a>
             </li>
 
@@ -160,6 +160,18 @@
             <li title='Caustic Cocktail'>
               <a class='has-text-white'  onclick='runFC14 ()'>
                 <i id='fc14icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC14 <span id='FC14hint'>- Caustic C.</span>
+              </a>
+            </li>
+            
+            <li title='Hyperoxia (experience dive)'>
+              <a class='has-text-white'  onclick='runFC15 ()'>
+                <i id='fc15icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC15 <span id='FC15hint'>- Hyperoxia</span>
+              </a>
+            </li>
+            
+            <li title='DCI (experience dive)'>
+              <a class='has-text-white'  onclick='runFC16 ()'>
+                <i id='fc16icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC16 <span id='FC16hint'>- DCI</span>
               </a>
             </li>
           </ul>
@@ -211,25 +223,170 @@
                     <li>Bitter taste</li>
                     <li>Coughing and gagging</li>
                   </ul>
+
+                  <ul id='fc15symptoms' class='is-hidden' style='list-style-type: circle; margin-left: 1.5em'>
+                    <li>VISUALDISTURBANCE</li>
+                    <li>EAR RINGING</li>
+                    <li>NAUSEA</li>
+                    <li>TWITCHING</li>
+                    <li>IRRITABILITY</li>
+                    <li>DIZZINESS</li>
+                  </ul>
+
+                  <ul id='fc16symptoms' class='is-hidden' style='list-style-type: circle; margin-left: 1.5em'>
+                    <li>PAIN</li>
+                    <li>NUMBNESS</li>
+                    <li>MOTORIC WEAKNESS</li>
+                    <li>CUTANEOUS AND/OR MUSCULAR DISCOMFORT</li>
+                  </ul>
                 </div>
 
                 <div id='solutions' class='notification is-success is-hidden p-0'>
                   <ol id='solutionFC1' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
-                    <p class="mb-3 is-uppercase	has-text-weight-bold">O<sup>2</sup> SENSOR DISCREPANCY, <span class="has-text-info">FC1</span> SOLUTION:</p>
+                    <p class="mb-3 is-uppercase	has-text-weight-bold">O<sub>2</sub> SENSOR DISCREPANCY, <span class="has-text-info">FC1</span> SOLUTION:</p>
                     <li>Signal team and stabilize</li>
                     <li>Switch CTRL to low setpoint 0.7</li>
-                    <li>Check CTRL diluent pO2</li>
+                    <li>Check CTRL diluent pO<sub>2</sub></li>
                     <li>One handed diluent flush</li>
                     <li>Evaluate circumtances</li>
                   </ol>
 
                   <ol id='solutionFC2' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
-                    <p class="mb-3 is-uppercase	has-text-weight-bold">MODERATELY HIGH BUT SAFE PO2, <span class="has-text-info">FC2</span> SOLUTION:</p>
+                    <p class="mb-3 is-uppercase	has-text-weight-bold">MODERATELY HIGH BUT SAFE PO<sub>2</sub>, <span class="has-text-info">FC2</span> SOLUTION:</p>
                     <li>Trigger diluent addition by nose exhalation</li>
                     <li>Evaluate circumstances</li>
-                    <p>If not resolved</p>
-                    <li>Unintentional O2 addition – increasing but safe pO2</li>
+                    <br>
+                    <strong>If not resolved</strong>
+                    <li>Unintentional O<sub>2</sub> addition – increasing but safe pO<sub>2</sub></li>
                   </ol>
+
+                  <ol id='solutionFC3' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
+                    <p class="mb-3 is-uppercase	has-text-weight-bold">HIGH UNSAFE PO<sub>2</sub> – HYPEROXIC WARNING, <span class="has-text-info">FC3</span> SOLUTION:</p>
+                    <li>Signal team "High pO<sub>2</sub>"</li>
+                    <li>Diluent flush</li>
+                    <li>Evaluate circumstances</li>
+                    <br>
+                    <strong>If not resolved</strong>
+                    <li>Unintentional O<sub>2</sub> addition – hyperoxic warning</li>
+                  </ol>
+
+                  <ol id='solutionFC4' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
+                    <p class="mb-3 is-uppercase	has-text-weight-bold">LOW UNSAFE PO<sub>2</sub> – HYPOXIC WARNING, <span class="has-text-info">FC4</span> SOLUTION:</p>
+                    <li>Signal team "switch to back gas" and stabilize</li>
+                    <li>Switch to back gas</li>
+                    <li>Check O<sub>2</sub> supply using MAV</li>
+                    <li>Flow check O<sub>2</sub> cylinder valve</li>
+                    <li>Check oxygen pressure gauge</li>
+                    <li>Evaluate circumstances</li>
+                  </ol>
+
+                  <ol id='solutionFC5' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
+                    <p class="mb-3 is-uppercase	has-text-weight-bold">SENSOR CURRENT LIMITATION AND VOTING LOGIC FAILURE, <span class="has-text-info">FC5</span> SOLUTION:</p>
+                    <li>Signal team and stabilize</li>
+                    <li>Switch CTRL to low setpoint 0.7</li>
+                    <li>Check CTRL diluent pO<sub>2</sub></li>
+                    <li>One handed diluent flush</li>
+                    <li>Evaluate circumstances</li>
+                  </ol>
+
+                  <ol id='solutionFC6' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
+                    <p class="mb-3 is-uppercase	has-text-weight-bold">CONTROLLER FAILURE, <span class="has-text-info">FC6</span> SOLUTION:</p>
+                    <li>Signal team and stabilize</li>
+                    <li>Manual O<sub>2</sub> addition</li>
+                    <li>Use HUD for O<sub>2</sub> monitoring</li>
+                    <li>Evaluate circumstances</li>
+                  </ol>
+                  
+                  <ol id='solutionFC7' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
+                    <p class="mb-3 is-uppercase	has-text-weight-bold">SOLENOID ALERT, INTERRUPTED O<sub>2</sub> SUPPLY, <span class="has-text-info">FC7</span> SOLUTION:</p>
+                    <li>Signal team "O<sub>2</sub> failed" and stabilize</li>
+                    <li>Maintain pO<sub>2</sub> with O<sub>2</sub> MAV</li>
+                    <li>Flow check O<sub>2</sub> cylinder valve</li>
+                    <li>Check oxygen pressure gauge</li>
+                    <li>Evaluate circumstances</li>
+                  </ol>
+
+                  <ol id='solutionFC8' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
+                    <p class="mb-3 is-uppercase	has-text-weight-bold">O<sub>2</sub> RUNAWAY – MALFUNCTIONING ADDITION, <span class="has-text-info">FC8</span> SOLUTION:</p>
+                    <li>Signal team and stabilize</li>
+                    <li>Adjust trim to be slightly negative</li>
+                    <li>Remain on the loop allowing gas to escape from the lips</li>
+                    <li>Close O<sub>2</sub> valve while signalling</li>
+                    <li>Evaluate circumstances</li>
+                  </ol>
+
+                  <ol id='solutionFC9' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
+                    <p class="mb-3 is-uppercase	has-text-weight-bold">DILUENT RUNAWAY – MALFUNCTIONING ADV, <span class="has-text-info">FC9</span> SOLUTION:</p>
+                    <li>Signal team and stabilize</li>
+                    <li>Adjust trim to be slightly negative</li>
+                    <li>Remain on the loop allowing gas to escape from the lips</li>
+                    <li>Close primary valve while signalling</li>
+                    <li>Evaluate circumstances</li>
+                  </ol>
+
+                  <ol id='solutionFC10' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
+                    <p class="mb-3 is-uppercase	has-text-weight-bold">VOTING FAILED – VOTING LOGIC FAILURE, <span class="has-text-info">FC10</span> SOLUTION:</p>
+                    <li>Signal team and stabilize</li>
+                    <li>Bailout</li>
+                    <li>Evaluate circumstances</li>
+                  </ol>
+
+                  <ol id='solutionFC11' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
+                    <p class="mb-3 is-uppercase	has-text-weight-bold">HYPERCAPNIA – CO2 ABSORBENT FAILURE, <span class="has-text-info">FC11</span> SOLUTION:</p>
+                    <li>Signal team and stabilize</li>
+                    <li>Stop all physical activity</li>
+                    <li>Exhale deeply</li>
+                    <li>Evaluate circumstances</li>
+                    <br>
+                    <strong>If not resolved</strong>
+                    <li>Bailout</li>
+                  </ol>
+
+                  <ol id='solutionFC12' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
+                    <p class="mb-3 is-uppercase	has-text-weight-bold">RELEASED COUNTERLUNG OPV, <span class="has-text-info">FC12</span> SOLUTION:</p>
+                    <li>Signal team and stabilize</li>
+                    <li>Confirm OPV pull string status</li>
+                    <li>Evaluate circumstances</li>
+                  </ol>
+
+                  <ol id='solutionFC13' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
+                    <p class="mb-3 is-uppercase	has-text-weight-bold">SEMI-CLOSED OPERATION, <span class="has-text-info">FC13</span> SOLUTION:</p>
+                    <li>Signal team "SCR OPS"</li>
+                    <li>Monitor pO2</li>
+                    <li>Force ADV addition as required</li>
+                    <li>Evaluate circumstances</li>
+                  </ol>
+
+                  <ol id='solutionFC14' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
+                    <p class="mb-3 is-uppercase	has-text-weight-bold">CAUSTIC COCKTAIL, <span class="has-text-info">FC14</span> SOLUTION:</p>
+                    <li>Signal team and stabilize</li>
+                    <li>Switch to backgas</li>
+                    <li>Flood recovery</li>
+                    <li>Evaluate circumstances</li>
+                    <br>
+                    <strong>If not resolved</strong>
+                    <li>Bailout</li>
+                  </ol>
+
+                  <ol id='solutionFC15' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
+                    <p class="mb-3 is-uppercase	has-text-weight-bold">HYPEROXIA (experience dive), <span class="has-text-info">FC15</span> SOLUTION:</p>
+                    <li>Signal team and stabilize</li>
+                    <li>Stop and stabilize</li>
+                    <li>Switch CTRL to low setpoint 0.7</li>
+                    <li>Diluent flush</li>
+                    <li>Evaluate circumstances</li>
+                  </ol>
+
+                  <ol id='solutionFC16' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
+                    <p class="mb-3 is-uppercase	has-text-weight-bold">DCI (experience dive), <span class="has-text-info">FC16</span> SOLUTION:</p>
+                    <li>Descend 3m or deeper</li>
+                    <li>Restart deco from this depth
+                    <li>Evaluate circumstances</li>
+                    <li>Extend deco as practical</li>
+                    <li>Do not separate from team</li>
+                    <li>Communicate with surface</li>
+                  </ol>
+
                 </div>
               </section>
     

@@ -50,6 +50,8 @@ let isFC11Active = false
 let isFC12Active = false
 let isFC13Active = false
 let isFC14Active = false
+let isFC15Active = false
+let isFC16Active = false
 
 // TIMER
 let minutesLabel = document.getElementById("minutes");
