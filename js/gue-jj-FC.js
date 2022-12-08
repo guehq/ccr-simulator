@@ -79,23 +79,38 @@ function runFC5 () {
     isFC5Active = true
     document.getElementById('fc5icon').classList.remove('has-text-success')
     document.getElementById('fc5icon').classList.add('has-text-danger')
+    document.getElementById('solutionFC5').classList.remove('is-hidden')
   } else {
     isFC5Active = false
     document.getElementById('fc5icon').classList.remove('has-text-danger')
     document.getElementById('fc5icon').classList.add('has-text-success')
+    document.getElementById('solutionFC5').classList.add('is-hidden')
   }
 }
 
 // FC6
 function runFC6 () {
-  !isFC6Active
-  document.getElementById('nerd').classList.toggle('visible')
-  document.getElementById('fc6icon').classList.toggle('has-text-danger')
-  document.getElementById('fc6icon').classList.toggle('has-text-success')
-  document.getElementById('hideNerd').classList.toggle('is-hidden')
-  document.getElementById('showNerd').classList.toggle('is-hidden')
-  document.getElementById('hideNerd').disabled = true
-  document.getElementById('showNerd').disabled = true
+  if ( !isFC6Active ) {
+    isFC6Active = true
+    document.getElementById('nerd').classList.remove('visible')
+    document.getElementById('fc6icon').classList.add('has-text-danger')
+    document.getElementById('fc6icon').classList.remove('has-text-success')
+    document.getElementById('hideNerd').classList.toggle('is-hidden')
+    document.getElementById('showNerd').classList.toggle('is-hidden')
+    document.getElementById('solutionFC6').classList.remove('is-hidden')
+    document.getElementById('hideNerd').disabled = true
+    document.getElementById('showNerd').disabled = true
+  } else {
+    isFC6Active = false
+    document.getElementById('nerd').classList.add('visible')
+    document.getElementById('fc6icon').classList.remove('has-text-danger')
+    document.getElementById('fc6icon').classList.add('has-text-success')
+    document.getElementById('hideNerd').classList.toggle('is-hidden')
+    document.getElementById('showNerd').classList.toggle('is-hidden')
+    document.getElementById('solutionFC6').classList.add('is-hidden')
+    document.getElementById('hideNerd').disabled = false
+    document.getElementById('showNerd').disabled = false
+  }
 }
 
 // FC7
@@ -105,11 +120,13 @@ function runFC7 () {
     sv.textContent = '- Solenoid Valve [FAIL]'
     document.getElementById('fc7icon').classList.remove('has-text-success')
     document.getElementById('fc7icon').classList.add('has-text-danger')
+    document.getElementById('solutionFC7').classList.remove('is-hidden')
   } else {
     svFailure = false
     sv.textContent = '- Solenoid Valve'
     document.getElementById('fc7icon').classList.remove('has-text-danger')
     document.getElementById('fc7icon').classList.add('has-text-success')
+    document.getElementById('solutionFC7').classList.add('is-hidden')
   }
 }
 
@@ -121,12 +138,14 @@ function runFC8 () {
     document.getElementById('mavOxygen').removeAttribute('disabled')
     document.getElementById('fc8icon').classList.toggle('has-text-danger')
     document.getElementById('fc8icon').classList.toggle('has-text-success')
+    document.getElementById('solutionFC8').classList.add('is-hidden')
   } else {
     o2RunawayFailure = true
     document.getElementById('oxygenFlush').setAttribute('disabled', '')
     document.getElementById('mavOxygen').setAttribute('disabled', '')
     document.getElementById('fc8icon').classList.toggle('has-text-danger')
     document.getElementById('fc8icon').classList.toggle('has-text-success')
+    document.getElementById('solutionFC8').classList.remove('is-hidden')
   }
 }
 
@@ -138,12 +157,14 @@ function runFC9 () {
     document.getElementById('mavDiluent').removeAttribute('disabled')
     document.getElementById('fc9icon').classList.toggle('has-text-danger')
     document.getElementById('fc9icon').classList.toggle('has-text-success')
+    document.getElementById('solutionFC9').classList.add('is-hidden')
   } else {
     o2RunawayFailure = true
     document.getElementById('diluentFlush').setAttribute('disabled', '')
     document.getElementById('mavDiluent').setAttribute('disabled', '')
     document.getElementById('fc9icon').classList.toggle('has-text-danger')
     document.getElementById('fc9icon').classList.toggle('has-text-success')
+    document.getElementById('solutionFC9').classList.remove('is-hidden')
   }
 }
 
@@ -155,12 +176,14 @@ function runFC10 () {
     warningMessageFC10.classList.remove('is-hidden')
     document.getElementById('fc10icon').classList.remove('has-text-success')
     document.getElementById('fc10icon').classList.add('has-text-danger')
+    document.getElementById('solutionFC10').classList.remove('is-hidden')
   } else {
     votingFailure = false
     nerdCenter.classList.remove('is-hidden')
     warningMessageFC10.classList.add('is-hidden')
     document.getElementById('fc10icon').classList.remove('has-text-danger')
     document.getElementById('fc10icon').classList.add('has-text-success')
+    document.getElementById('solutionFC10').classList.add('is-hidden')
   }
 }
 
@@ -172,12 +195,14 @@ function runFC11 () {
     document.getElementById('fc11icon').classList.add('has-text-danger')
     document.getElementById('symptoms').classList.remove('is-hidden')
     document.getElementById('fc11symptoms').classList.remove('is-hidden')
+    document.getElementById('solutionFC11').classList.remove('is-hidden')
   } else {
     co2AbsorbentFailure = false
     document.getElementById('fc11icon').classList.remove('has-text-danger')
     document.getElementById('fc11icon').classList.add('has-text-success')
     document.getElementById('symptoms').classList.add('is-hidden')
     document.getElementById('fc11symptoms').classList.add('is-hidden')
+    document.getElementById('solutionFC11').classList.add('is-hidden')
   }
 }
 
@@ -187,6 +212,7 @@ function runFC12 () {
     counterlungADVFailure = true
     document.getElementById('fc12icon').classList.remove('has-text-success')
     document.getElementById('fc12icon').classList.add('has-text-danger')
+    document.getElementById('solutionFC12').classList.remove('is-hidden')
 
     refreshADV = setInterval(mavDiluent, 1000)
     adv.textContent = '- ADV [ACTIVE]'
@@ -195,6 +221,7 @@ function runFC12 () {
     counterlungADVFailure = false
     document.getElementById('fc12icon').classList.remove('has-text-danger')
     document.getElementById('fc12icon').classList.add('has-text-success')
+    document.getElementById('solutionFC12').classList.add('is-hidden')
 
     clearInterval(refreshADV)
     adv.textContent = '- ADV'
@@ -210,12 +237,14 @@ function runFC13 () {
     document.getElementById('mavOxygen').removeAttribute('disabled')
     document.getElementById('fc13icon').classList.toggle('has-text-danger')
     document.getElementById('fc13icon').classList.toggle('has-text-success')
+    document.getElementById('solutionFC13').classList.add('is-hidden')
   } else {
     o2RunawayFailure = true
     document.getElementById('oxygenFlush').setAttribute('disabled', '')
     document.getElementById('mavOxygen').setAttribute('disabled', '')
     document.getElementById('fc13icon').classList.toggle('has-text-danger')
     document.getElementById('fc13icon').classList.toggle('has-text-success')
+    document.getElementById('solutionFC13').classList.remove('is-hidden')
   }
 }
 
@@ -227,17 +256,57 @@ function runFC14 () {
     document.getElementById('fc14icon').classList.add('has-text-danger')
     document.getElementById('symptoms').classList.remove('is-hidden')
     document.getElementById('fc14symptoms').classList.remove('is-hidden')
+    document.getElementById('solutionFC14').classList.remove('is-hidden')
   } else {
     causticCocktail = false
     document.getElementById('fc14icon').classList.remove('has-text-danger')
     document.getElementById('fc14icon').classList.add('has-text-success')
     document.getElementById('symptoms').classList.add('is-hidden')
     document.getElementById('fc14symptoms').classList.add('is-hidden')
+    document.getElementById('solutionFC14').classList.add('is-hidden')
+  }
+}
+
+// FC15
+function runFC15 () {
+  if ( !isFC15Active) {
+    isFC15Active = true
+    document.getElementById('fc15icon').classList.remove('has-text-success')
+    document.getElementById('fc15icon').classList.add('has-text-danger')
+    document.getElementById('symptoms').classList.remove('is-hidden')
+    document.getElementById('fc15symptoms').classList.remove('is-hidden')
+    document.getElementById('solutionFC15').classList.remove('is-hidden')
+  } else {
+    isFC15Active = false
+    document.getElementById('fc15icon').classList.remove('has-text-danger')
+    document.getElementById('fc15icon').classList.add('has-text-success')
+    document.getElementById('symptoms').classList.add('is-hidden')
+    document.getElementById('fc15symptoms').classList.add('is-hidden')
+    document.getElementById('solutionFC15').classList.add('is-hidden')
+  }
+}
+
+// FC16
+function runFC16 () {
+  if ( !isFC16Active ) {
+    isFC16Active = true
+    document.getElementById('fc16icon').classList.remove('has-text-success')
+    document.getElementById('fc16icon').classList.add('has-text-danger')
+    document.getElementById('symptoms').classList.remove('is-hidden')
+    document.getElementById('fc16symptoms').classList.remove('is-hidden')
+    document.getElementById('solutionFC16').classList.remove('is-hidden')
+  } else {
+    isFC16Active = false
+    document.getElementById('fc16icon').classList.remove('has-text-danger')
+    document.getElementById('fc16icon').classList.add('has-text-success')
+    document.getElementById('symptoms').classList.add('is-hidden')
+    document.getElementById('fc16symptoms').classList.add('is-hidden')
+    document.getElementById('solutionFC16').classList.add('is-hidden')
   }
 }
 
 function randomFailure () {
-  randomNo = Math.floor(Math.random() * 14) + 1;
+  randomNo = Math.floor(Math.random() * 16) + 1;
 
   if ( randomNo == 1 ) { runFC1 () } 
   else if ( randomNo == 2 ) { runFC2 () }
@@ -253,6 +322,8 @@ function randomFailure () {
   else if ( randomNo == 12 ) { runFC12 () }
   else if ( randomNo == 13 ) { runFC13 () }
   else if ( randomNo == 14 ) { runFC14 () }
+  else if ( randomNo == 15 ) { runFC15 () }
+  else if ( randomNo == 16 ) { runFC16 () }
 }
 
 function toggleHint () {
@@ -271,4 +342,6 @@ function toggleHint () {
   document.getElementById('FC12hint').classList.toggle('is-hidden')
   document.getElementById('FC13hint').classList.toggle('is-hidden')
   document.getElementById('FC14hint').classList.toggle('is-hidden')
+  document.getElementById('FC15hint').classList.toggle('is-hidden')
+  document.getElementById('FC16hint').classList.toggle('is-hidden')
 }
