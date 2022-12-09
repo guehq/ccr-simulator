@@ -197,29 +197,29 @@ function mavOxygen () {
 /* -------- DEPTH CHANGES -------- */
 function descend () {
   if(depth.value < 60) {
-    depth.value = depth.value + 5;
+    depth.value = depth.value + 3;
     depth.innerHTML = depth.value;
     tts.value = Math.ceil(depth.value / ascentRate);
     tts.innerHTML = tts.value;
     ATA = depth.value / 10 + 1
-    loopO2 = loopO2 / (ATA - .5) * ATA
+    loopO2 = loopO2 / (ATA - .3) * ATA
     checkSensors ()
   } else {
-    return;
+    return
   }
 }
 
 function ascend () {
   if(depth.value > 0) {
-    depth.value = depth.value - 5;
+    depth.value = depth.value - 3;
     depth.innerHTML = depth.value;
     tts.value = Math.ceil(depth.value / ascentRate);
     tts.innerHTML = tts.value;
     ATA = depth.value / 10 + 1
-    loopO2 = loopO2 / (ATA + .5) * ATA
+    loopO2 = loopO2 / (ATA + .3) * ATA
     checkSensors ()
   } else {
-    return;
+    return
   }
 }
 
