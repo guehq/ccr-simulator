@@ -52,7 +52,9 @@ body {
 }
 
 /* HUD START */
-
+.hud-light {
+  background: #363636;
+}
 /* HUD END */
 
 /* NERD START */
@@ -182,7 +184,7 @@ section.nerd input[type=number] {
 
 .light-red.is-blinking {
   -webkit-animation: redLightBlinking 1s infinite;
-  animation: 1s infinite redLightBlinking;
+  animation: .6s infinite redLightBlinking;
 }
 
 @keyframes redLightBlinking {
@@ -199,7 +201,7 @@ section.nerd input[type=number] {
 
 .light-green.is-blinking {
   -webkit-animation: greenLightBlinking 1s infinite;
-  animation: 1s infinite greenLightBlinking;
+  animation: .6s infinite greenLightBlinking;
 }
 
 @keyframes greenLightBlinking {
@@ -216,7 +218,7 @@ section.nerd input[type=number] {
 
 .light-yellow.is-blinking {
   -webkit-animation: yellowLightBlinking 1s infinite;
-  animation: 1s infinite yellowLightBlinking;
+  animation: .6s infinite yellowLightBlinking;
 }
 
 @keyframes yellowLightBlinking {

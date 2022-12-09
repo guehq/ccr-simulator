@@ -57,8 +57,8 @@ let isTimeSpeedx1 = true
 let isTimeSpeedx2 = false
 
 // TIMER
-let minutesLabel = document.getElementById("minutes")
-let secondsLabel = document.getElementById("seconds")
+let minutesLabel = document.getElementById('minutes')
+let secondsLabel = document.getElementById('seconds')
 let totalSeconds = 0
 setInterval(setTime, 1000)
 
@@ -69,9 +69,9 @@ function setTime() {
 }
 
 function pad(val) {
-  var valString = val + "";
+  var valString = val + '';
   if (valString.length < 2) {
-    return "0" + valString
+    return '0' + valString
   } else {
     return valString
   }
@@ -114,7 +114,7 @@ function checkSensors () {
     document.getElementById('app').classList.add('has-background-info')
     document.getElementById('app').classList.remove('has-background-danger')
     document.getElementById('messages').classList.add('passive')
-    document.getElementById('reason').textContent = ""
+    document.getElementById('reason').textContent = ''
     document.getElementById('symptoms_live').classList.add('is-hidden')
     document.getElementById('hypoxia_symptoms').classList.add('is-hidden')
     document.getElementById('hyperoxia_symptoms').classList.add('is-hidden')
@@ -122,14 +122,14 @@ function checkSensors () {
     document.getElementById('app').classList.add('has-background-danger')
     document.getElementById('app').classList.remove('has-background-info')
     document.getElementById('messages').classList.remove('passive')
-    document.getElementById('reason').textContent = "Hypoxia"
+    document.getElementById('reason').textContent = 'Hypoxia'
     document.getElementById('symptoms_live').classList.remove('is-hidden')
     document.getElementById('hypoxia_symptoms').classList.remove('is-hidden')
   } else if (sensor1.value > 2) {
     document.getElementById('app').classList.add('has-background-danger')
     document.getElementById('app').classList.remove('has-background-info')
     document.getElementById('messages').classList.remove('passive')
-    document.getElementById('reason').textContent = "Hyperoxia"
+    document.getElementById('reason').textContent = 'Hyperoxia'
     document.getElementById('symptoms_live').classList.remove('is-hidden')
     document.getElementById('hyperoxia_symptoms').classList.remove('is-hidden')
   } 
@@ -196,30 +196,43 @@ function mavOxygen () {
 
 /* -------- DEPTH CHANGES -------- */
 function descend () {
-  if(depth.value < 60) {
-    depth.value = depth.value + 5;
+  if ( depth.value == 0 ) {
+    document.getElementById('sp_19').disabled = true
+    document.getElementById('sp_7').checked = true
+  }
+  
+  if ( depth.value < 60 ) {
+    depth.value = depth.value + 3;
     depth.innerHTML = depth.value;
     tts.value = Math.ceil(depth.value / ascentRate);
     tts.innerHTML = tts.value;
     ATA = depth.value / 10 + 1
-    loopO2 = loopO2 / (ATA - .5) * ATA
+    loopO2 = loopO2 / (ATA - .3) * ATA
     checkSensors ()
   } else {
-    return;
+    return
   }
 }
 
 function ascend () {
+  if ( depth.value < 4 + 3 ) {
+    document.getElementById('sp_7').checked = true
+  }
+
   if(depth.value > 0) {
-    depth.value = depth.value - 5;
+    depth.value = depth.value - 3;
     depth.innerHTML = depth.value;
     tts.value = Math.ceil(depth.value / ascentRate);
     tts.innerHTML = tts.value;
     ATA = depth.value / 10 + 1
-    loopO2 = loopO2 / (ATA + .5) * ATA
+    loopO2 = loopO2 / (ATA + .3) * ATA
     checkSensors ()
   } else {
-    return;
+    return
+  }
+
+  if ( depth.value == 0 ) {
+    document.getElementById('sp_19').disabled = false
   }
 }
 
@@ -320,3 +333,66 @@ function timeSpeedx2 () {
   document.getElementById('timeSpeedx1').classList.remove('has-text-success')
   document.getElementById('timeSpeedx2').classList.add('has-text-success')
 }
+
+// HUD 
+function hudClearLeds () {
+  document.getElementById('hud_sensor1_led1').classList.remove('is-blinking', 'has-background-danger')
+  document.getElementById('hud_sensor1_led2').classList.remove('is-blinking', 'has-background-success')
+  document.getElementById('hud_sensor1_led3').classList.remove('is-blinking', 'has-background-warning')
+  document.getElementById('hud_sensor1_led4').classList.remove('is-blinking', 'has-background-danger')
+  document.getElementById('hud_sensor2_led1').classList.remove('is-blinking', 'has-background-danger')
+  document.getElementById('hud_sensor2_led2').classList.remove('is-blinking', 'has-background-success')
+  document.getElementById('hud_sensor2_led3').classList.remove('is-blinking', 'has-background-warning')
+  document.getElementById('hud_sensor2_led4').classList.remove('is-blinking', 'has-background-danger')
+  document.getElementById('hud_sensor3_led1').classList.remove('is-blinking', 'has-background-danger')
+  document.getElementById('hud_sensor3_led2').classList.remove('is-blinking', 'has-background-success')
+  document.getElementById('hud_sensor3_led3').classList.remove('is-blinking', 'has-background-warning')
+  document.getElementById('hud_sensor3_led4').classList.remove('is-blinking', 'has-background-danger')
+  document.getElementById('hud_start_icon').classList.remove('has-text-success')
+  document.getElementById('hud_battery_icon').classList.remove('has-text-success')
+  document.getElementById('hud_sensor_icon').classList.remove('has-text-success')
+  document.getElementById('hud_communication_icon').classList.remove('has-text-success')
+  
+}
+
+function hudStartAnimation () {
+  hudClearLeds ()
+  document.getElementById('hud_start_icon').classList.add('has-text-success')
+  document.getElementById('hud_sensor1_led4').classList.add('has-background-danger')
+  document.getElementById('hud_sensor2_led1').classList.add('has-background-danger')
+  document.getElementById('hud_sensor2_led2').classList.add('has-background-success')
+  document.getElementById('hud_sensor2_led3').classList.add('has-background-warning')
+  document.getElementById('hud_sensor2_led4').classList.add('has-background-danger')
+  document.getElementById('hud_sensor3_led4').classList.add('has-background-danger')
+
+}
+
+function hudBatteryLow () {
+  hudClearLeds ()
+  document.getElementById('hud_battery_icon').classList.add('has-text-success')
+  document.getElementById('hud_sensor1_led3').classList.add('has-background-warning')
+  document.getElementById('hud_sensor2_led3').classList.add('has-background-warning')
+  document.getElementById('hud_sensor3_led3').classList.add('has-background-warning')
+}
+
+function hudSensorFailed () {
+  hudClearLeds ()
+  document.getElementById('hud_sensor_icon').classList.add('has-text-success')
+  document.getElementById('hud_sensor1_led2').classList.add('is-blinking')
+  document.getElementById('hud_sensor1_led3').classList.add('is-blinking')
+  document.getElementById('hud_sensor2_led3').classList.add('is-blinking')
+  document.getElementById('hud_sensor2_led2').classList.add('is-blinking')
+  document.getElementById('hud_sensor3_led4').classList.add('has-background-danger')
+  document.getElementById('hud_sensor3_led1').classList.add('has-background-danger')
+}
+
+function hudNoCommunications () {
+  hudClearLeds ()
+  document.getElementById('hud_communication_icon').classList.add('has-text-success')
+  document.getElementById('hud_sensor1_led1').classList.add('is-blinking')
+  document.getElementById('hud_sensor1_led4').classList.add('is-blinking')
+  document.getElementById('hud_sensor3_led1').classList.add('is-blinking')
+  document.getElementById('hud_sensor3_led4').classList.add('is-blinking')
+}
+
+hudNoCommunications ()
