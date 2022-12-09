@@ -112,16 +112,27 @@ function checkSensors () {
     document.getElementById('app').classList.remove('has-background-danger')
     document.getElementById('messages').classList.add('passive')
     document.getElementById('reason').textContent = ""
+    document.getElementById('symptoms').classList.add('is-hidden')
+    document.getElementById('hypoxia_symptoms').classList.add('is-hidden')
+    document.getElementById('fc15symptoms').classList.add('is-hidden')
   } else if (sensor1.value < 0.16) {
     document.getElementById('app').classList.add('has-background-danger')
     document.getElementById('app').classList.remove('has-background-info')
     document.getElementById('messages').classList.remove('passive')
     document.getElementById('reason').textContent = "Hypoxia"
+    document.getElementById('symptoms').classList.remove('is-hidden')
+    document.getElementById('hypoxia_symptoms').classList.remove('is-hidden')
   } else if (sensor1.value > 2) {
     document.getElementById('app').classList.add('has-background-danger')
     document.getElementById('app').classList.remove('has-background-info')
     document.getElementById('messages').classList.remove('passive')
     document.getElementById('reason').textContent = "Hyperoxia"
+    document.getElementById('symptoms').classList.remove('is-hidden')
+    document.getElementById('fc15symptoms').classList.remove('is-hidden')
+  } 
+  
+  if (loopO2 <= 0.01 ) {
+    loopO2 = 0.01
   }
 
   // Check Gas Mix 
@@ -139,7 +150,7 @@ checkSensors ();
 
 // O2 USAGE
 function o2consumption () {
-  o2scr = 0.001
+  o2scr = 0.003
   setInterval(seto2scr, 1000)
 
   function seto2scr () {
