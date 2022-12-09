@@ -52,15 +52,15 @@
           <p class='is-size-7'>setpoint:</p>
           <section id='setpoint'>
             <label class='sp.19'>
-              <input type='radio' value='0.18' name='radio' checked>
+              <input id="sp_19" type='radio' value='0.18' name='radio' checked>
               <span>0.19</span>
             </label>
             <label class='sp.7'>
-              <input type='radio' value='0.68' name='radio'>
+              <input id="sp_7" type='radio' value='0.68' name='radio'>
               <span>0.7</span>
             </label>
             <label class='sp1.2'>
-              <input type='radio' value='1.18' name='radio'>
+              <input id="sp_12" type='radio' value='1.18' name='radio'>
               <span>1.2</span>
             </label>
           </section>
@@ -446,25 +446,43 @@
             <section id='hud' class='has-background-black m-5'>
               <div class='columns'>
                 <div id='hud_sensor1' class='column'>
-                  <div class='hud-light light-red has-background-grey-darker is-blinkingXXX'></div>
-                  <div class='hud-light light-green has-background-grey-darker'></div>
-                  <div class='hud-light light-yellow has-background-grey-darker'></div>
-                  <div class='hud-light light-red has-background-danger'></div>
+                  <div id="hud_sensor1_led1" class='hud-light light-red'></div>
+                  <div id="hud_sensor1_led2" class='hud-light light-green'></div>
+                  <div id="hud_sensor1_led3" class='hud-light light-yellow'></div>
+                  <div id="hud_sensor1_led4" class='hud-light light-red'></div>
                 </div>
                 <div id='hud_sensor2' class='column'>
-                  <div class='hud-light light-top has-background-danger'></div>
-                  <div class='hud-light light-green has-background-success'></div>
-                  <div class='hud-light light-yellow has-background-warning'></div>
-                  <div class='hud-light light-bottom has-background-danger'></div>
+                  <div id="hud_sensor2_led1" class='hud-light light-red'></div>
+                  <div id="hud_sensor2_led2" class='hud-light light-green'></div>
+                  <div id="hud_sensor2_led3" class='hud-light light-yellow'></div>
+                  <div id="hud_sensor2_led4" class='hud-light light-red'></div>
                 </div>
                 <div id='hud_sensor3' class='column'>
-                  <div class='hud-light light-top has-background-grey-darker'></div>
-                  <div class='hud-light light-green has-background-grey-darker'></div>
-                  <div class='hud-light light-yellow has-background-grey-darker'></div>
-                  <div class='hud-light light-bottom has-background-danger'></div>
+                  <div id="hud_sensor3_led1" class='hud-light light-red'></div>
+                  <div id="hud_sensor3_led2" class='hud-light light-green'></div>
+                  <div id="hud_sensor3_led3" class='hud-light light-yellow'></div>
+                  <div id="hud_sensor3_led4" class='hud-light light-red'></div>
                 </div>
               </div>
             </section>
+
+            <div class="buttons is-fullwidth is-justify-content-right px-3">
+              <button class="button is-small is-black" onclick="hudRealtime ()" title="Sync with CTRL" disabled>
+                <i id="hud_play_icon" class="fa-solid fa-circle-play"></i>
+              </button>
+              <button class="button is-small is-black" onclick="hudStartAnimation ()" title="Turn-on">
+                <i id="hud_start_icon" class="fa-solid fa-power-off"></i>
+              </button>
+              <button class="button is-small is-black" onclick="hudBatteryLow ()" title="Battery is low and should be replaced">
+                <i id="hud_battery_icon" class="fa-solid fa-battery-quarter"></i>
+              </button>
+              <button class="button is-small is-black" onclick="hudSensorFailed ()" title="O2 sensor has failed calibration">
+                <i id="hud_sensor_icon" class="fa-solid fa-filter-circle-xmark"></i>
+              </button>
+              <button class="button is-small is-black" onclick="hudNoCommunications ()" title="No DiveCAN® Communications">
+                <i id="hud_communication_icon" class="fa-solid fa-link-slash"></i>
+              </button>
+            </div>
 
             <!-- ############################### -->
             <!-- ############ NERD ############# -->
