@@ -53,24 +53,27 @@ let isFC14Active = false
 let isFC15Active = false
 let isFC16Active = false
 
+let isTimeSpeedx1 = true
+let isTimeSpeedx2 = false
+
 // TIMER
-let minutesLabel = document.getElementById("minutes");
-let secondsLabel = document.getElementById("seconds");
-let totalSeconds = 0;
-setInterval(setTime, 1000);
+let minutesLabel = document.getElementById("minutes")
+let secondsLabel = document.getElementById("seconds")
+let totalSeconds = 0
+setInterval(setTime, 1000)
 
 function setTime() {
   ++totalSeconds;
-  secondsLabel.innerHTML = pad(totalSeconds % 60);
-  minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+  secondsLabel.innerHTML = pad(totalSeconds % 60)
+  minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60))
 }
 
 function pad(val) {
   var valString = val + "";
   if (valString.length < 2) {
-    return "0" + valString;
+    return "0" + valString
   } else {
-    return valString;
+    return valString
   }
 }
 
@@ -301,4 +304,19 @@ function resetData () {
   depth.innerHTML = depth.value
 
   diluentFlush ()
+}
+
+// TIME SPEED
+function timeSpeedx1 () {
+  isTimeSpeedx1 = true
+  isTimeSpeedx2 = false
+  document.getElementById('timeSpeedx1').classList.add('has-text-success')
+  document.getElementById('timeSpeedx2').classList.remove('has-text-success')
+}
+
+function timeSpeedx2 () {
+  isTimeSpeedx1 = false
+  isTimeSpeedx2 = true
+  document.getElementById('timeSpeedx1').classList.remove('has-text-success')
+  document.getElementById('timeSpeedx2').classList.add('has-text-success')
 }

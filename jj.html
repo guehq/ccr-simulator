@@ -78,6 +78,7 @@
             <button class='button is-small is-ghost is-black' title='Show Hints' onclick='toggleHint ()'><i id='failuresHintButton' class='fa-solid fa-lightbulb has-text-success'></i></button>
             <button class='button is-small is-ghost is-black' title='Show Solution' onclick='toggleSolutions ()'><i id="failuresSolutionButton" class='fa-solid fa-book'></i></button>
           </p>
+
           <ul class='menu-list'>
             <li title='O2 sensor discrepancy'>
               <a class='has-text-white' onclick='runFC1 ()'>
@@ -175,7 +176,12 @@
               </a>
             </li>
           </ul>
+
           <button class='button is-small is-fullwidth is-black mt-4' onclick='randomFailure ()'><i class='fa-solid fa-play'></i>&nbsp;Play random failures</button>
+          <div class="buttons is-fullwidth is-justify-content-center mt-4">
+            <button id='timeSpeedx1' class="button is-small is-black has-text-success" onclick='timeSpeedx1 ()'>x1</button>
+            <button id='timeSpeedx2' class="button is-small is-black" onclick='timeSpeedx2 ()' disabled>x2</button>
+          </div>
         </aside>
 
         <!-- <hr>
@@ -517,8 +523,8 @@
               </table>
 
               <section class='nerd-buttons'>
-                <button class='btn btn-left'></button>
-                <button class='btn btn-right'></button>
+                <button class='btn btn-left' disabled></button>
+                <button class='btn btn-right' disabled></button>
               </section>
             </section>
           </div>
