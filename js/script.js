@@ -53,24 +53,27 @@ let isFC14Active = false
 let isFC15Active = false
 let isFC16Active = false
 
+let isTimeSpeedx1 = true
+let isTimeSpeedx2 = false
+
 // TIMER
-let minutesLabel = document.getElementById("minutes");
-let secondsLabel = document.getElementById("seconds");
-let totalSeconds = 0;
-setInterval(setTime, 1000);
+let minutesLabel = document.getElementById("minutes")
+let secondsLabel = document.getElementById("seconds")
+let totalSeconds = 0
+setInterval(setTime, 1000)
 
 function setTime() {
   ++totalSeconds;
-  secondsLabel.innerHTML = pad(totalSeconds % 60);
-  minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+  secondsLabel.innerHTML = pad(totalSeconds % 60)
+  minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60))
 }
 
 function pad(val) {
   var valString = val + "";
   if (valString.length < 2) {
-    return "0" + valString;
+    return "0" + valString
   } else {
-    return valString;
+    return valString
   }
 }
 
@@ -112,16 +115,27 @@ function checkSensors () {
     document.getElementById('app').classList.remove('has-background-danger')
     document.getElementById('messages').classList.add('passive')
     document.getElementById('reason').textContent = ""
+    document.getElementById('symptoms_live').classList.add('is-hidden')
+    document.getElementById('hypoxia_symptoms').classList.add('is-hidden')
+    document.getElementById('hyperoxia_symptoms').classList.add('is-hidden')
   } else if (sensor1.value < 0.16) {
     document.getElementById('app').classList.add('has-background-danger')
     document.getElementById('app').classList.remove('has-background-info')
     document.getElementById('messages').classList.remove('passive')
     document.getElementById('reason').textContent = "Hypoxia"
+    document.getElementById('symptoms_live').classList.remove('is-hidden')
+    document.getElementById('hypoxia_symptoms').classList.remove('is-hidden')
   } else if (sensor1.value > 2) {
     document.getElementById('app').classList.add('has-background-danger')
     document.getElementById('app').classList.remove('has-background-info')
     document.getElementById('messages').classList.remove('passive')
     document.getElementById('reason').textContent = "Hyperoxia"
+    document.getElementById('symptoms_live').classList.remove('is-hidden')
+    document.getElementById('hyperoxia_symptoms').classList.remove('is-hidden')
+  } 
+  
+  if (loopO2 <= 0.01 ) {
+    loopO2 = 0.01
   }
 
   // Check Gas Mix 
@@ -139,7 +153,7 @@ checkSensors ();
 
 // O2 USAGE
 function o2consumption () {
-  o2scr = 0.001
+  o2scr = 0.003
   setInterval(seto2scr, 1000)
 
   function seto2scr () {
@@ -290,4 +304,19 @@ function resetData () {
   depth.innerHTML = depth.value
 
   diluentFlush ()
+}
+
+// TIME SPEED
+function timeSpeedx1 () {
+  isTimeSpeedx1 = true
+  isTimeSpeedx2 = false
+  document.getElementById('timeSpeedx1').classList.add('has-text-success')
+  document.getElementById('timeSpeedx2').classList.remove('has-text-success')
+}
+
+function timeSpeedx2 () {
+  isTimeSpeedx1 = false
+  isTimeSpeedx2 = true
+  document.getElementById('timeSpeedx1').classList.remove('has-text-success')
+  document.getElementById('timeSpeedx2').classList.add('has-text-success')
 }

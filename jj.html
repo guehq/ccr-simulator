@@ -78,6 +78,7 @@
             <button class='button is-small is-ghost is-black' title='Show Hints' onclick='toggleHint ()'><i id='failuresHintButton' class='fa-solid fa-lightbulb has-text-success'></i></button>
             <button class='button is-small is-ghost is-black' title='Show Solution' onclick='toggleSolutions ()'><i id="failuresSolutionButton" class='fa-solid fa-book'></i></button>
           </p>
+
           <ul class='menu-list'>
             <li title='O2 sensor discrepancy'>
               <a class='has-text-white' onclick='runFC1 ()'>
@@ -175,7 +176,12 @@
               </a>
             </li>
           </ul>
+
           <button class='button is-small is-fullwidth is-black mt-4' onclick='randomFailure ()'><i class='fa-solid fa-play'></i>&nbsp;Play random failures</button>
+          <div class="buttons is-fullwidth is-justify-content-center mt-4">
+            <button id='timeSpeedx1' class="button is-small is-black has-text-success" onclick='timeSpeedx1 ()'>x1</button>
+            <button id='timeSpeedx2' class="button is-small is-black" onclick='timeSpeedx2 ()' disabled>x2</button>
+          </div>
         </aside>
 
         <!-- <hr>
@@ -199,16 +205,21 @@
               </section>
 
               <section class='notifications mt-5'>
-                <div id='gas_density' class='notification is-warning is-hidden'>
-                  High <strong>Gas Density</strong> Risk!
+                <div id='gas_density' class='notification is-danger is-light is-hidden'>
+                  High <strong>Gas Density</strong>!
                 </div>
 
-                <div id='gas_narcosis' class='notification is-warning is-hidden'>
-                  High <strong>Gas Narcosis</strong> Risk!
+                <div id='gas_narcosis' class='notification is-danger is-light is-hidden'>
+                  High <strong>Gas Narcosis</strong>!
                 </div>
+
+                <!-- ############################### -->
+                <!-- ########## SYMPTOMS ########### -->
+                <!-- ############################### -->
 
                 <div id='symptoms' class='notification is-warning is-hidden'>
                   <label>SYMPTOMS:</label>
+
                   <ul id='fc11symptoms' class='is-hidden' style='list-style-type: circle; margin-left: 1.5em'>
                     <li>Increased breathing rate</li>
                     <li>Gasping</li>
@@ -225,23 +236,52 @@
                   </ul>
 
                   <ul id='fc15symptoms' class='is-hidden' style='list-style-type: circle; margin-left: 1.5em'>
-                    <li>VISUALDISTURBANCE</li>
-                    <li>EAR RINGING</li>
-                    <li>NAUSEA</li>
-                    <li>TWITCHING</li>
-                    <li>IRRITABILITY</li>
-                    <li>DIZZINESS</li>
+                    <li>Visual disturbance</li>
+                    <li>Ear ringing</li>
+                    <li>Nausea</li>
+                    <li>Twitching</li>
+                    <li>Irritability</li>
+                    <li>Dizziness</li>
                   </ul>
 
                   <ul id='fc16symptoms' class='is-hidden' style='list-style-type: circle; margin-left: 1.5em'>
-                    <li>PAIN</li>
-                    <li>NUMBNESS</li>
-                    <li>MOTORIC WEAKNESS</li>
-                    <li>CUTANEOUS AND/OR MUSCULAR DISCOMFORT</li>
+                    <li>Pain</li>
+                    <li>Numbness</li>
+                    <li>Motoric weakness</li>
+                    <li>Cutaneous and/or muscular discomfort</li>
                   </ul>
+
                 </div>
 
-                <div id='solutions' class='notification is-success is-hidden p-0'>
+                <div id='symptoms_live' class='notification is-warning is-hidden'>
+                  <label>SYMPTOMS:</label>
+
+                  <ul id='hypoxia_symptoms' class='is-hidden' style='list-style-type: circle; margin-left: 1.5em'>
+                    <li>Impaired intellectual capacity</li>
+                    <li>Compromised response time</li>
+                    <li>Reduced awareness</li>
+                    <li>Nausea</li>
+                    <li>Euphoria</li>
+                    <li>Fatigue</li>
+                    <li>Unconsciousness</li>
+                  </ul>
+
+                  <ul id='hyperoxia_symptoms' class='is-hidden' style='list-style-type: circle; margin-left: 1.5em'>
+                    <li>Visual disturbance</li>
+                    <li>Ear ringing</li>
+                    <li>Nausea</li>
+                    <li>Twitching</li>
+                    <li>Irritability</li>
+                    <li>Dizziness</li>
+                  </ul>
+
+                </div>
+
+                <!-- ############################### -->
+                <!-- ########## SOLUTIONS ########## -->
+                <!-- ############################### -->
+
+                <div id='solutions' class='notification is-success is-light is-hidden p-0'>
                   <ol id='solutionFC1' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
                     <p class="mb-3 is-uppercase	has-text-weight-bold">O<sub>2</sub> SENSOR DISCREPANCY, <span class="has-text-info">FC1</span> SOLUTION:</p>
                     <li>Signal team and stabilize</li>
@@ -398,6 +438,11 @@
           </div>
 
           <div class='column is-5'>
+
+            <!-- ############################### -->
+            <!-- ############# HUD ############# -->
+            <!-- ############################### -->
+
             <section id='hud' class='has-background-black m-5'>
               <div class='columns'>
                 <div id='hud_sensor1' class='column'>
@@ -420,6 +465,10 @@
                 </div>
               </div>
             </section>
+
+            <!-- ############################### -->
+            <!-- ############ NERD ############# -->
+            <!-- ############################### -->
 
             <section id='nerd' class='nerd visible'>
               <table id='nerd-top'>
@@ -474,8 +523,8 @@
               </table>
 
               <section class='nerd-buttons'>
-                <button class='btn btn-left'></button>
-                <button class='btn btn-right'></button>
+                <button class='btn btn-left' disabled></button>
+                <button class='btn btn-right' disabled></button>
               </section>
             </section>
           </div>
