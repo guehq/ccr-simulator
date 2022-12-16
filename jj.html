@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang='en' class='has-navbar-fixed-top'>
+<html lang='en' class='has-navbar-fixed-top'> <!-- style='padding-top: 110px; -->
 <head>
   <meta charset='UTF-8'>
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -34,14 +34,16 @@
         </div>
         <div class='navbar-item'>
           <div class='buttons are-small'>
-            <button id='mavDiluent' class='button is-success is-rounded' onclick='mavDiluent ()'>MAV Diluent</button>
-            <button id='mavOxygen' class='button is-success is-rounded' onclick='mavOxygen ()'>MAV Oxygen</button>
+            <button id='mavDiluent' class='button is-success is-rounded' onclick='mavDiluent ()'>ADV</button>
+            <button id='mavOxygen' class='button is-success is-rounded' onclick='mavOxygen ()'>O<sup>2</sup>&nbsp;MAV</button>
           </div>
         </div>
         <div class='navbar-item'>
           <div class='buttons are-small'>
             <button id='hideNerd' class='button is-dark is-rounded' onclick='hideNerd ()'><i class='fa-solid fa-eye-slash'></i>&nbsp;Hide Nerd</button>
             <button id='showNerd' class='button is-dark is-rounded is-hidden' onclick='showNerd ()'><i class='fa-solid fa-eye'></i>&nbsp;Show Nerd</button>
+            <button id='hideHud' class='button is-dark is-rounded' onclick='hideHud ()'><i class='fa-solid fa-eye-slash'></i>&nbsp;Hide HUD</button>
+            <button id='showHud' class='button is-dark is-rounded is-hidden' onclick='showHud ()'><i class='fa-solid fa-eye'></i>&nbsp;Show HUD</button>
             <button id='reset_data' class='button is-danger has-background-black-ter is-rounded' onclick='resetData ()'>Reset Depth</button>
           </div>
         </div>
@@ -52,18 +54,53 @@
           <p class='is-size-7'>setpoint:</p>
           <section id='setpoint'>
             <label class='sp.19'>
-              <input id="sp_19" type='radio' value='0.18' name='radio' checked>
-              <span>0.19</span>
+              <input id='sp_19' type='radio' value='0.18' name='radio' checked>
+              <span>.19</span>
             </label>
             <label class='sp.7'>
-              <input id="sp_7" type='radio' value='0.68' name='radio'>
-              <span>0.7</span>
+              <input id='sp_7' type='radio' value='0.68' name='radio'>
+              <span>.7</span>
             </label>
             <label class='sp1.2'>
-              <input id="sp_12" type='radio' value='1.18' name='radio'>
+              <input id='sp_12' type='radio' value='1.18' name='radio'>
               <span>1.2</span>
             </label>
           </section>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <nav id="adv_nav" class='navbar is-fixed-top is-light has-background-black-ter is-hidden' style='margin-top: 52px'>    
+    <div class='navbar-menu'>
+      <div class='navbar-start'>
+        <div class='navbar-item'>
+          <p class='is-size-7 has-text-white'>Diver Actions:&nbsp;</p>
+          <div class='buttons are-small'>
+            <button id='' class='button is-dark is-rounded' onclick='' title=''>Hold Breath</button>
+            <button id='' class='button is-dark is-rounded' onclick='' title=''>Head-up Trim</button>
+            <button id='' class='button is-dark is-rounded' onclick='' title=''>Disconnect O<sup>2</sup>&nbsp;MAV</button>
+            <button id='' class='button is-dark is-rounded' onclick='' title=''>Switch BO</button>
+            <button id='' class='button is-dark is-rounded' onclick='' title=''>Full BO</button>
+          </div>
+        </div>
+
+        <div class='navbar-item'>
+          <p class='is-size-7 has-text-white'>Open/Close:&nbsp;</p>
+          <div class='buttons are-small'>
+            <button id='o2tankValve' class='button is-success is-rounded' onclick='o2ValveToggle ()' title='O2 Tank Valve'>O<sup>2</sup>&nbsp;</button>
+            <button id='rightValve' class='button is-success is-rounded' onclick='rightValveToggle ()' title='Right Post Valve'>Right Post</button>
+            <button id='leftValve' class='button is-success is-rounded' onclick='leftValveToggle ()' title='Left Post Valve'>Left Post</button>
+          </div>
+        </div>
+
+        <div class='navbar-item'>
+          <p class='is-size-7 has-text-white'>Check:&nbsp;</p>
+          <div class='buttons are-small'>
+            <button id='' class='button is-dark is-rounded' onclick='' title=''>O<sup>2</sup>&nbsp;tank valve</button>
+            <button id='' class='button is-dark is-rounded' onclick='' title=''>O<sup>2</sup>&nbsp;SPG</button>
+            <button id='' class='button is-dark is-rounded' onclick='' title=''>Dil. SPG</button>
+          </div>
         </div>
       </div>
     </div>
@@ -75,8 +112,8 @@
         <aside class='menu'>
           <p class='menu-label p-5 mb-0 has-text-white' style='line-height: 2.5em'>
             Potential Failures 
-            <button class='button is-small is-ghost is-black' title='Show Hints' onclick='toggleHint ()'><i id='failuresHintButton' class='fa-solid fa-lightbulb has-text-success'></i></button>
-            <button class='button is-small is-ghost is-black' title='Show Solution' onclick='toggleSolutions ()'><i id="failuresSolutionButton" class='fa-solid fa-book'></i></button>
+            <button class='button is-small is-ghost is-black' title='Show/Hide Hints' onclick='toggleHint ()'><i id='failuresHintButton' class='fa-solid fa-lightbulb has-text-success'></i></button>
+            <button class='button is-small is-ghost is-black' title='Show/Hide Solutions' onclick='toggleSolutions ()'><i id='failuresSolutionButton' class='fa-solid fa-book'></i></button>
           </p>
 
           <ul class='menu-list'>
@@ -94,13 +131,13 @@
 
             <li title='Hight unsafe PO2 - Hyperoxic warning'>
               <a class='has-text-white' onclick='runFC3 ()'>
-                <i id='fc3icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC3 <span id='FC3hint'>- High PO<sub>2</sub> unsafe</span>
+                <i id='fc3icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC3! <span id='FC3hint'>- High PO<sub>2</sub> unsafe</span>
               </a>
             </li>
 
             <li title='Low unsafe PO2 - Hypoxic warning'>
               <a class='has-text-white' onclick='runFC4 ()'>
-                <i id='fc4icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC4 <span id='FC4hint'>- Low PO<sub>2</sub></span>
+                <i id='fc4icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC4! <span id='FC4hint'>- Low PO<sub>2</sub></span>
               </a>
             </li>
 
@@ -112,7 +149,7 @@
 
             <li title='Controller failure'>
               <a class='has-text-white' onclick='runFC6 ()'>
-                <i id='fc6icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC6 <span id='FC6hint'>- Controller Fail</span>
+                <i id='fc6icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC6! <span id='FC6hint'>- Controller Fail</span>
               </a>
             </li>
 
@@ -124,74 +161,67 @@
 
             <li title='O2 runaway - Malfunctioning addition'>
               <a class='has-text-white' onclick='runFC8 ()'>
-                <i id='fc8icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC8 <span id='FC8hint'>- O<sub>2</sub> Runaway</span>
+                <i id='fc8icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC8! <span id='FC8hint'>- O<sub>2</sub> Runaway</span>
               </a>
             </li>
 
             <li title='Diluent runaway - Malfunctioning ADV'>
               <a class='has-text-white' onclick='runFC9 ()'>
-                <i id='fc9icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC9 <span id='FC9hint'>- Dil. Runaway</span>
+                <i id='fc9icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC9! <span id='FC9hint'>- Dil. Runaway</span>
               </a>
             </li>
-            
+
             <li title='Voting failed - Voting logic failure'>
               <a class='has-text-white' onclick='runFC10 ()'>
                 <i id='fc10icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC10 <span id='FC10hint'>- Voting Failed</span>
               </a>
             </li>
-            
+
             <li title='Hypercapnia - CO2 absorbent failure'>
               <a class='has-text-white' onclick='runFC11 ()'>
                 <i id='fc11icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC11 <span id='FC11hint'>- Hypercapnia</span>
               </a>
             </li>
-            
+
             <li title='Released counterlung OPV'>
               <a class='has-text-white' onclick='runFC12 ()'>
                 <i id='fc12icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC12 <span id='FC12hint'>- CL OPV</span>
               </a>
             </li>
-            
+
             <li title='Semi-closed operation'>
               <a class='has-text-white'  onclick='runFC13 ()'>
                 <i id='fc13icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC13 <span id='FC13hint'>- SCR Operation</span>
               </a>
             </li>
-            
+
             <li title='Caustic Cocktail'>
               <a class='has-text-white'  onclick='runFC14 ()'>
                 <i id='fc14icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC14 <span id='FC14hint'>- Caustic C.</span>
               </a>
             </li>
-            
+
             <li title='Hyperoxia (experience dive)'>
               <a class='has-text-white'  onclick='runFC15 ()'>
                 <i id='fc15icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC15 <span id='FC15hint'>- Hyperoxia</span>
               </a>
             </li>
-            
+
             <li title='DCI (experience dive)'>
               <a class='has-text-white'  onclick='runFC16 ()'>
                 <i id='fc16icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC16 <span id='FC16hint'>- DCI</span>
               </a>
             </li>
+
+            <li title='BOOM!'>
+              <a class='has-text-white'  onclick='runFC17 ()'>
+                <i id='fc17icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;FC17 <span id='FC17hint'>- BOOM!</span>
+              </a>
+            </li>
           </ul>
 
           <button class='button is-small is-fullwidth is-black mt-4' onclick='randomFailure ()'><i class='fa-solid fa-play'></i>&nbsp;Play random failures</button>
-          <div class="buttons is-fullwidth is-justify-content-center mt-4">
-            <button id='timeSpeedx1' class="button is-small is-black has-text-success" onclick='timeSpeedx1 ()'>x1</button>
-            <button id='timeSpeedx2' class="button is-small is-black" onclick='timeSpeedx2 ()' disabled>x2</button>
-          </div>
         </aside>
-
-        <!-- <hr>
-
-        <aside class='menu'>
-          <p class='menu-label p-4 has-text-white'>Upcoming Features</p>
-          <ul class='menu-list px-4'>
-            <li class='has-text-white m-2'><i class='fa-solid fa-lightbulb'></i>&nbsp; HUD</li>
-          </ul>
-        </aside> -->
       </div>
       
       <div id='app' class='column is-four-fifth has-background-info'>
@@ -283,7 +313,7 @@
 
                 <div id='solutions' class='notification is-success is-light is-hidden p-0'>
                   <ol id='solutionFC1' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
-                    <p class="mb-3 is-uppercase	has-text-weight-bold">O<sub>2</sub> SENSOR DISCREPANCY, <span class="has-text-info">FC1</span> SOLUTION:</p>
+                    <p class='mb-3 is-uppercase	has-text-weight-bold'>O<sub>2</sub> SENSOR DISCREPANCY, <span class='has-text-info'>FC1</span> SOLUTION:</p>
                     <li>Signal team and stabilize</li>
                     <li>Switch CTRL to low setpoint 0.7</li>
                     <li>Check CTRL diluent pO<sub>2</sub></li>
@@ -292,7 +322,7 @@
                   </ol>
 
                   <ol id='solutionFC2' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
-                    <p class="mb-3 is-uppercase	has-text-weight-bold">MODERATELY HIGH BUT SAFE PO<sub>2</sub>, <span class="has-text-info">FC2</span> SOLUTION:</p>
+                    <p class='mb-3 is-uppercase	has-text-weight-bold'>MODERATELY HIGH BUT SAFE PO<sub>2</sub>, <span class='has-text-info'>FC2</span> SOLUTION:</p>
                     <li>Trigger diluent addition by nose exhalation</li>
                     <li>Evaluate circumstances</li>
                     <br>
@@ -301,8 +331,8 @@
                   </ol>
 
                   <ol id='solutionFC3' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
-                    <p class="mb-3 is-uppercase	has-text-weight-bold">HIGH UNSAFE PO<sub>2</sub> – HYPEROXIC WARNING, <span class="has-text-info">FC3</span> SOLUTION:</p>
-                    <li>Signal team "High pO<sub>2</sub>"</li>
+                    <p class='mb-3 is-uppercase	has-text-weight-bold'>HIGH UNSAFE PO<sub>2</sub> – HYPEROXIC WARNING, <span class='has-text-info'>FC3</span> SOLUTION:</p>
+                    <li>Signal team 'High pO<sub>2</sub>'</li>
                     <li>Diluent flush</li>
                     <li>Evaluate circumstances</li>
                     <br>
@@ -311,8 +341,8 @@
                   </ol>
 
                   <ol id='solutionFC4' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
-                    <p class="mb-3 is-uppercase	has-text-weight-bold">LOW UNSAFE PO<sub>2</sub> – HYPOXIC WARNING, <span class="has-text-info">FC4</span> SOLUTION:</p>
-                    <li>Signal team "switch to back gas" and stabilize</li>
+                    <p class='mb-3 is-uppercase	has-text-weight-bold'>LOW UNSAFE PO<sub>2</sub> – HYPOXIC WARNING, <span class='has-text-info'>FC4</span> SOLUTION:</p>
+                    <li>Signal team 'switch to back gas' and stabilize</li>
                     <li>Switch to back gas</li>
                     <li>Check O<sub>2</sub> supply using MAV</li>
                     <li>Flow check O<sub>2</sub> cylinder valve</li>
@@ -321,7 +351,7 @@
                   </ol>
 
                   <ol id='solutionFC5' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
-                    <p class="mb-3 is-uppercase	has-text-weight-bold">SENSOR CURRENT LIMITATION AND VOTING LOGIC FAILURE, <span class="has-text-info">FC5</span> SOLUTION:</p>
+                    <p class='mb-3 is-uppercase	has-text-weight-bold'>SENSOR CURRENT LIMITATION AND VOTING LOGIC FAILURE, <span class='has-text-info'>FC5</span> SOLUTION:</p>
                     <li>Signal team and stabilize</li>
                     <li>Switch CTRL to low setpoint 0.7</li>
                     <li>Check CTRL diluent pO<sub>2</sub></li>
@@ -330,7 +360,7 @@
                   </ol>
 
                   <ol id='solutionFC6' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
-                    <p class="mb-3 is-uppercase	has-text-weight-bold">CONTROLLER FAILURE, <span class="has-text-info">FC6</span> SOLUTION:</p>
+                    <p class='mb-3 is-uppercase	has-text-weight-bold'>CONTROLLER FAILURE, <span class='has-text-info'>FC6</span> SOLUTION:</p>
                     <li>Signal team and stabilize</li>
                     <li>Manual O<sub>2</sub> addition</li>
                     <li>Use HUD for O<sub>2</sub> monitoring</li>
@@ -338,8 +368,8 @@
                   </ol>
                   
                   <ol id='solutionFC7' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
-                    <p class="mb-3 is-uppercase	has-text-weight-bold">SOLENOID ALERT, INTERRUPTED O<sub>2</sub> SUPPLY, <span class="has-text-info">FC7</span> SOLUTION:</p>
-                    <li>Signal team "O<sub>2</sub> failed" and stabilize</li>
+                    <p class='mb-3 is-uppercase	has-text-weight-bold'>SOLENOID ALERT, INTERRUPTED O<sub>2</sub> SUPPLY, <span class='has-text-info'>FC7</span> SOLUTION:</p>
+                    <li>Signal team 'O<sub>2</sub> failed' and stabilize</li>
                     <li>Maintain pO<sub>2</sub> with O<sub>2</sub> MAV</li>
                     <li>Flow check O<sub>2</sub> cylinder valve</li>
                     <li>Check oxygen pressure gauge</li>
@@ -347,7 +377,7 @@
                   </ol>
 
                   <ol id='solutionFC8' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
-                    <p class="mb-3 is-uppercase	has-text-weight-bold">O<sub>2</sub> RUNAWAY – MALFUNCTIONING ADDITION, <span class="has-text-info">FC8</span> SOLUTION:</p>
+                    <p class='mb-3 is-uppercase	has-text-weight-bold'>O<sub>2</sub> RUNAWAY – MALFUNCTIONING ADDITION, <span class='has-text-info'>FC8</span> SOLUTION:</p>
                     <li>Signal team and stabilize</li>
                     <li>Adjust trim to be slightly negative</li>
                     <li>Remain on the loop allowing gas to escape from the lips</li>
@@ -356,7 +386,7 @@
                   </ol>
 
                   <ol id='solutionFC9' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
-                    <p class="mb-3 is-uppercase	has-text-weight-bold">DILUENT RUNAWAY – MALFUNCTIONING ADV, <span class="has-text-info">FC9</span> SOLUTION:</p>
+                    <p class='mb-3 is-uppercase	has-text-weight-bold'>DILUENT RUNAWAY – MALFUNCTIONING ADV, <span class='has-text-info'>FC9</span> SOLUTION:</p>
                     <li>Signal team and stabilize</li>
                     <li>Adjust trim to be slightly negative</li>
                     <li>Remain on the loop allowing gas to escape from the lips</li>
@@ -365,14 +395,14 @@
                   </ol>
 
                   <ol id='solutionFC10' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
-                    <p class="mb-3 is-uppercase	has-text-weight-bold">VOTING FAILED – VOTING LOGIC FAILURE, <span class="has-text-info">FC10</span> SOLUTION:</p>
+                    <p class='mb-3 is-uppercase	has-text-weight-bold'>VOTING FAILED – VOTING LOGIC FAILURE, <span class='has-text-info'>FC10</span> SOLUTION:</p>
                     <li>Signal team and stabilize</li>
                     <li>Bailout</li>
                     <li>Evaluate circumstances</li>
                   </ol>
 
                   <ol id='solutionFC11' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
-                    <p class="mb-3 is-uppercase	has-text-weight-bold">HYPERCAPNIA – CO2 ABSORBENT FAILURE, <span class="has-text-info">FC11</span> SOLUTION:</p>
+                    <p class='mb-3 is-uppercase	has-text-weight-bold'>HYPERCAPNIA – CO2 ABSORBENT FAILURE, <span class='has-text-info'>FC11</span> SOLUTION:</p>
                     <li>Signal team and stabilize</li>
                     <li>Stop all physical activity</li>
                     <li>Exhale deeply</li>
@@ -383,22 +413,22 @@
                   </ol>
 
                   <ol id='solutionFC12' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
-                    <p class="mb-3 is-uppercase	has-text-weight-bold">RELEASED COUNTERLUNG OPV, <span class="has-text-info">FC12</span> SOLUTION:</p>
+                    <p class='mb-3 is-uppercase	has-text-weight-bold'>RELEASED COUNTERLUNG OPV, <span class='has-text-info'>FC12</span> SOLUTION:</p>
                     <li>Signal team and stabilize</li>
                     <li>Confirm OPV pull string status</li>
                     <li>Evaluate circumstances</li>
                   </ol>
 
                   <ol id='solutionFC13' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
-                    <p class="mb-3 is-uppercase	has-text-weight-bold">SEMI-CLOSED OPERATION, <span class="has-text-info">FC13</span> SOLUTION:</p>
-                    <li>Signal team "SCR OPS"</li>
+                    <p class='mb-3 is-uppercase	has-text-weight-bold'>SEMI-CLOSED OPERATION, <span class='has-text-info'>FC13</span> SOLUTION:</p>
+                    <li>Signal team 'SCR OPS'</li>
                     <li>Monitor pO2</li>
                     <li>Force ADV addition as required</li>
                     <li>Evaluate circumstances</li>
                   </ol>
 
                   <ol id='solutionFC14' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
-                    <p class="mb-3 is-uppercase	has-text-weight-bold">CAUSTIC COCKTAIL, <span class="has-text-info">FC14</span> SOLUTION:</p>
+                    <p class='mb-3 is-uppercase	has-text-weight-bold'>CAUSTIC COCKTAIL, <span class='has-text-info'>FC14</span> SOLUTION:</p>
                     <li>Signal team and stabilize</li>
                     <li>Switch to backgas</li>
                     <li>Flood recovery</li>
@@ -409,7 +439,7 @@
                   </ol>
 
                   <ol id='solutionFC15' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
-                    <p class="mb-3 is-uppercase	has-text-weight-bold">HYPEROXIA (experience dive), <span class="has-text-info">FC15</span> SOLUTION:</p>
+                    <p class='mb-3 is-uppercase	has-text-weight-bold'>HYPEROXIA (experience dive), <span class='has-text-info'>FC15</span> SOLUTION:</p>
                     <li>Signal team and stabilize</li>
                     <li>Stop and stabilize</li>
                     <li>Switch CTRL to low setpoint 0.7</li>
@@ -418,7 +448,7 @@
                   </ol>
 
                   <ol id='solutionFC16' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
-                    <p class="mb-3 is-uppercase	has-text-weight-bold">DCI (experience dive), <span class="has-text-info">FC16</span> SOLUTION:</p>
+                    <p class='mb-3 is-uppercase	has-text-weight-bold'>DCI (experience dive), <span class='has-text-info'>FC16</span> SOLUTION:</p>
                     <li>Descend 3m or deeper</li>
                     <li>Restart deco from this depth
                     <li>Evaluate circumstances</li>
@@ -446,41 +476,41 @@
             <section id='hud' class='has-background-black m-5'>
               <div class='columns'>
                 <div id='hud_sensor1' class='column'>
-                  <div id="hud_sensor1_led1" class='hud-light light-red'></div>
-                  <div id="hud_sensor1_led2" class='hud-light light-green'></div>
-                  <div id="hud_sensor1_led3" class='hud-light light-yellow'></div>
-                  <div id="hud_sensor1_led4" class='hud-light light-red'></div>
+                  <div id='hud_sensor1_led1' class='hud-light light-red'></div>
+                  <div id='hud_sensor1_led2' class='hud-light light-green'></div>
+                  <div id='hud_sensor1_led3' class='hud-light light-yellow'></div>
+                  <div id='hud_sensor1_led4' class='hud-light light-red'></div>
                 </div>
                 <div id='hud_sensor2' class='column'>
-                  <div id="hud_sensor2_led1" class='hud-light light-red'></div>
-                  <div id="hud_sensor2_led2" class='hud-light light-green'></div>
-                  <div id="hud_sensor2_led3" class='hud-light light-yellow'></div>
-                  <div id="hud_sensor2_led4" class='hud-light light-red'></div>
+                  <div id='hud_sensor2_led1' class='hud-light light-red'></div>
+                  <div id='hud_sensor2_led2' class='hud-light light-green'></div>
+                  <div id='hud_sensor2_led3' class='hud-light light-yellow'></div>
+                  <div id='hud_sensor2_led4' class='hud-light light-red'></div>
                 </div>
                 <div id='hud_sensor3' class='column'>
-                  <div id="hud_sensor3_led1" class='hud-light light-red'></div>
-                  <div id="hud_sensor3_led2" class='hud-light light-green'></div>
-                  <div id="hud_sensor3_led3" class='hud-light light-yellow'></div>
-                  <div id="hud_sensor3_led4" class='hud-light light-red'></div>
+                  <div id='hud_sensor3_led1' class='hud-light light-red'></div>
+                  <div id='hud_sensor3_led2' class='hud-light light-green'></div>
+                  <div id='hud_sensor3_led3' class='hud-light light-yellow'></div>
+                  <div id='hud_sensor3_led4' class='hud-light light-red'></div>
                 </div>
               </div>
             </section>
 
-            <div class="buttons is-fullwidth is-justify-content-right px-3">
-              <button class="button is-small is-black" onclick="hudRealtime ()" title="Sync with CTRL" disabled>
-                <i id="hud_play_icon" class="fa-solid fa-circle-play"></i>
+            <div class='buttons is-fullwidth is-justify-content-right px-3'>
+              <button class='button is-small is-black' onclick='hudRealtime ()' title='Turn-on & Sync with CTRL'>
+                <i id='hud_play_icon' class='fa-solid fa-circle-play'></i>
               </button>
-              <button class="button is-small is-black" onclick="hudStartAnimation ()" title="Turn-on">
-                <i id="hud_start_icon" class="fa-solid fa-power-off"></i>
+              <button class='button is-small is-black is-hidden' onclick='hudStart ()' title='Turn-on'>
+                <i id='hud_start_icon' class='fa-solid fa-power-off'></i>
               </button>
-              <button class="button is-small is-black" onclick="hudBatteryLow ()" title="Battery is low and should be replaced">
-                <i id="hud_battery_icon" class="fa-solid fa-battery-quarter"></i>
+              <button class='button is-small is-black' onclick='hudBatteryLow ()' title='Battery is low and should be replaced'>
+                <i id='hud_battery_icon' class='fa-solid fa-battery-quarter'></i>
               </button>
-              <button class="button is-small is-black" onclick="hudSensorFailed ()" title="O2 sensor has failed calibration">
-                <i id="hud_sensor_icon" class="fa-solid fa-filter-circle-xmark"></i>
+              <button class='button is-small is-black' onclick='hudSensorFailed ()' title='O2 sensor has failed calibration (Sensor 3)'>
+                <i id='hud_sensor_icon' class='fa-solid fa-filter-circle-xmark'></i>
               </button>
-              <button class="button is-small is-black" onclick="hudNoCommunications ()" title="No DiveCAN® Communications">
-                <i id="hud_communication_icon" class="fa-solid fa-link-slash"></i>
+              <button class='button is-small is-black' onclick='hudNoCommunications ()' title='No DiveCAN® Communications'>
+                <i id='hud_communication_icon' class='fa-solid fa-link-slash'></i>
               </button>
             </div>
 
@@ -555,10 +585,41 @@
     <div class='content has-text-centered'>
       <p>Copyright &copy; nev[at]gue.com</p>
     </div>
+
+    <div class='level'>
+      <div class='level-left'>
+        <div class='level-item'>
+          <div class='buttons'>
+            <button id='' class='button is-primary is-small'>"How to use" GUIDE</button>
+            <button id='' class='button is-primary is-small'>Default Presets</button>
+            <button id='' class='button is-danger is-small' onclick=''>Report BUG</button>
+          </div>
+        </div>
+        
+        <div class="level-item mx-5">
+          <div class='buttons'>
+            <button id='advancedUsage' class='button is-dark is-small' onclick='runAdvancedUser ()'>Advanced Usage</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="level-right">
+        <div class="level-item">
+          <p class='is-size-7 has-text-white'>Timer Speed:</p>
+        </div>
+        <div class="level-item">
+          <div class='buttons is-fullwidth is-justify-content-center mt-4'>
+            <button id='timeSpeedx1' class='button is-small is-dark has-text-success' onclick='timeSpeedx1 ()'>x1</button>
+            <button id='timeSpeedx2' class='button is-small is-dark' onclick='timeSpeedx2 ()' disabled>x2</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </footer>
 
   <script src='./js/script.js'></script>
   <script src='./js/gue-gas-dynamics.js'></script>
   <script src='./js/gue-jj-FC.js'></script>
+  <script src='./js/hud.js'></script>
 </body>
 </html>

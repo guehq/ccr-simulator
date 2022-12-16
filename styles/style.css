@@ -52,8 +52,68 @@ body {
 }
 
 /* HUD START */
+#hud {
+  border-radius: 3em 0 0 3em;
+  margin-right: 0 !important;
+}
+
 .hud-light {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 100%;
+  margin: .5rem auto;
   background: #363636;
+}
+
+.light-red.is-blinking {
+  -webkit-animation: redLightBlinking .75s infinite;
+  animation: .75s infinite redLightBlinking;
+}
+
+@keyframes redLightBlinking {
+  0% { background-color: #363636; }
+  50% { background-color: tomato; }
+  100% { background-color: #363636; }
+}
+
+@-webkit-keyframes redLightBlinking {
+  0% { background-color: #363636; }
+  50% { background-color: tomato; }
+  100% { background-color: #363636; }
+}
+
+.light-green.is-blinking {
+  -webkit-animation: greenLightBlinking .75s infinite;
+  animation: .75s infinite greenLightBlinking;
+}
+
+@keyframes greenLightBlinking {
+  0% { background-color: #363636; }
+  50% { background-color: #48c78e; }
+  100% { background-color: #363636; }
+}
+
+@-webkit-keyframes greenLightBlinking {
+  0% { background-color: #363636; }
+  50% { background-color: #48c78e; }
+  100% { background-color: #363636; }
+}
+
+.light-yellow.is-blinking {
+  -webkit-animation: yellowLightBlinking .75s infinite;
+  animation: .75s infinite yellowLightBlinking;
+}
+
+@keyframes yellowLightBlinking {
+  0% { background-color: #363636; }
+  50% { background-color: #ffe08a; }
+  100% { background-color: #363636; }
+}
+
+@-webkit-keyframes yellowLightBlinking {
+  0% { background-color: #363636; }
+  50% { background-color: #ffe08a; }
+  100% { background-color: #363636; }
 }
 /* HUD END */
 
@@ -164,71 +224,7 @@ section.nerd input[type=number] {
 }
 /* NERD END */
 
-/* failures START */
+/* Failures START */
 #failures {
   height: calc(100vh - 32px);
-}
-
-/* HUD */
-#hud {
-  border-radius: 3em 0 0 3em;
-  margin-right: 0 !important;
-}
-
-.hud-light {
-  width: 1.5rem;
-  height: 1.5rem;
-  border-radius: 100%;
-  margin: .5rem auto;
-}
-
-.light-red.is-blinking {
-  -webkit-animation: redLightBlinking 1s infinite;
-  animation: .6s infinite redLightBlinking;
-}
-
-@keyframes redLightBlinking {
-  0% { background-color: tomato; }
-  50% { background-color: #363636; }
-  100% { background-color: tomato; }
-}
-
-@-webkit-keyframes redLightBlinking {
-  0% { background-color: tomato; }
-  50% { background-color: #363636; }
-  100% { background-color: tomato; }
-}
-
-.light-green.is-blinking {
-  -webkit-animation: greenLightBlinking 1s infinite;
-  animation: .6s infinite greenLightBlinking;
-}
-
-@keyframes greenLightBlinking {
-  0% { background-color: #48c78e; }
-  50% { background-color: #363636; }
-  100% { background-color: #48c78e; }
-}
-
-@-webkit-keyframes greenLightBlinking {
-  0% { background-color: #48c78e; }
-  50% { background-color: #363636; }
-  100% { background-color: #48c78e; }
-}
-
-.light-yellow.is-blinking {
-  -webkit-animation: yellowLightBlinking 1s infinite;
-  animation: .6s infinite yellowLightBlinking;
-}
-
-@keyframes yellowLightBlinking {
-  0% { background-color: #ffe08a; }
-  50% { background-color: #363636; }
-  100% { background-color: #ffe08a; }
-}
-
-@-webkit-keyframes yellowLightBlinking {
-  0% { background-color: #ffe08a; }
-  50% { background-color: #363636; }
-  100% { background-color: #ffe08a; }
 }

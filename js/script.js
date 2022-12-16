@@ -311,6 +311,20 @@ function hideNerd () {
   document.getElementById('showNerd').classList.remove('is-hidden')
 }
 
+// HUD
+
+function showHud () {
+  document.getElementById('hud').classList.remove('is-hidden')
+  document.getElementById('showHud').classList.add('is-hidden')
+  document.getElementById('hideHud').classList.remove('is-hidden')
+}
+
+function hideHud () {
+  document.getElementById('hud').classList.add('is-hidden')
+  document.getElementById('hideHud').classList.add('is-hidden')
+  document.getElementById('showHud').classList.remove('is-hidden')
+}
+
 // RESET DATA
 function resetData () {
   depth.value = 0
@@ -334,65 +348,25 @@ function timeSpeedx2 () {
   document.getElementById('timeSpeedx2').classList.add('has-text-success')
 }
 
-// HUD 
-function hudClearLeds () {
-  document.getElementById('hud_sensor1_led1').classList.remove('is-blinking', 'has-background-danger')
-  document.getElementById('hud_sensor1_led2').classList.remove('is-blinking', 'has-background-success')
-  document.getElementById('hud_sensor1_led3').classList.remove('is-blinking', 'has-background-warning')
-  document.getElementById('hud_sensor1_led4').classList.remove('is-blinking', 'has-background-danger')
-  document.getElementById('hud_sensor2_led1').classList.remove('is-blinking', 'has-background-danger')
-  document.getElementById('hud_sensor2_led2').classList.remove('is-blinking', 'has-background-success')
-  document.getElementById('hud_sensor2_led3').classList.remove('is-blinking', 'has-background-warning')
-  document.getElementById('hud_sensor2_led4').classList.remove('is-blinking', 'has-background-danger')
-  document.getElementById('hud_sensor3_led1').classList.remove('is-blinking', 'has-background-danger')
-  document.getElementById('hud_sensor3_led2').classList.remove('is-blinking', 'has-background-success')
-  document.getElementById('hud_sensor3_led3').classList.remove('is-blinking', 'has-background-warning')
-  document.getElementById('hud_sensor3_led4').classList.remove('is-blinking', 'has-background-danger')
-  document.getElementById('hud_start_icon').classList.remove('has-text-success')
-  document.getElementById('hud_battery_icon').classList.remove('has-text-success')
-  document.getElementById('hud_sensor_icon').classList.remove('has-text-success')
-  document.getElementById('hud_communication_icon').classList.remove('has-text-success')
-  
-}
+// ADVANCED USAGE
 
-function hudStartAnimation () {
-  hudClearLeds ()
-  document.getElementById('hud_start_icon').classList.add('has-text-success')
-  document.getElementById('hud_sensor1_led4').classList.add('has-background-danger')
-  document.getElementById('hud_sensor2_led1').classList.add('has-background-danger')
-  document.getElementById('hud_sensor2_led2').classList.add('has-background-success')
-  document.getElementById('hud_sensor2_led3').classList.add('has-background-warning')
-  document.getElementById('hud_sensor2_led4').classList.add('has-background-danger')
-  document.getElementById('hud_sensor3_led4').classList.add('has-background-danger')
+function runAdvancedUser () {
+  document.getElementById('adv_nav').classList.toggle('is-hidden')
+  document.getElementById('advancedUsage').classList.toggle('has-text-success')
 
 }
 
-function hudBatteryLow () {
-  hudClearLeds ()
-  document.getElementById('hud_battery_icon').classList.add('has-text-success')
-  document.getElementById('hud_sensor1_led3').classList.add('has-background-warning')
-  document.getElementById('hud_sensor2_led3').classList.add('has-background-warning')
-  document.getElementById('hud_sensor3_led3').classList.add('has-background-warning')
+function o2ValveToggle () {
+  document.getElementById('o2tankValve').classList.toggle('is-success')
+  document.getElementById('o2tankValve').classList.toggle('is-danger')
 }
 
-function hudSensorFailed () {
-  hudClearLeds ()
-  document.getElementById('hud_sensor_icon').classList.add('has-text-success')
-  document.getElementById('hud_sensor1_led2').classList.add('is-blinking')
-  document.getElementById('hud_sensor1_led3').classList.add('is-blinking')
-  document.getElementById('hud_sensor2_led3').classList.add('is-blinking')
-  document.getElementById('hud_sensor2_led2').classList.add('is-blinking')
-  document.getElementById('hud_sensor3_led4').classList.add('has-background-danger')
-  document.getElementById('hud_sensor3_led1').classList.add('has-background-danger')
+function rightValveToggle () {
+  document.getElementById('rightValve').classList.toggle('is-success')
+  document.getElementById('rightValve').classList.toggle('is-danger')
 }
 
-function hudNoCommunications () {
-  hudClearLeds ()
-  document.getElementById('hud_communication_icon').classList.add('has-text-success')
-  document.getElementById('hud_sensor1_led1').classList.add('is-blinking')
-  document.getElementById('hud_sensor1_led4').classList.add('is-blinking')
-  document.getElementById('hud_sensor3_led1').classList.add('is-blinking')
-  document.getElementById('hud_sensor3_led4').classList.add('is-blinking')
+function leftValveToggle () {
+  document.getElementById('leftValve').classList.toggle('is-success')
+  document.getElementById('leftValve').classList.toggle('is-danger')
 }
-
-hudNoCommunications ()
