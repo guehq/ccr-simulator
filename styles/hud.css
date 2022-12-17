@@ -48,6 +48,7 @@
   background: #363636;
 }
 
+#hud_buddy_led.is-blinking,
 .light-red.is-blinking {
   -webkit-animation: redLightBlinking .75s infinite;
   animation: .75s infinite redLightBlinking;

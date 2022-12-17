@@ -355,7 +355,8 @@ function timeSpeedx2 () {
 // ADVANCED USAGE
 
 function runAdvancedUser () {
-  document.getElementById('adv_nav').classList.toggle('is-hidden')
+  document.getElementById('adv_nav_row1').classList.toggle('is-hidden')
+  document.getElementById('adv_nav_row2').classList.toggle('is-hidden')
   document.getElementById('advancedUsage').classList.toggle('has-text-success')
   document.querySelector('html').classList.toggle('double-nav')
 }
@@ -368,6 +369,16 @@ function o2ValveToggle () {
 function rightValveToggle () {
   document.getElementById('rightValve').classList.toggle('is-success')
   document.getElementById('rightValve').classList.toggle('is-danger')
+}
+
+function rightIsoValveToggle () {
+  document.getElementById('rightIsoValve').classList.toggle('is-success')
+  document.getElementById('rightIsoValve').classList.toggle('is-danger')
+}
+
+function leftIsoValveToggle () {
+  document.getElementById('leftIsoValve').classList.toggle('is-success')
+  document.getElementById('leftIsoValve').classList.toggle('is-danger')
 }
 
 function leftValveToggle () {
@@ -404,4 +415,9 @@ function setGas15_55 () {
 function setGas12_65 () {
   document.getElementById('fO2').value = 12
   document.getElementById('fHe').value = 65
+}
+
+// MODAL
+function toggleDefaultPresets () {
+  document.getElementById('defaultPresets').classList.toggle('is-active')
 }

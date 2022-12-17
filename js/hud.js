@@ -10,6 +10,8 @@ const S3L1 = document.getElementById('hud_sensor3_led1')
 const S3L2 = document.getElementById('hud_sensor3_led2')
 const S3L3 = document.getElementById('hud_sensor3_led3')
 const S3L4 = document.getElementById('hud_sensor3_led4')
+const BL = document.getElementById('hud_buddy_led')
+// TODO: BL sadece sensor 1 e bakiyor. ortalamayı almalı
 let maxT
 let hudTimer
 let reading
@@ -40,6 +42,7 @@ function hudClearLeds () {
   hudClearS1Leds ()
   hudClearS2Leds ()
   hudClearS3Leds ()
+  BL.classList.remove('is-blinking')
   document.getElementById('hud_battery_icon').classList.remove('has-text-success')
   document.getElementById('hud_sensor_icon').classList.remove('has-text-success')
   document.getElementById('hud_communication_icon').classList.remove('has-text-success')
@@ -138,6 +141,7 @@ function hudCurrentPO2 () {
     if ( s1val < .95 ) {
       if ( s1val <= 0.45 ) {
         S1L4.classList.add('is-blinking')
+        BL.classList.add('is-blinking')
         setTimeout ( hudClearS1Leds, time )
       } else {
         S1L3.classList.add('is-blinking')
@@ -156,6 +160,7 @@ function hudCurrentPO2 () {
         setTimeout ( hudClearS1Leds, time )
       } else {
         S1L1.classList.add('is-blinking')
+        BL.classList.add('is-blinking')
         setTimeout ( hudClearS1Leds, time )
       }
     }
