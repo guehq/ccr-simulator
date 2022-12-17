@@ -51,16 +51,24 @@ function runFC1 () {
   }
 }
 
+// Run Moderately High But Safe PO2 Failure
+function runHighPO2Safe () {
+  if ( depth.value < 15 ) { 
+    depth.value = 15 
+    depth.innerHTML = 15 
+  }
+  loopO2 = 1.44
+}
+
 // FC2
 function runFC2 () {
   if ( !isFC2Active ) {
     isFC2Active = true
-    // TODO: if depth less than 5m. --> 15m
-    loopO2 = 1.44
     document.getElementById('fc2icon').classList.remove('has-text-success')
     document.getElementById('fc2icon').classList.add('has-text-danger')
     document.getElementById('FC2no').classList.add('has-text-danger')
     document.getElementById('solutionFC2').classList.remove('is-hidden')
+    runHighPO2Safe ()
   } else {
     isFC2Active = false
     document.getElementById('fc2icon').classList.remove('has-text-danger')
