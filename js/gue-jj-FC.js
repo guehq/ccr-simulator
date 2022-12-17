@@ -78,16 +78,24 @@ function runFC2 () {
   }
 }
 
+// Run High Unsafe PO2 - Hyperoxic Warning
+function runHighPO2Unsafe () {
+  if ( depth.value < 15 ) { 
+    depth.value = 15 
+    depth.innerHTML = 15 
+  }
+  loopO2 = 1.91
+}
+
 // FC3
 function runFC3 () {
   if ( !isFC3Active ) {
     isFC3Active = true
-    // TODO: if depth less than 15m. --> 15m
-    loopO2 = 1.91
     document.getElementById('fc3icon').classList.remove('has-text-success')
     document.getElementById('fc3icon').classList.add('has-text-danger')
     document.getElementById('FC3no').classList.add('has-text-danger')
     document.getElementById('solutionFC3').classList.remove('is-hidden')
+    runHighPO2Unsafe ()
   } else {
     isFC3Active = false
     document.getElementById('fc3icon').classList.remove('has-text-danger')
