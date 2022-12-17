@@ -109,8 +109,8 @@
           <p class='is-size-7 has-text-white'>Check:&nbsp;</p>
           <div class='buttons are-small'>
             <button id='' class='button is-dark is-rounded' onclick='alert("O2 tank status: OPEN")' title=''>O<sup>2</sup>&nbsp;tank valve</button>
-            <button id='' class='button is-dark is-rounded' onclick='alert("O2 tank pressure: 60 bar")' title=''>O<sup>2</sup>&nbsp;SPG</button>
-            <button id='' class='button is-dark is-rounded' onclick='alert("Diluent tank pressure: 100 bar")' title=''>Dil. SPG</button>
+            <button id='' class='button is-dark is-rounded' onclick='alert("O2 tank pressure: " + o2spg + " bar")' title=''>O<sup>2</sup>&nbsp;SPG</button>
+            <button id='' class='button is-dark is-rounded' onclick='alert("Diluent tank pressure: " + dilspg + " bar")' title=''>Dil. SPG</button>
           </div>
         </div>
       </div>
@@ -166,7 +166,7 @@
 
             <li title='Sensor current limitation and voting logic failure'>
               <a class='has-text-white' onclick='runFC5 ()'>
-                <i id='fc5icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;<span id='FC5no'>FC5</span> <span id='FC5hint'>- Sensor Limit.</span>
+                <i id='fc5icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;<span id='FC5no'>FC5</span> <span id='FC5hint'>- Sensor Limitation</span>
               </a>
             </li>
 
@@ -688,8 +688,9 @@
   </div>
 
   <script src='./js/script.js'></script>
+  <script src='./js/gue-standard-gases.js'></script>
   <script src='./js/gue-gas-dynamics.js'></script>
   <script src='./js/gue-jj-FC.js'></script>
-  <script src='./js/hud.js'></script>
+  <script src='./js/jj-hud.js'></script>
 </body>
 </html>

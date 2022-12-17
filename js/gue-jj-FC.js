@@ -53,10 +53,7 @@ function runFC1 () {
 
 // Run Moderately High But Safe PO2 Failure
 function runHighPO2Safe () {
-  if ( depth.value < 15 ) { 
-    depth.value = 15 
-    depth.innerHTML = 15 
-  }
+  ifDepthLessThan15 ()
   loopO2 = 1.44
 }
 
@@ -78,12 +75,9 @@ function runFC2 () {
   }
 }
 
-// Run High Unsafe PO2 - Hyperoxic Warning
+// Run High Unsafe PO2 - Hyperoxic Warning Failure
 function runHighPO2Unsafe () {
-  if ( depth.value < 15 ) { 
-    depth.value = 15 
-    depth.innerHTML = 15 
-  }
+  ifDepthLessThan15 ()
   loopO2 = 1.91
 }
 
@@ -105,35 +99,64 @@ function runFC3 () {
   }
 }
 
+// Run Low Unsafe PO2 - Hypoxic Warning Failure
+function runLowPO2Unsafe () {
+  r = Math.floor(Math.random() * 3) + 1
+  
+  if ( r == 1 ) {
+    svFailure = true
+  } else if ( r == 2 ) {
+    svFailure = true
+    o2spg = 0
+  } else {
+    svFailure = true
+    o2valve = false
+  }
+
+  loopO2 = 0.31
+}
+
+// Stop Low Unsafe PO2 - Hypoxic Warning Failure
+function stopLowPO2Unsafe () {
+  svFailure = false
+  o2spg = 60
+  o2valve = true
+}
+
 // FC4
 function runFC4 () {
   if ( !isFC4Active ) {
     isFC4Active = true
-    // TODO: o2 tank closed or O2 tank empty
-    loopO2 = 0.31
     document.getElementById('fc4icon').classList.remove('has-text-success')
     document.getElementById('fc4icon').classList.add('has-text-danger')
     document.getElementById('FC4no').classList.add('has-text-danger')
     document.getElementById('solutionFC4').classList.remove('is-hidden')
+    runLowPO2Unsafe ()
   } else {
     isFC4Active = false
     document.getElementById('fc4icon').classList.remove('has-text-danger')
     document.getElementById('fc4icon').classList.add('has-text-success')
     document.getElementById('FC4no').classList.remove('has-text-danger')
     document.getElementById('solutionFC4').classList.add('is-hidden')
+    stopLowPO2Unsafe ()
   }
+}
+
+// Run Sensor Current Limitation and Voting Logic Failure
+function runSensorLimitation () {
+  ifDepthLessThan15 ()
+  document.getElementById('sp_12').checked = true
 }
 
 // FC5
 function runFC5 () {
   if ( !isFC5Active ) {
     isFC5Active = true
-    // TODO: depth if <15 --> 15m
-    // TODO: setpoint 1.2
     document.getElementById('fc5icon').classList.remove('has-text-success')
     document.getElementById('fc5icon').classList.add('has-text-danger')
     document.getElementById('FC5no').classList.add('has-text-danger')
     document.getElementById('solutionFC5').classList.remove('is-hidden')
+    runSensorLimitation ()
   } else {
     isFC5Active = false
     document.getElementById('fc5icon').classList.remove('has-text-danger')

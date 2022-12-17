@@ -14,6 +14,8 @@ let fN2 = 1 - fO2 - fHe
 let ppO2 = fO2 * ATA
 let ppHe = fHe * ATA
 let loopO2 = ppO2
+let o2spg = 60
+let dilspg = 100
 
 let tts = document.getElementById('tts')
 tts.value = Math.ceil(depth.value / ascentRate)
@@ -94,12 +96,13 @@ function checkSensors () {
   if ( isFC5Active && sensor1.value > 1.1 ) {
     sensor1.value = 1.11
     sensor2.value = 1.15
+    sensor3.value = loopO2 * 0.99
   } else {
     sensor1.value = loopO2
     sensor2.value = loopO2 * 1.01
     sensor3.value = loopO2 * 0.99
   }
-
+  
   sensor1.value = sensor1.value * discrepancyFactor1
   sensor2.value = sensor2.value * discrepancyFactor2
   sensor3.value = sensor3.value * discrepancyFactor3
@@ -400,33 +403,14 @@ function toggleFCs () {
   document.getElementById('toggleFCs').classList.toggle('has-text-success')
 }
 
-// Standard Gases
-function setGasAir () {
-  document.getElementById('fO2').value = 21
-  document.getElementById('fHe').value = 0
-}
-
-function setGas21_35 () {
-  document.getElementById('fO2').value = 21
-  document.getElementById('fHe').value = 35
-}
-
-function setGas18_45 () {
-  document.getElementById('fO2').value = 18
-  document.getElementById('fHe').value = 45
-}
-
-function setGas15_55 () {
-  document.getElementById('fO2').value = 15
-  document.getElementById('fHe').value = 55
-}
-
-function setGas12_65 () {
-  document.getElementById('fO2').value = 12
-  document.getElementById('fHe').value = 65
-}
-
 // MODAL
 function toggleDefaultPresets () {
   document.getElementById('defaultPresets').classList.toggle('is-active')
+}
+
+function ifDepthLessThan15 () {
+  if ( depth.value < 15 ) { 
+    depth.value = 15 
+    depth.innerHTML = 15 
+  }
 }
