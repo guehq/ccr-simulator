@@ -19,7 +19,9 @@ let tts = document.getElementById('tts')
 tts.value = Math.ceil(depth.value / ascentRate)
 tts.innerHTML = tts.value
 
-let discrepancyFactor = 1
+let discrepancyFactor1 = 1
+let discrepancyFactor2 = 1
+let discrepancyFactor3 = 1
 let svFailure = false
 let sv = document.getElementById('solenoid_valve')
 let votingFailure = false
@@ -57,6 +59,8 @@ let isFC17Active = false
 let isTimeSpeedx1 = true
 let isTimeSpeedx2 = false
 
+
+
 // TIMER
 let minutesLabel = document.getElementById('minutes')
 let secondsLabel = document.getElementById('seconds')
@@ -78,6 +82,8 @@ function pad(val) {
   }
 }
 
+
+
 // SENSORS
 function checkSensors () {
   ATA = depth.value / 10 + 1
@@ -91,9 +97,12 @@ function checkSensors () {
   } else {
     sensor1.value = loopO2
     sensor2.value = loopO2 * 1.01
+    sensor3.value = loopO2 * 0.99
   }
 
-  sensor3.value = loopO2 * 0.99 * discrepancyFactor
+  sensor1.value = sensor1.value * discrepancyFactor1
+  sensor2.value = sensor2.value * discrepancyFactor2
+  sensor3.value = sensor3.value * discrepancyFactor3
 
   sensor1.innerHTML = sensor1.value.toFixed(2)
   sensor2.innerHTML = sensor2.value.toFixed(2)

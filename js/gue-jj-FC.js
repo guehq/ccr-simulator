@@ -6,26 +6,48 @@ function toggleSolutions () {
 
 /* ---------- FAILURE CARDS for GUE-JJ CONFIGURATION ---------- */
 
-// FC1
+// Run Oxygen Sensor Discrepancy Failure
+function runO2SensorDiscrepancy () {
+  r = Math.floor(Math.random() * 3) + 1
+  
+  if ( r == 1 ) {
+    discrepancyFactor1 = .5
+    document.getElementById('sensor1').classList.add('has-text-warning')
+  } else if ( r == 2 ) {
+    discrepancyFactor2 = 1.3
+    document.getElementById('sensor2').classList.add('has-text-warning')
+  } else {
+    discrepancyFactor3 = .7
+    document.getElementById('sensor3').classList.add('has-text-warning')
+  }
+}
+
+// Stop Oxygen Sensor Discrepancy Failure
+function stopO2SensorDiscrepancy () {
+  discrepancyFactor1 = 1
+  discrepancyFactor2 = 1
+  discrepancyFactor3 = 1
+  document.getElementById('sensor1').classList.remove('has-text-warning')
+  document.getElementById('sensor2').classList.remove('has-text-warning')
+  document.getElementById('sensor3').classList.remove('has-text-warning')
+}
+
+// Run FC1
 function runFC1 () {
   if ( !isFC1Active ) {
     isFC1Active = true
-    discrepancyFactor = .7
-    // TODO: select a random sensor
-    // TODO: discrepancyFactor random -.5 -.7 +.5 +.7
-    document.getElementById('sensor3').classList.add('has-text-warning')
     document.getElementById('fc1icon').classList.remove('has-text-success')
     document.getElementById('fc1icon').classList.add('has-text-danger')
     document.getElementById('FC1no').classList.add('has-text-danger')
     document.getElementById('solutionFC1').classList.remove('is-hidden')
+    runO2SensorDiscrepancy ()
   } else {
     isFC1Active = false
-    discrepancyFactor = 1
-    document.getElementById('sensor3').classList.remove('has-text-warning')
     document.getElementById('fc1icon').classList.remove('has-text-danger')
     document.getElementById('fc1icon').classList.add('has-text-success')
     document.getElementById('FC1no').classList.remove('has-text-danger')
     document.getElementById('solutionFC1').classList.add('is-hidden')
+    stopO2SensorDiscrepancy ()
   }
 }
 
