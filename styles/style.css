@@ -19,7 +19,7 @@ body {
 }
 
 .menu-list li {
-  padding-left: 1.5em;
+  padding-left: .75em;
 }
 
 .menu-list li a:hover {
@@ -28,7 +28,6 @@ body {
 
 .status > div {
   padding: .25rem;
-  width: 50%;
 }
 
 .active {
@@ -58,179 +57,6 @@ body {
   50% { background-color: black; color: orange; }
   100% { background-color: transparent; color: black; }
 }
-
-/* HUD START */
-#hud {
-  border-radius: 3em 0 0 3em;
-  margin-right: 0 !important;
-}
-
-.hud-light {
-  width: 1.5rem;
-  height: 1.5rem;
-  border-radius: 100%;
-  margin: .5rem auto;
-  background: #363636;
-}
-
-.light-red.is-blinking {
-  -webkit-animation: redLightBlinking .75s infinite;
-  animation: .75s infinite redLightBlinking;
-}
-
-@keyframes redLightBlinking {
-  0% { background-color: #363636; }
-  50% { background-color: tomato; }
-  100% { background-color: #363636; }
-}
-
-@-webkit-keyframes redLightBlinking {
-  0% { background-color: #363636; }
-  50% { background-color: tomato; }
-  100% { background-color: #363636; }
-}
-
-.light-green.is-blinking {
-  -webkit-animation: greenLightBlinking .75s infinite;
-  animation: .75s infinite greenLightBlinking;
-}
-
-@keyframes greenLightBlinking {
-  0% { background-color: #363636; }
-  50% { background-color: #48c78e; }
-  100% { background-color: #363636; }
-}
-
-@-webkit-keyframes greenLightBlinking {
-  0% { background-color: #363636; }
-  50% { background-color: #48c78e; }
-  100% { background-color: #363636; }
-}
-
-.light-yellow.is-blinking {
-  -webkit-animation: yellowLightBlinking .75s infinite;
-  animation: .75s infinite yellowLightBlinking;
-}
-
-@keyframes yellowLightBlinking {
-  0% { background-color: #363636; }
-  50% { background-color: #ffe08a; }
-  100% { background-color: #363636; }
-}
-
-@-webkit-keyframes yellowLightBlinking {
-  0% { background-color: #363636; }
-  50% { background-color: #ffe08a; }
-  100% { background-color: #363636; }
-}
-/* HUD END */
-
-/* NERD START */
-#nerd {
-  display: none;
-}
-
-#nerd.visible {
-  display: block;
-}
-
-section.nerd {
-  position: absolute;
-  right: 3em;
-  bottom: 3em;
-  height: 22em;
-  width: 22em;
-  border-radius: 100%;
-  padding: 4em 3em;
-  background-color: black;
-  color: white;
-  text-align: center;
-}
-
-section.nerd th {
-  color: skyblue;
-}
-
-section.nerd .danger {
-  color: tomato;
-  -webkit-animation: dangerColorChange 1s infinite;
-  animation: 1s infinite dangerColorChange;
-}
-
-@keyframes dangerColorChange {
-  0% { background-color: tomato; color: black; }
-  50% { background-color: black; color: tomato; }
-  100% { background-color: tomato; color: black; }
-}
-
-@-webkit-keyframes dangerColorChange {
-  0% { background-color: tomato; color: black; }
-  50% { background-color: black; color: tomato; }
-  100% { background-color: tomato; color: black; }
-}
-
-section.nerd table {
-  margin-bottom: .5em;
-  width: 100%;
-}
-
-section.nerd table td {
-  font-size: 2em;
-  text-align: right;
-}
-
-section.nerd table#center {
-  width: 100%;
-  text-align: center;
-  font-size: 1.1em;
-  margin: 0 -1.5em 1em;
-}
-
-section.nerd table#center td {
-  padding: 0 .25em;
-}
-
-section.nerd-buttons {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  height: 2em;
-  width: 38em;
-}
-
-section.nerd-buttons .btn {
-  border-radius: 100%;
-  width: 4em;
-  height: 4em;
-  background-color: black;
-  cursor: pointer;
-}
-
-section.nerd-buttons .btn-right {
-  float: right;
-}
-
-/* Chrome, Safari, Edge, Opera */
-section.nerd input {
-  background: transparent;
-  border: none;
-  color: white;
-  display: inline-block;
-  font-size: 1em;
-  width: 1.25em;
-}
-
-section.nerd input::-webkit-outer-spin-button,
-section.nerd input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-section.nerd input[type=number] {
-  -moz-appearance: textfield;
-}
-/* NERD END */
 
 /* Failures START */
 #failures {

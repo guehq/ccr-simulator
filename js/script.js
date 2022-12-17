@@ -23,7 +23,7 @@ let discrepancyFactor = 1
 let svFailure = false
 let sv = document.getElementById('solenoid_valve')
 let votingFailure = false
-let nerdCenter = document.getElementById('nerd-center')
+let nerdCenter = document.getElementById('nerd_center_row')
 let warningMessageFC10 = document.getElementById('nerd-warning-FC10')
 let o2RunawayFailure = false
 let diluentRunawayFailure = false
@@ -301,13 +301,13 @@ setInterval(checkSetpoint, 1500);
 
 // NERD
 function showNerd () {
-  document.getElementById('nerd').classList.add('visible')
+  document.getElementById('nerd-section').classList.remove('is-hidden')
   document.getElementById('showNerd').classList.add('is-hidden')
   document.getElementById('hideNerd').classList.remove('is-hidden')
 }
 
 function hideNerd () {
-  document.getElementById('nerd').classList.remove('visible')
+  document.getElementById('nerd-section').classList.add('is-hidden')
   document.getElementById('hideNerd').classList.add('is-hidden')
   document.getElementById('showNerd').classList.remove('is-hidden')
 }
@@ -315,13 +315,13 @@ function hideNerd () {
 // HUD
 
 function showHud () {
-  document.getElementById('hud').classList.remove('is-hidden')
+  document.getElementById('hud-section').classList.remove('is-hidden')
   document.getElementById('showHud').classList.add('is-hidden')
   document.getElementById('hideHud').classList.remove('is-hidden')
 }
 
 function hideHud () {
-  document.getElementById('hud').classList.add('is-hidden')
+  document.getElementById('hud-section').classList.add('is-hidden')
   document.getElementById('hideHud').classList.add('is-hidden')
   document.getElementById('showHud').classList.remove('is-hidden')
 }
@@ -329,6 +329,7 @@ function hideHud () {
 // RESET DATA
 function resetData () {
   depth.value = 0
+  // TODO: setpoint .19 active olmali
   depth.innerHTML = depth.value
 
   diluentFlush ()

@@ -1,0 +1,93 @@
+/* NERD START */
+#nerd {
+  margin: 2em auto 0;
+  border-radius: 100%;
+  padding: 4em 3em;
+  width: 22em;
+  height: 22em;
+  color: white;
+  text-align: center;
+  background-color: black;
+}
+
+#nerd table {
+  margin-bottom: .5em;
+  width: 100%;
+}
+
+#nerd table td {
+  font-size: 2em;
+  text-align: right;
+}
+
+#nerd table#center {
+  width: 100%;
+  text-align: center;
+  font-size: 1.1em;
+  margin: 0 -1.5em 1em;
+}
+
+#nerd table#center td {
+  padding: 0 .25em;
+}
+
+#nerd th {
+  color: skyblue;
+}
+
+#nerd .danger {
+  color: tomato;
+  -webkit-animation: dangerColorChange 1s infinite;
+  animation: 1s infinite dangerColorChange;
+}
+
+@keyframes dangerColorChange {
+  0% { background-color: tomato; color: black; }
+  50% { background-color: black; color: tomato; }
+  100% { background-color: tomato; color: black; }
+}
+
+@-webkit-keyframes dangerColorChange {
+  0% { background-color: tomato; color: black; }
+  50% { background-color: black; color: tomato; }
+  100% { background-color: tomato; color: black; }
+}
+
+.nerd-buttons {
+  margin: -3.4em auto 1em;
+  width: 22em;
+}
+
+.nerd-buttons button {
+  border-radius: 100%;
+  width: 4em;
+  height: 4em;
+  background-color: black;
+  cursor: pointer;
+}
+
+.nerd-buttons .is-right {
+  float: right;
+}
+
+/* Chrome, Safari, Edge, Opera */
+#nerd input {
+  background: transparent;
+  border: none;
+  color: white;
+  display: inline-block;
+  font-size: 1em;
+  width: 1.25em;
+}
+
+#nerd input::-webkit-outer-spin-button,
+#nerd input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+#nerd input[type=number] {
+  -moz-appearance: textfield;
+}
+/* NERD END */

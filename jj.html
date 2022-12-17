@@ -7,6 +7,8 @@
   <title>JJ CCR Simulator</title>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css' integrity='sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==' crossorigin='anonymous' referrerpolicy='no-referrer' />
   <link rel='stylesheet' href='./styles/bulma.min.css'>
+  <link rel='stylesheet' href='./styles/hud.css'>
+  <link rel='stylesheet' href='./styles/nerd.css'>
   <link rel='stylesheet' href='./styles/style.css'>
 </head>
 <body>
@@ -116,7 +118,7 @@
           <div class="level m-0 p-5">
             <div class="level-left">
               <div class="level-item">
-                <p class='menu-label has-text-white pl-5'>Failure Cards</p>
+                <p class='menu-label has-text-white'>Failure Cards</p>
               </div>
             </div>
 
@@ -481,112 +483,115 @@
           </div>
 
           <div class='column is-5'>
+            <div id="hud-section">
+              <!-- ############################### -->
+              <!-- ############# HUD ############# -->
+              <!-- ############################### -->
 
-            <!-- ############################### -->
-            <!-- ############# HUD ############# -->
-            <!-- ############################### -->
-
-            <section id='hud' class='has-background-black m-5'>
-              <div class='columns'>
-                <div id='hud_sensor1' class='column'>
-                  <div id='hud_sensor1_led1' class='hud-light light-red'></div>
-                  <div id='hud_sensor1_led2' class='hud-light light-green'></div>
-                  <div id='hud_sensor1_led3' class='hud-light light-yellow'></div>
-                  <div id='hud_sensor1_led4' class='hud-light light-red'></div>
+              <section id='hud' class='has-background-black m-5'>
+                <div class='sensors'>
+                  <div id='hud_sensor1' class='sensor'>
+                    <div id='hud_sensor1_led1' class='hud-light light-red'></div>
+                    <div id='hud_sensor1_led2' class='hud-light light-green'></div>
+                    <div id='hud_sensor1_led3' class='hud-light light-yellow'></div>
+                    <div id='hud_sensor1_led4' class='hud-light light-red'></div>
+                  </div>
+                  <div id='hud_sensor2' class='sensor'>
+                    <div id='hud_sensor2_led1' class='hud-light light-red'></div>
+                    <div id='hud_sensor2_led2' class='hud-light light-green'></div>
+                    <div id='hud_sensor2_led3' class='hud-light light-yellow'></div>
+                    <div id='hud_sensor2_led4' class='hud-light light-red'></div>
+                  </div>
+                  <div id='hud_sensor3' class='sensor'>
+                    <div id='hud_sensor3_led1' class='hud-light light-red'></div>
+                    <div id='hud_sensor3_led2' class='hud-light light-green'></div>
+                    <div id='hud_sensor3_led3' class='hud-light light-yellow'></div>
+                    <div id='hud_sensor3_led4' class='hud-light light-red'></div>
+                  </div>
                 </div>
-                <div id='hud_sensor2' class='column'>
-                  <div id='hud_sensor2_led1' class='hud-light light-red'></div>
-                  <div id='hud_sensor2_led2' class='hud-light light-green'></div>
-                  <div id='hud_sensor2_led3' class='hud-light light-yellow'></div>
-                  <div id='hud_sensor2_led4' class='hud-light light-red'></div>
-                </div>
-                <div id='hud_sensor3' class='column'>
-                  <div id='hud_sensor3_led1' class='hud-light light-red'></div>
-                  <div id='hud_sensor3_led2' class='hud-light light-green'></div>
-                  <div id='hud_sensor3_led3' class='hud-light light-yellow'></div>
-                  <div id='hud_sensor3_led4' class='hud-light light-red'></div>
-                </div>
+              </section>
+  
+              <div class='buttons is-fullwidth is-justify-content-flex-end px-3'>
+                <button class='button is-small is-dark' onclick='hudRealtime ()' title='Turn-on & Sync with CTRL'>
+                  <i id='hud_play_icon' class='fa-solid fa-circle-play'></i>
+                </button>
+                <button class='button is-small is-dark is-hidden' onclick='hudStart ()' title='Turn-on'>
+                  <i id='hud_start_icon' class='fa-solid fa-power-off'></i>
+                </button>
+                <button class='button is-small is-dark' onclick='hudBatteryLow ()' title='Battery is low and should be replaced'>
+                  <i id='hud_battery_icon' class='fa-solid fa-battery-quarter'></i>
+                </button>
+                <button class='button is-small is-dark' onclick='hudSensorFailed ()' title='O2 sensor has failed calibration (Sensor 3)'>
+                  <i id='hud_sensor_icon' class='fa-solid fa-filter-circle-xmark'></i>
+                </button>
+                <button class='button is-small is-dark' onclick='hudNoCommunications ()' title='No DiveCAN® Communications'>
+                  <i id='hud_communication_icon' class='fa-solid fa-link-slash'></i>
+                </button>
               </div>
-            </section>
-
-            <div class='buttons is-fullwidth is-justify-content-right px-3'>
-              <button class='button is-small is-black' onclick='hudRealtime ()' title='Turn-on & Sync with CTRL'>
-                <i id='hud_play_icon' class='fa-solid fa-circle-play'></i>
-              </button>
-              <button class='button is-small is-black is-hidden' onclick='hudStart ()' title='Turn-on'>
-                <i id='hud_start_icon' class='fa-solid fa-power-off'></i>
-              </button>
-              <button class='button is-small is-black' onclick='hudBatteryLow ()' title='Battery is low and should be replaced'>
-                <i id='hud_battery_icon' class='fa-solid fa-battery-quarter'></i>
-              </button>
-              <button class='button is-small is-black' onclick='hudSensorFailed ()' title='O2 sensor has failed calibration (Sensor 3)'>
-                <i id='hud_sensor_icon' class='fa-solid fa-filter-circle-xmark'></i>
-              </button>
-              <button class='button is-small is-black' onclick='hudNoCommunications ()' title='No DiveCAN® Communications'>
-                <i id='hud_communication_icon' class='fa-solid fa-link-slash'></i>
-              </button>
             </div>
 
-            <!-- ############################### -->
-            <!-- ############ NERD ############# -->
-            <!-- ############################### -->
-
-            <section id='nerd' class='nerd visible'>
-              <table id='nerd-top'>
-                <thead>
+            <section id="nerd-section" class="py-4" style="margin-top: 8em">
+              <!-- ############################### -->
+              <!-- ############ NERD ############# -->
+              <!-- ############################### -->
+  
+              <div id='nerd' class='nerd'>
+                <table id='nerd_top_row'>
+                  <thead>
+                    <tr>
+                      <th>DEPTH</th>
+                      <th>TIME</th>
+                      <th>STOP</th>
+                      <th>TIME</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><span id='depth'></span></td>
+                      <td>
+                        <label id='minutes'>00</label><span style='font-size: .5em'>:</span><label id='seconds' style='font-size: .5em'>00</label></td>
+                      <td>-</td>
+                      <td>-</td>
+                    </tr>
+                  </tbody>
+                </table>
+  
+                <table id='nerd_center_row'>
                   <tr>
-                    <th>DEPTH</th>
-                    <th>TIME</th>
-                    <th>STOP</th>
-                    <th>TIME</th>
+                    <td><span id='sensor1'></span></td>
+                    <td><span id='sensor2'></span></td>
+                    <td><span id='sensor3'></span></td>
                   </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span id='depth'></span></td>
-                    <td>
-                      <label id='minutes'>00</label><span style='font-size: .5em'>:</span><label id='seconds' style='font-size: .5em'>00</label></td>
-                    <td>-</td>
-                    <td>-</td>
-                  </tr>
-                </tbody>
-              </table>
-
-              <table id='nerd-center'>
-                <tr>
-                  <td><span id='sensor1'></span></td>
-                  <td><span id='sensor2'></span></td>
-                  <td><span id='sensor3'></span></td>
-                </tr>
-              </table>
-
-              <div id='nerd-warning-FC10' class='nerd-warning is-hidden' style='padding: 4px 0'>
-                <p class='is-size-3 has-text-warning has-text-centered'>VOTING FAILED</p>
+                </table>
+  
+                <div id='nerd-warning-FC10' class='nerd-warning is-hidden' style='padding: 4px 0'>
+                  <p class='is-size-3 has-text-warning has-text-centered'>VOTING FAILED</p>
+                </div>
+  
+                <table id='nerd_bottom_row'>
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>O2/HE</th>
+                      <th>NDL</th>
+                      <th>TTS</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>CC</td>
+                      <td><input id='fO2' type='number' value='21' onfocusout='resetData ()'>/<input id='fHe' type='number' value='35' onfocusout='resetData ()'></td>
+                      <td>-</td>
+                      <td><span id='tts'></span></td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
 
-              <table id='nerd-bottom'>
-                <thead>
-                  <tr>
-                    <th></th>
-                    <th>O2/HE</th>
-                    <th>NDL</th>
-                    <th>TTS</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>CC</td>
-                    <td><input id='fO2' type='number' value='21' onfocusout='resetData ()'>/<input id='fHe' type='number' value='35' onfocusout='resetData ()'></td>
-                    <td>-</td>
-                    <td><span id='tts'></span></td>
-                  </tr>
-                </tbody>
-              </table>
-
-              <section class='nerd-buttons'>
-                <button class='btn btn-left' disabled></button>
-                <button class='btn btn-right' disabled></button>
-              </section>
+              <div class='nerd-buttons'>
+                <button class='is-left' onclick="alert('Controller left button [inactive]')"></button>
+                <button class='is-right' onclick="alert('Controller right button [inactive]')"></button>
+              </div>
             </section>
           </div>
         </div>

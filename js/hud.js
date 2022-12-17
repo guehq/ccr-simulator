@@ -140,25 +140,25 @@ function hudCurrentPO2 () {
 
     if ( s1val < .95 ) {
       if ( s1val <= 0.45 ) {
-        S1L4.classList.add('is-blinking', 'has-background-danger')
+        S1L4.classList.add('is-blinking')
         setTimeout ( hudClearS1Leds, time )
       } else {
-        S1L3.classList.add('is-blinking', 'has-background-warning')
+        S1L3.classList.add('is-blinking')
         setTimeout ( hudClearS1Leds, time )
       }
     } else if ( s1val < 1.05 ) {
-      S1L2.classList.add('is-blinking', 'has-background-success')
-      S1L3.classList.add('is-blinking', 'has-background-warning')
+      S1L2.classList.add('is-blinking')
+      S1L3.classList.add('is-blinking')
       setTimeout ( hudClearS1Leds, 750 )
     } else {
       x = x * (-1)
       time = x * 750
 
       if ( s1val <= 1.55 ) {
-        S1L2.classList.add('is-blinking', 'has-background-success')
+        S1L2.classList.add('is-blinking')
         setTimeout ( hudClearS1Leds, time )
       } else {
-        S1L1.classList.add('is-blinking', 'has-background-danger')
+        S1L1.classList.add('is-blinking')
         setTimeout ( hudClearS1Leds, time )
       }
     }
@@ -171,25 +171,25 @@ function hudCurrentPO2 () {
 
     if ( s2val < .95 ) {
       if ( s2val <= 0.45 ) {
-        S2L4.classList.add('is-blinking', 'has-background-danger')
+        S2L4.classList.add('is-blinking')
         setTimeout ( hudClearS2Leds, time )
       } else {
-        S2L3.classList.add('is-blinking', 'has-background-warning')
+        S2L3.classList.add('is-blinking')
         setTimeout ( hudClearS2Leds, time )
       }
     } else if ( s2val < 1.05 ) {
-      S2L2.classList.add('is-blinking', 'has-background-success')
-      S2L3.classList.add('is-blinking', 'has-background-warning')
+      S2L2.classList.add('is-blinking')
+      S2L3.classList.add('is-blinking')
       setTimeout ( hudClearS2Leds, 750 )
     } else {
       x = x * (-1)
       time = x * 750
 
       if ( s2val <= 1.55 ) {
-        S2L2.classList.add('is-blinking', 'has-background-success')
+        S2L2.classList.add('is-blinking')
         setTimeout ( hudClearS2Leds, time )
       } else {
-        S2L1.classList.add('is-blinking', 'has-background-danger')
+        S2L1.classList.add('is-blinking')
         setTimeout ( hudClearS2Leds, time )
       }
     }
@@ -202,25 +202,25 @@ function hudCurrentPO2 () {
 
     if ( s3val < .95 ) {
       if ( s3val <= 0.45 ) {
-        S3L4.classList.add('is-blinking', 'has-background-danger')
+        S3L4.classList.add('is-blinking')
         setTimeout ( hudClearS3Leds, time )
       } else {
-        S3L3.classList.add('is-blinking', 'has-background-warning')
+        S3L3.classList.add('is-blinking')
         setTimeout ( hudClearS3Leds, time )
       }
     } else if ( s3val < 1.05 ) {
-      S3L2.classList.add('is-blinking', 'has-background-success')
-      S3L3.classList.add('is-blinking', 'has-background-warning')
+      S3L2.classList.add('is-blinking')
+      S3L3.classList.add('is-blinking')
       setTimeout ( hudClearS3Leds, 750 )
     } else {
       x = x * (-1)
       time = x * 750
 
       if ( s3val <= 1.55 ) {
-        S3L2.classList.add('is-blinking', 'has-background-success')
+        S3L2.classList.add('is-blinking')
         setTimeout ( hudClearS3Leds, time )
       } else {
-        S3L1.classList.add('is-blinking', 'has-background-danger')
+        S3L1.classList.add('is-blinking')
         setTimeout ( hudClearS3Leds, time )
       }
     }
@@ -253,7 +253,6 @@ function setHudTimer () {
   hudTimer = 750 * maxT + 3000
   hudTimer = 10000
 }
-
 
 function hudRealtime () {
   setHudTimer ()

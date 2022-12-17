@@ -111,7 +111,7 @@ function runFC6 () {
     isFC6Active = true
     // TODO: hide only controller inside
     // TODO: disable all setpoints --> auto switch to .7
-    document.getElementById('nerd').classList.remove('visible')
+    document.getElementById('nerd').classList.add('is-hidden')
     document.getElementById('fc6icon').classList.add('has-text-danger')
     document.getElementById('fc6icon').classList.remove('has-text-success')
     document.getElementById('FC6no').classList.add('has-text-danger')
@@ -122,7 +122,7 @@ function runFC6 () {
     document.getElementById('showNerd').disabled = true
   } else {
     isFC6Active = false
-    document.getElementById('nerd').classList.add('visible')
+    document.getElementById('nerd').classList.remove('is-hidden')
     document.getElementById('fc6icon').classList.remove('has-text-danger')
     document.getElementById('fc6icon').classList.add('has-text-success')
     document.getElementById('FC6no').classList.remove('has-text-danger')
