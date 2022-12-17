@@ -52,6 +52,7 @@ let isFC13Active = false
 let isFC14Active = false
 let isFC15Active = false
 let isFC16Active = false
+let isFC17Active = false
 
 let isTimeSpeedx1 = true
 let isTimeSpeedx2 = false
@@ -353,7 +354,7 @@ function timeSpeedx2 () {
 function runAdvancedUser () {
   document.getElementById('adv_nav').classList.toggle('is-hidden')
   document.getElementById('advancedUsage').classList.toggle('has-text-success')
-
+  document.querySelector('html').classList.toggle('double-nav')
 }
 
 function o2ValveToggle () {
@@ -369,4 +370,35 @@ function rightValveToggle () {
 function leftValveToggle () {
   document.getElementById('leftValve').classList.toggle('is-success')
   document.getElementById('leftValve').classList.toggle('is-danger')
+}
+
+function toggleFCs () {
+  document.getElementById('failures').classList.toggle('is-hidden')
+  document.getElementById('toggleFCs').classList.toggle('has-text-success')
+}
+
+// Standard Gases
+function setGasAir () {
+  document.getElementById('fO2').value = 21
+  document.getElementById('fHe').value = 0
+}
+
+function setGas21_35 () {
+  document.getElementById('fO2').value = 21
+  document.getElementById('fHe').value = 35
+}
+
+function setGas18_45 () {
+  document.getElementById('fO2').value = 18
+  document.getElementById('fHe').value = 45
+}
+
+function setGas15_55 () {
+  document.getElementById('fO2').value = 15
+  document.getElementById('fHe').value = 55
+}
+
+function setGas12_65 () {
+  document.getElementById('fO2').value = 12
+  document.getElementById('fHe').value = 65
 }

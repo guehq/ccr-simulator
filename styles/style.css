@@ -1,3 +1,7 @@
+html.double-nav {
+  padding-top: 110px;
+}
+
 body {
   font-family: monospace;
   background-color: black;
@@ -10,8 +14,12 @@ body {
   background-color: #333;
 }
 
+#app {
+  min-height: calc(100vh - 110px);
+}
+
 .menu-list li {
-  padding-left: .75em;
+  padding-left: 1.5em;
 }
 
 .menu-list li a:hover {
@@ -226,5 +234,5 @@ section.nerd input[type=number] {
 
 /* Failures START */
 #failures {
-  height: calc(100vh - 32px);
+  min-height: calc(100vh - 32px);
 }
