@@ -241,6 +241,8 @@ function autoAscend () {
   document.getElementById('descend').disabled = true
   document.getElementById('ascend').disabled = true
   document.getElementById('auto_ascend').disabled = true
+  // TODO: setpoint .19 active hale getir
+  // TODO: negatif derinlik problemini çöz
 
   setTimeout( function () {
     depth.value = depth.value - 1;

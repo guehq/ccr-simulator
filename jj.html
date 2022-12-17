@@ -489,6 +489,8 @@
               <!-- ############################### -->
 
               <section id='hud' class='has-background-black m-5'>
+                <button id="hud_main_button" onclick='hudRealtime ()' title='Turn-on & Sync with CTRL'></button>
+                <div id="hud_buddy_led"></div>
                 <div class='sensors'>
                   <div id='hud_sensor1' class='sensor'>
                     <div id='hud_sensor1_led1' class='hud-light light-red'></div>
@@ -512,12 +514,6 @@
               </section>
   
               <div class='buttons is-fullwidth is-justify-content-flex-end px-3'>
-                <button class='button is-small is-dark' onclick='hudRealtime ()' title='Turn-on & Sync with CTRL'>
-                  <i id='hud_play_icon' class='fa-solid fa-circle-play'></i>
-                </button>
-                <button class='button is-small is-dark is-hidden' onclick='hudStart ()' title='Turn-on'>
-                  <i id='hud_start_icon' class='fa-solid fa-power-off'></i>
-                </button>
                 <button class='button is-small is-dark' onclick='hudBatteryLow ()' title='Battery is low and should be replaced'>
                   <i id='hud_battery_icon' class='fa-solid fa-battery-quarter'></i>
                 </button>

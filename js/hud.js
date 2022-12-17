@@ -40,8 +40,6 @@ function hudClearLeds () {
   hudClearS1Leds ()
   hudClearS2Leds ()
   hudClearS3Leds ()
-  document.getElementById('hud_play_icon').classList.remove('has-text-success')
-  document.getElementById('hud_start_icon').classList.remove('has-text-success')
   document.getElementById('hud_battery_icon').classList.remove('has-text-success')
   document.getElementById('hud_sensor_icon').classList.remove('has-text-success')
   document.getElementById('hud_communication_icon').classList.remove('has-text-success')
@@ -131,7 +129,6 @@ function hudStartAnimation () {
 
 function hudCurrentPO2 () {
   hudClearLeds ()
-  document.getElementById('hud_play_icon').classList.add('has-text-success')
 
   function checkS1 () {
     let s1val = sensor1.value.toFixed(2)

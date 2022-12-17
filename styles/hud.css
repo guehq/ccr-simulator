@@ -1,12 +1,43 @@
 /* HUD START */
 #hud {
+  position: relative;
   border-radius: 3em 0 0 3em;
   margin-right: 0 !important;
 }
 
 #hud .sensor {
-  width: 30%;
+  width: 29%;
   display: inline-block;
+}
+
+#hud .sensor:first-child {
+  margin-left: 2em;
+}
+
+#hud_main_button {
+  position: absolute;
+  top: calc(50% - 1em);
+  left: -1em;
+  border: none;
+  border-radius: 3em 0 0 3em;
+  width: 1em;
+  height: 2em;
+  background: gold;
+}
+
+#hud_buddy_led {
+  position: absolute;
+  top: .5em;
+  left: .5em;
+  border: none;
+  border-radius: 5em 0 0 5em;
+  width: 2em;
+  height: calc(100% - 1em);
+  background: #363636;
+}
+
+#hud_main_button:hover {
+  cursor: pointer;
 }
 
 .hud-light {
