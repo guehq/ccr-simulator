@@ -1,0 +1,102 @@
+/* HUD START */
+#hud {
+  position: relative;
+  border-radius: 3em 0 0 3em;
+  margin-right: 0 !important;
+}
+
+#hud .sensor {
+  width: 29%;
+  display: inline-block;
+}
+
+#hud .sensor:first-child {
+  margin-left: 2em;
+}
+
+#hud_main_button {
+  position: absolute;
+  top: calc(50% - 1em);
+  left: -1em;
+  border: none;
+  border-radius: 3em 0 0 3em;
+  width: 1em;
+  height: 2em;
+  background: gold;
+}
+
+#hud_buddy_led {
+  position: absolute;
+  top: .5em;
+  left: .5em;
+  border: none;
+  border-radius: 5em 0 0 5em;
+  width: 2em;
+  height: calc(100% - 1em);
+  background: #363636;
+}
+
+#hud_main_button:hover {
+  cursor: pointer;
+}
+
+.hud-light {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 100%;
+  margin: .5rem auto;
+  background: #363636;
+}
+
+#hud_buddy_led.is-blinking,
+.light-red.is-blinking {
+  -webkit-animation: redLightBlinking .75s infinite;
+  animation: .75s infinite redLightBlinking;
+}
+
+@keyframes redLightBlinking {
+  0% { background-color: #363636; }
+  50% { background-color: tomato; }
+  100% { background-color: #363636; }
+}
+
+@-webkit-keyframes redLightBlinking {
+  0% { background-color: #363636; }
+  50% { background-color: tomato; }
+  100% { background-color: #363636; }
+}
+
+.light-green.is-blinking {
+  -webkit-animation: greenLightBlinking .75s infinite;
+  animation: .75s infinite greenLightBlinking;
+}
+
+@keyframes greenLightBlinking {
+  0% { background-color: #363636; }
+  50% { background-color: #48c78e; }
+  100% { background-color: #363636; }
+}
+
+@-webkit-keyframes greenLightBlinking {
+  0% { background-color: #363636; }
+  50% { background-color: #48c78e; }
+  100% { background-color: #363636; }
+}
+
+.light-yellow.is-blinking {
+  -webkit-animation: yellowLightBlinking .75s infinite;
+  animation: .75s infinite yellowLightBlinking;
+}
+
+@keyframes yellowLightBlinking {
+  0% { background-color: #363636; }
+  50% { background-color: #ffe08a; }
+  100% { background-color: #363636; }
+}
+
+@-webkit-keyframes yellowLightBlinking {
+  0% { background-color: #363636; }
+  50% { background-color: #ffe08a; }
+  100% { background-color: #363636; }
+}
+/* HUD END */

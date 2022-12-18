@@ -14,16 +14,20 @@ let fN2 = 1 - fO2 - fHe
 let ppO2 = fO2 * ATA
 let ppHe = fHe * ATA
 let loopO2 = ppO2
+let o2spg = 60
+let dilspg = 100
 
 let tts = document.getElementById('tts')
 tts.value = Math.ceil(depth.value / ascentRate)
 tts.innerHTML = tts.value
 
-let discrepancyFactor = 1
+let discrepancyFactor1 = 1
+let discrepancyFactor2 = 1
+let discrepancyFactor3 = 1
 let svFailure = false
 let sv = document.getElementById('solenoid_valve')
 let votingFailure = false
-let nerdCenter = document.getElementById('nerd-center')
+let nerdCenter = document.getElementById('nerd_center_row')
 let warningMessageFC10 = document.getElementById('nerd-warning-FC10')
 let o2RunawayFailure = false
 let diluentRunawayFailure = false
@@ -52,9 +56,12 @@ let isFC13Active = false
 let isFC14Active = false
 let isFC15Active = false
 let isFC16Active = false
+let isFC17Active = false
 
 let isTimeSpeedx1 = true
 let isTimeSpeedx2 = false
+
+
 
 // TIMER
 let minutesLabel = document.getElementById('minutes')
@@ -77,6 +84,8 @@ function pad(val) {
   }
 }
 
+
+
 // SENSORS
 function checkSensors () {
   ATA = depth.value / 10 + 1
@@ -87,12 +96,16 @@ function checkSensors () {
   if ( isFC5Active && sensor1.value > 1.1 ) {
     sensor1.value = 1.11
     sensor2.value = 1.15
+    sensor3.value = loopO2 * 0.99
   } else {
     sensor1.value = loopO2
     sensor2.value = loopO2 * 1.01
+    sensor3.value = loopO2 * 0.99
   }
-
-  sensor3.value = loopO2 * 0.99 * discrepancyFactor
+  
+  sensor1.value = sensor1.value * discrepancyFactor1
+  sensor2.value = sensor2.value * discrepancyFactor2
+  sensor3.value = sensor3.value * discrepancyFactor3
 
   sensor1.innerHTML = sensor1.value.toFixed(2)
   sensor2.innerHTML = sensor2.value.toFixed(2)
@@ -240,6 +253,8 @@ function autoAscend () {
   document.getElementById('descend').disabled = true
   document.getElementById('ascend').disabled = true
   document.getElementById('auto_ascend').disabled = true
+  // TODO: setpoint .19 active hale getir
+  // TODO: negatif derinlik problemini çöz
 
   setTimeout( function () {
     depth.value = depth.value - 1;
@@ -300,20 +315,35 @@ setInterval(checkSetpoint, 1500);
 
 // NERD
 function showNerd () {
-  document.getElementById('nerd').classList.add('visible')
+  document.getElementById('nerd-section').classList.remove('is-hidden')
   document.getElementById('showNerd').classList.add('is-hidden')
   document.getElementById('hideNerd').classList.remove('is-hidden')
 }
 
 function hideNerd () {
-  document.getElementById('nerd').classList.remove('visible')
+  document.getElementById('nerd-section').classList.add('is-hidden')
   document.getElementById('hideNerd').classList.add('is-hidden')
   document.getElementById('showNerd').classList.remove('is-hidden')
+}
+
+// HUD
+
+function showHud () {
+  document.getElementById('hud-section').classList.remove('is-hidden')
+  document.getElementById('showHud').classList.add('is-hidden')
+  document.getElementById('hideHud').classList.remove('is-hidden')
+}
+
+function hideHud () {
+  document.getElementById('hud-section').classList.add('is-hidden')
+  document.getElementById('hideHud').classList.add('is-hidden')
+  document.getElementById('showHud').classList.remove('is-hidden')
 }
 
 // RESET DATA
 function resetData () {
   depth.value = 0
+  // TODO: setpoint .19 active olmali
   depth.innerHTML = depth.value
 
   diluentFlush ()
@@ -334,65 +364,53 @@ function timeSpeedx2 () {
   document.getElementById('timeSpeedx2').classList.add('has-text-success')
 }
 
-// HUD 
-function hudClearLeds () {
-  document.getElementById('hud_sensor1_led1').classList.remove('is-blinking', 'has-background-danger')
-  document.getElementById('hud_sensor1_led2').classList.remove('is-blinking', 'has-background-success')
-  document.getElementById('hud_sensor1_led3').classList.remove('is-blinking', 'has-background-warning')
-  document.getElementById('hud_sensor1_led4').classList.remove('is-blinking', 'has-background-danger')
-  document.getElementById('hud_sensor2_led1').classList.remove('is-blinking', 'has-background-danger')
-  document.getElementById('hud_sensor2_led2').classList.remove('is-blinking', 'has-background-success')
-  document.getElementById('hud_sensor2_led3').classList.remove('is-blinking', 'has-background-warning')
-  document.getElementById('hud_sensor2_led4').classList.remove('is-blinking', 'has-background-danger')
-  document.getElementById('hud_sensor3_led1').classList.remove('is-blinking', 'has-background-danger')
-  document.getElementById('hud_sensor3_led2').classList.remove('is-blinking', 'has-background-success')
-  document.getElementById('hud_sensor3_led3').classList.remove('is-blinking', 'has-background-warning')
-  document.getElementById('hud_sensor3_led4').classList.remove('is-blinking', 'has-background-danger')
-  document.getElementById('hud_start_icon').classList.remove('has-text-success')
-  document.getElementById('hud_battery_icon').classList.remove('has-text-success')
-  document.getElementById('hud_sensor_icon').classList.remove('has-text-success')
-  document.getElementById('hud_communication_icon').classList.remove('has-text-success')
-  
+// ADVANCED USAGE
+
+function runAdvancedUser () {
+  document.getElementById('adv_nav_row1').classList.toggle('is-hidden')
+  document.getElementById('adv_nav_row2').classList.toggle('is-hidden')
+  document.getElementById('advancedUsage').classList.toggle('has-text-success')
+  document.querySelector('html').classList.toggle('double-nav')
 }
 
-function hudStartAnimation () {
-  hudClearLeds ()
-  document.getElementById('hud_start_icon').classList.add('has-text-success')
-  document.getElementById('hud_sensor1_led4').classList.add('has-background-danger')
-  document.getElementById('hud_sensor2_led1').classList.add('has-background-danger')
-  document.getElementById('hud_sensor2_led2').classList.add('has-background-success')
-  document.getElementById('hud_sensor2_led3').classList.add('has-background-warning')
-  document.getElementById('hud_sensor2_led4').classList.add('has-background-danger')
-  document.getElementById('hud_sensor3_led4').classList.add('has-background-danger')
-
+function o2ValveToggle () {
+  document.getElementById('o2tankValve').classList.toggle('is-success')
+  document.getElementById('o2tankValve').classList.toggle('is-danger')
 }
 
-function hudBatteryLow () {
-  hudClearLeds ()
-  document.getElementById('hud_battery_icon').classList.add('has-text-success')
-  document.getElementById('hud_sensor1_led3').classList.add('has-background-warning')
-  document.getElementById('hud_sensor2_led3').classList.add('has-background-warning')
-  document.getElementById('hud_sensor3_led3').classList.add('has-background-warning')
+function rightValveToggle () {
+  document.getElementById('rightValve').classList.toggle('is-success')
+  document.getElementById('rightValve').classList.toggle('is-danger')
 }
 
-function hudSensorFailed () {
-  hudClearLeds ()
-  document.getElementById('hud_sensor_icon').classList.add('has-text-success')
-  document.getElementById('hud_sensor1_led2').classList.add('is-blinking')
-  document.getElementById('hud_sensor1_led3').classList.add('is-blinking')
-  document.getElementById('hud_sensor2_led3').classList.add('is-blinking')
-  document.getElementById('hud_sensor2_led2').classList.add('is-blinking')
-  document.getElementById('hud_sensor3_led4').classList.add('has-background-danger')
-  document.getElementById('hud_sensor3_led1').classList.add('has-background-danger')
+function rightIsoValveToggle () {
+  document.getElementById('rightIsoValve').classList.toggle('is-success')
+  document.getElementById('rightIsoValve').classList.toggle('is-danger')
 }
 
-function hudNoCommunications () {
-  hudClearLeds ()
-  document.getElementById('hud_communication_icon').classList.add('has-text-success')
-  document.getElementById('hud_sensor1_led1').classList.add('is-blinking')
-  document.getElementById('hud_sensor1_led4').classList.add('is-blinking')
-  document.getElementById('hud_sensor3_led1').classList.add('is-blinking')
-  document.getElementById('hud_sensor3_led4').classList.add('is-blinking')
+function leftIsoValveToggle () {
+  document.getElementById('leftIsoValve').classList.toggle('is-success')
+  document.getElementById('leftIsoValve').classList.toggle('is-danger')
 }
 
-hudNoCommunications ()
+function leftValveToggle () {
+  document.getElementById('leftValve').classList.toggle('is-success')
+  document.getElementById('leftValve').classList.toggle('is-danger')
+}
+
+function toggleFCs () {
+  document.getElementById('failures').classList.toggle('is-hidden')
+  document.getElementById('toggleFCs').classList.toggle('has-text-success')
+}
+
+// MODAL
+function toggleDefaultPresets () {
+  document.getElementById('defaultPresets').classList.toggle('is-active')
+}
+
+function ifDepthLessThan15 () {
+  if ( depth.value < 15 ) { 
+    depth.value = 15 
+    depth.innerHTML = 15 
+  }
+}
