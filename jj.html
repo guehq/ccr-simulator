@@ -489,12 +489,12 @@
           </div>
 
           <div class='column is-5'>
-            <div id="hud-section">
+            <section id="hud-section" class="mt-4 has-background-info">
               <!-- ############################### -->
               <!-- ############# HUD ############# -->
               <!-- ############################### -->
 
-              <section id='hud' class='has-background-black m-5'>
+              <div id='hud' class='has-background-black'>
                 <button id="hud_main_button" onclick='hudRealtime ()' title='Turn-on & Sync with CTRL'></button>
                 <div id="hud_buddy_led"></div>
                 <div class='sensors'>
@@ -517,7 +517,7 @@
                     <div id='hud_sensor3_led4' class='hud-light light-red'></div>
                   </div>
                 </div>
-              </section>
+              </div>
   
               <div class='buttons is-fullwidth is-justify-content-flex-end px-3'>
                 <button class='button is-small is-dark' onclick='hudBatteryLow ()' title='Battery is low and should be replaced'>
@@ -530,9 +530,9 @@
                   <i id='hud_communication_icon' class='fa-solid fa-link-slash'></i>
                 </button>
               </div>
-            </div>
+            </section>
 
-            <section id="nerd-section" class="py-4" style="margin-top: 8em">
+            <section id="nerd-section" class="has-background-info mt-calc-nav-1">
               <!-- ############################### -->
               <!-- ############ NERD ############# -->
               <!-- ############################### -->
@@ -612,7 +612,7 @@
           <div class='buttons'>
             <button class='button is-primary is-outlined is-small' disabled>"How to use" GUIDE</button>
             <button class='button is-primary is-outlined is-small' onclick="toggleDefaultPresets ()">Default Presets</button>
-            <a href="https://github.com/guehq/ccr-simulator" target="_blank" class='button is-danger is-outlined is-small'>Report a BUG</a>
+            <a href="https://github.com/guehq/ccr-simulator/issues" target="_blank" class='button is-danger is-outlined is-small'>Report a BUG</a>
           </div>
         </div>
         
