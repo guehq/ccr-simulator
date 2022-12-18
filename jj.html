@@ -658,32 +658,27 @@
   </footer>
 
   <div id='defaultPresets' class="modal">
-    <div class="notification">
-      <div class="level">
-        <div class="level-left">
-          <div class="level-item">
-            <div class="title">Default Presets</div>
-          </div>
-        </div>
-        <div class="level-right">
-          <div class="level-item">
-            <button class="button is-outlined" onclick="toggleDefaultPresets ()">X</button>
-          </div>
-        </div>
-      </div>
-      <strong>Descend, Ascend and Auto Ascend Buttons</strong>
-      <ul>
-        <li>Each "Descend" and "Ascend" button descents/ascents 3 meters distance.</li>
-        <li>Auto ascend speed is 1m/sec for a quick demostration.</li>
-      </ul>
-      <br>
-      <strong>Setpoints</strong>
-      <ul>
-        <li>Default setpoint is ".7".</li>
-        <li>When you are on surface you can switch to ".19". But during simulating a dive, you can only switch between ".7" to "1.2".</li>
-        <li>While ascending, setpoint automaticly siwtch ".7" after 4 meters.</li>
-        <li>If controller fails, setpoint automaticly becomes ".7".</li>
-      </ul>
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Default Presets</p>
+        <button class="delete" aria-label="close" onclick="toggleDefaultPresets ()"></button>
+      </header>
+      <section class="modal-card-body">
+        <strong>Descend, Ascend and Auto Ascend Buttons</strong>
+        <ul>
+          <li>> Each "Descend" and "Ascend" button descents/ascents 3 meters distance.</li>
+          <li>> Auto ascend speed is 1m/sec for a quick demostration.</li>
+        </ul>
+        <br>
+        <strong>Setpoints</strong>
+        <ul>
+          <li>> Default setpoint is ".7".</li>
+          <li>> When you are on surface you can switch to ".19". But during simulating a dive, you can only switch between ".7" to "1.2".</li>
+          <li>> While ascending, setpoint automaticly siwtch ".7" after 4 meters.</li>
+          <li>> If controller fails, setpoint automaticly becomes ".7".</li>
+        </ul>
+      </section>
     </div>
   </div>
 
