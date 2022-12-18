@@ -166,32 +166,41 @@ function runFC5 () {
   }
 }
 
+// Run Controller Failure 
+function runControllerFailure () {
+  document.getElementById('nerd_top_row').classList.add('is-hidden')
+  document.getElementById('nerd_center_row').classList.add('is-hidden')
+  document.getElementById('nerd_bottom_row').classList.add('is-hidden')
+  document.getElementById('hideNerd').disabled = true
+  document.getElementById('showNerd').disabled = true
+  document.getElementById('sp_7').checked = true
+}
+
+// Stop Controller Failure 
+function stopControllerFailure () {
+  document.getElementById('nerd_top_row').classList.remove('is-hidden')
+  document.getElementById('nerd_center_row').classList.remove('is-hidden')
+  document.getElementById('nerd_bottom_row').classList.remove('is-hidden')
+  document.getElementById('hideNerd').disabled = false
+  document.getElementById('showNerd').disabled = false
+}
+
 // FC6
 function runFC6 () {
   if ( !isFC6Active ) {
     isFC6Active = true
-    // TODO: hide only controller inside
-    // TODO: disable all setpoints --> auto switch to .7
-    document.getElementById('nerd').classList.add('is-hidden')
     document.getElementById('fc6icon').classList.add('has-text-danger')
     document.getElementById('fc6icon').classList.remove('has-text-success')
     document.getElementById('FC6no').classList.add('has-text-danger')
-    document.getElementById('hideNerd').classList.toggle('is-hidden')
-    document.getElementById('showNerd').classList.toggle('is-hidden')
     document.getElementById('solutionFC6').classList.remove('is-hidden')
-    document.getElementById('hideNerd').disabled = true
-    document.getElementById('showNerd').disabled = true
+    runControllerFailure ()
   } else {
     isFC6Active = false
-    document.getElementById('nerd').classList.remove('is-hidden')
     document.getElementById('fc6icon').classList.remove('has-text-danger')
     document.getElementById('fc6icon').classList.add('has-text-success')
     document.getElementById('FC6no').classList.remove('has-text-danger')
-    document.getElementById('hideNerd').classList.toggle('is-hidden')
-    document.getElementById('showNerd').classList.toggle('is-hidden')
     document.getElementById('solutionFC6').classList.add('is-hidden')
-    document.getElementById('hideNerd').disabled = false
-    document.getElementById('showNerd').disabled = false
+    stopControllerFailure ()
   }
 }
 

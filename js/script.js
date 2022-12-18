@@ -370,6 +370,8 @@ function runAdvancedUser () {
   document.getElementById('adv_nav_row1').classList.toggle('is-hidden')
   document.getElementById('adv_nav_row2').classList.toggle('is-hidden')
   document.getElementById('advancedUsage').classList.toggle('has-text-success')
+  document.getElementById('nerd-section').classList.toggle('mt-calc-nav-1')
+  document.getElementById('nerd-section').classList.toggle('mt-calc-nav-3')
   document.querySelector('html').classList.toggle('double-nav')
 }
 

@@ -172,7 +172,7 @@
 
             <li title='Controller failure'>
               <a class='has-text-white' onclick='runFC6 ()'>
-                <i id='fc6icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;<span id='FC6no'>FC6</span> <span id='FC6hint'>- Controller Fail</span>
+                <i id='fc6icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;<span id='FC6no'>FC6</span> <span id='FC6hint'>- Controller Failure</span>
               </a>
             </li>
 
@@ -489,12 +489,12 @@
           </div>
 
           <div class='column is-5'>
-            <div id="hud-section">
+            <section id="hud-section" class="mt-4 has-background-info">
               <!-- ############################### -->
               <!-- ############# HUD ############# -->
               <!-- ############################### -->
 
-              <section id='hud' class='has-background-black m-5'>
+              <div id='hud' class='has-background-black'>
                 <button id="hud_main_button" onclick='hudRealtime ()' title='Turn-on & Sync with CTRL'></button>
                 <div id="hud_buddy_led"></div>
                 <div class='sensors'>
@@ -517,7 +517,7 @@
                     <div id='hud_sensor3_led4' class='hud-light light-red'></div>
                   </div>
                 </div>
-              </section>
+              </div>
   
               <div class='buttons is-fullwidth is-justify-content-flex-end px-3'>
                 <button class='button is-small is-dark' onclick='hudBatteryLow ()' title='Battery is low and should be replaced'>
@@ -530,9 +530,9 @@
                   <i id='hud_communication_icon' class='fa-solid fa-link-slash'></i>
                 </button>
               </div>
-            </div>
+            </section>
 
-            <section id="nerd-section" class="py-4" style="margin-top: 8em">
+            <section id="nerd-section" class="has-background-info mt-calc-nav-1">
               <!-- ############################### -->
               <!-- ############ NERD ############# -->
               <!-- ############################### -->
@@ -612,7 +612,7 @@
           <div class='buttons'>
             <button class='button is-primary is-outlined is-small' disabled>"How to use" GUIDE</button>
             <button class='button is-primary is-outlined is-small' onclick="toggleDefaultPresets ()">Default Presets</button>
-            <a href="https://github.com/guehq/ccr-simulator" target="_blank" class='button is-danger is-outlined is-small'>Report a BUG</a>
+            <a href="https://github.com/guehq/ccr-simulator/issues" target="_blank" class='button is-danger is-outlined is-small'>Report a BUG</a>
           </div>
         </div>
         
@@ -658,32 +658,27 @@
   </footer>
 
   <div id='defaultPresets' class="modal">
-    <div class="notification">
-      <div class="level">
-        <div class="level-left">
-          <div class="level-item">
-            <div class="title">Default Presets</div>
-          </div>
-        </div>
-        <div class="level-right">
-          <div class="level-item">
-            <button class="button is-outlined" onclick="toggleDefaultPresets ()">X</button>
-          </div>
-        </div>
-      </div>
-      <strong>Descend, Ascend and Auto Ascend Buttons</strong>
-      <ul>
-        <li>Each "Descend" and "Ascend" button descents/ascents 3 meters distance.</li>
-        <li>Auto ascend speed is 1m/sec for a quick demostration.</li>
-      </ul>
-      <br>
-      <strong>Setpoints</strong>
-      <ul>
-        <li>Default setpoint is ".7".</li>
-        <li>When you are on surface you can switch to ".19". But during simulating a dive, you can only switch between ".7" to "1.2".</li>
-        <li>While ascending, setpoint automaticly siwtch ".7" after 4 meters.</li>
-        <li class="has-text-warning">If controller fails, setpoint automaticly becomes ".7".</li>
-      </ul>
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Default Presets</p>
+        <button class="delete" aria-label="close" onclick="toggleDefaultPresets ()"></button>
+      </header>
+      <section class="modal-card-body">
+        <strong>Descend, Ascend and Auto Ascend Buttons</strong>
+        <ul>
+          <li>> Each "Descend" and "Ascend" button descents/ascents 3 meters distance.</li>
+          <li>> Auto ascend speed is 1m/sec for a quick demostration.</li>
+        </ul>
+        <br>
+        <strong>Setpoints</strong>
+        <ul>
+          <li>> Default setpoint is ".7".</li>
+          <li>> When you are on surface you can switch to ".19". But during simulating a dive, you can only switch between ".7" to "1.2".</li>
+          <li>> While ascending, setpoint automaticly siwtch ".7" after 4 meters.</li>
+          <li>> If controller fails, setpoint automaticly becomes ".7".</li>
+        </ul>
+      </section>
     </div>
   </div>
 

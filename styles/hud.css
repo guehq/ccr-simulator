@@ -1,4 +1,8 @@
 /* HUD START */
+#hud-section .buttons button.button {
+  border-radius: 0 0 1em 1em;
+}
+
 #hud {
   position: relative;
   border-radius: 3em 0 0 3em;
@@ -99,4 +103,5 @@
   50% { background-color: #ffe08a; }
   100% { background-color: #363636; }
 }
+
 /* HUD END */

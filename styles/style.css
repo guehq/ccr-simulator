@@ -39,7 +39,7 @@ body {
 #messages {
   position: absolute;
   bottom: 5em;
-  left: calc(20% + 3em);
+  left: calc(25% + 3em);
 }
 
 #messages.passive {
@@ -61,4 +61,12 @@ body {
 /* Failures START */
 #failures {
   min-height: calc(100vh - 32px);
+}
+
+.mt-calc-nav-1 {
+  margin-top: calc(100vh - 630px);
+}
+
+.mt-calc-nav-3 {
+  margin-top: calc(100vh - 740px);
 }
