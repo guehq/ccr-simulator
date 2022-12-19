@@ -31,6 +31,7 @@ function pad(val) {
 let sensor1 = document.getElementById('sensor1')
 let sensor2 = document.getElementById('sensor2')
 let sensor3 = document.getElementById('sensor3')
+let hasSensorLimitationFailure = false
 
 // Controller Data - TTS
 let tts = document.getElementById('tts')
@@ -57,8 +58,11 @@ let warningMessageFC10 = document.getElementById('nerd-warning-FC10')
 
 // O2 Failures
 let sv = document.getElementById('solenoid_valve')
-let hasSolenoidValveFailure = false
-let hasO2RunawayFailure = false
+let hasSolenoidNotWorkingFailure = false
+let hasSolenoidLeakingFailure = false
+let hasO2MavFailure = false
+let isO2MavConnected = true
+let isO2TankValveOpen = true
 
 // Dil Failures
 let diluentRunawayFailure = false
@@ -101,7 +105,7 @@ function checkSensors () {
   fHe = document.getElementById('fHe').value / 100
   fN2 = 1 - fO2 - fHe
 
-  if ( isFC5Active && sensor1.value > 1.1 ) {
+  if ( hasSensorLimitationFailure && sensor1.value > 1.1 ) {
     sensor1.value = 1.11
     sensor2.value = 1.15
     sensor3.value = loopO2 * 0.99
@@ -201,16 +205,36 @@ function mavDiluent () {
   checkSensors ()
 }
 
-function mavOxygen () {
+function o2addition () {
   ATA = depth.value / 10 + 1
 
-  if (loopO2 / ATA < 0.94) {
+  if ( loopO2 / ATA < 0.94 ) {
     loopO2 = loopO2 + 0.05
   } else {
     loopO2 = 1 * ATA
   }
 
   checkSensors ()
+}
+
+function mavO2Addition () {
+  if ( isO2TankValveOpen && spgO2 > 0 && isO2MavConnected ) {
+    o2addition ()
+  }
+}
+
+function solenoidO2Addition () {
+  if ( isO2TankValveOpen && spgO2 > 0 && !hasSolenoidNotWorkingFailure ) {
+    o2addition ()
+  }
+}
+
+function toggleO2MavConnection () {
+  isO2MavConnected = !isO2MavConnected
+  document.getElementById('o2MavConnection').classList.toggle('has-text-success')
+  document.getElementById('o2MavConnection').classList.toggle('has-text-danger')
+  document.getElementById('o2MavDisconnect').classList.toggle('is-hidden')
+  document.getElementById('o2MavConnect').classList.toggle('is-hidden')
 }
 
 
@@ -230,8 +254,6 @@ function descend () {
     ATA = depth.value / 10 + 1
     loopO2 = loopO2 / (ATA - .3) * ATA
     checkSensors ()
-  } else {
-    return
   }
 }
 
@@ -248,8 +270,6 @@ function ascend () {
     ATA = depth.value / 10 + 1
     loopO2 = loopO2 / (ATA + .3) * ATA
     checkSensors ()
-  } else {
-    return
   }
 
   if ( depth.value == 0 ) {
@@ -305,16 +325,17 @@ function oxygenFlush () {
 
 // SETPOINT
 function checkSetpoint () {
-  if ( hasSolenoidValveFailure ) {
-    return
-  } else {
-    let setpoint = document.querySelector('#setpoint input:checked')
+  if ( !hasSolenoidNotWorkingFailure ) {
+    sp = document.querySelector('#setpoint input:checked')
     
-    if (sensor1.value < setpoint.value) {
-      if ( hasO2RunawayFailure == false ) {
-        mavOxygen ()
-      }
-
+    if ( hasSolenoidLeakingFailure ) {
+      solenoidO2Addition ()
+      sv.textContent = '- Solenoid Valve [FAIL - Leaking]'
+      sv.classList.add('active')
+    } else if ( hasO2MavFailure ) {
+      mavO2Addition ()
+    } else if ( sensor1.value < sp.value ) {
+      solenoidO2Addition ()
       sv.textContent = '- Solenoid Valve [ACTIVE]'
       sv.classList.add('active')
     } else {
@@ -340,7 +361,6 @@ function hideNerd () {
 }
 
 // HUD
-
 function showHud () {
   document.getElementById('hud-section').classList.remove('is-invisible')
   document.getElementById('showHud').classList.add('is-hidden')
@@ -388,29 +408,32 @@ function runAdvancedUser () {
   document.querySelector('html').classList.toggle('double-nav')
 }
 
+runAdvancedUser ()
+
 function o2ValveToggle () {
-  document.getElementById('o2tankValve').classList.toggle('is-success')
-  document.getElementById('o2tankValve').classList.toggle('is-danger')
+  isO2TankValveOpen = !isO2TankValveOpen
+  document.getElementById('o2tankValve').classList.toggle('has-text-success')
+  document.getElementById('o2tankValve').classList.toggle('has-text-danger')
 }
 
 function rightValveToggle () {
-  document.getElementById('rightValve').classList.toggle('is-success')
-  document.getElementById('rightValve').classList.toggle('is-danger')
+  document.getElementById('rightValve').classList.toggle('has-text-success')
+  document.getElementById('rightValve').classList.toggle('has-text-danger')
 }
 
 function rightIsoValveToggle () {
-  document.getElementById('rightIsoValve').classList.toggle('is-success')
-  document.getElementById('rightIsoValve').classList.toggle('is-danger')
+  document.getElementById('rightIsoValve').classList.toggle('has-text-success')
+  document.getElementById('rightIsoValve').classList.toggle('has-text-danger')
 }
 
 function leftIsoValveToggle () {
-  document.getElementById('leftIsoValve').classList.toggle('is-success')
-  document.getElementById('leftIsoValve').classList.toggle('is-danger')
+  document.getElementById('leftIsoValve').classList.toggle('has-text-success')
+  document.getElementById('leftIsoValve').classList.toggle('has-text-danger')
 }
 
 function leftValveToggle () {
-  document.getElementById('leftValve').classList.toggle('is-success')
-  document.getElementById('leftValve').classList.toggle('is-danger')
+  document.getElementById('leftValve').classList.toggle('has-text-success')
+  document.getElementById('leftValve').classList.toggle('has-text-danger')
 }
 
 function toggleFCs () {
@@ -425,7 +448,8 @@ function toggleDefaultPresets () {
 
 function ifDepthLessThan15 () {
   if ( depth.value < 15 ) { 
-    depth.value = 15 
-    depth.innerHTML = 15 
+    r = Math.floor(Math.random() * 15) + 1
+    depth.value = 15 + r
+    depth.innerHTML = 15 + r
   }
 }

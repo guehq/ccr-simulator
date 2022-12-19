@@ -105,12 +105,12 @@ function runLowPO2Unsafe () {
   r = Math.floor(Math.random() * 3) + 1
   
   if ( r == 1 ) {
-    hasSolenoidValveFailure = true
+    hasSolenoidNotWorkingFailure = true
   } else if ( r == 2 ) {
-    hasSolenoidValveFailure = true
+    hasSolenoidNotWorkingFailure = true
     spgO2 = 0
   } else {
-    hasSolenoidValveFailure = true
+    hasSolenoidNotWorkingFailure = true
     o2valve = false
   }
 
@@ -119,7 +119,7 @@ function runLowPO2Unsafe () {
 
 // Stop Low Unsafe PO2 - Hypoxic Warning Failure
 function stopLowPO2Unsafe () {
-  hasSolenoidValveFailure = false
+  hasSolenoidNotWorkingFailure = false
   spgO2 = 60
   o2valve = true
 }
@@ -145,8 +145,13 @@ function runFC4 () {
 
 // Run Sensor Current Limitation and Voting Logic Failure
 function runSensorLimitation () {
+  hasSensorLimitationFailure = true
   ifDepthLessThan15 ()
   document.getElementById('sp_12').checked = true
+}
+
+function stopSensorLimitation () {
+  hasSensorLimitationFailure = false
 }
 
 // FC5
@@ -164,6 +169,7 @@ function runFC5 () {
     document.getElementById('fc5icon').classList.add('has-text-success')
     document.getElementById('FC5no').classList.remove('has-text-danger')
     document.getElementById('solutionFC5').classList.add('is-hidden')
+    stopSensorLimitation ()
   }
 }
 
@@ -207,14 +213,14 @@ function runFC6 () {
 
 // Run Solenoid Alert, Interrupted O2 Supply
 function runSolenoidAlert () {
-  hasSolenoidValveFailure = true
+  hasSolenoidNotWorkingFailure = true
   sv.textContent = '- Solenoid Valve [FAIL - Stop Working]'
   sv.classList.remove('active')
 }
 
 // Stop Solenoid Alert, Interrupted O2 Supply
 function stopSolenoidAlert () {
-  hasSolenoidValveFailure = false
+  hasSolenoidNotWorkingFailure = false
   sv.textContent = '- Solenoid Valve'
 }
 
@@ -239,16 +245,19 @@ function runFC7 () {
 
 // Run O2 Runaway – Malfunctioning Addition Failure
 function runO2RunawayFailure () {
-  hasO2RunawayFailure = true
-  document.getElementById('oxygenFlush').setAttribute('disabled', '')
-  document.getElementById('mavOxygen').setAttribute('disabled', '')
+  r = Math.floor(Math.random() * 2) + 1
+  
+  if ( r == 1 ) {
+    hasSolenoidLeakingFailure = true
+  } else {
+    hasO2MavFailure = true
+  }
 }
 
 // Stop O2 Runaway – Malfunctioning Addition Failure
 function stopO2RunawayFailure () {
-  hasO2RunawayFailure = false
-  document.getElementById('oxygenFlush').removeAttribute('disabled')
-  document.getElementById('mavOxygen').removeAttribute('disabled')
+  hasSolenoidLeakingFailure = false
+  hasO2MavFailure = false
 }
 
 // FC8
@@ -272,8 +281,8 @@ function runFC8 () {
 
 // FC9
 function runFC9 () {
-  if ( hasO2RunawayFailure ) {
-    hasO2RunawayFailure = false
+  if ( hasSolenoidNotWorkingFailure ) {
+    hasSolenoidNotWorkingFailure = false
     document.getElementById('diluentFlush').removeAttribute('disabled')
     document.getElementById('mavDiluent').removeAttribute('disabled')
     document.getElementById('fc9icon').classList.toggle('has-text-danger')
@@ -281,7 +290,7 @@ function runFC9 () {
     document.getElementById('FC9no').classList.remove('has-text-danger')
     document.getElementById('solutionFC9').classList.add('is-hidden')
   } else {
-    hasO2RunawayFailure = true
+    hasSolenoidNotWorkingFailure = true
     document.getElementById('diluentFlush').setAttribute('disabled', '')
     document.getElementById('mavDiluent').setAttribute('disabled', '')
     document.getElementById('fc9icon').classList.toggle('has-text-danger')
@@ -363,8 +372,8 @@ function runFC12 () {
 
 // FC13
 function runFC13 () {
-  if ( hasO2RunawayFailure ) {
-    hasO2RunawayFailure = false
+  if ( hasSolenoidNotWorkingFailure ) {
+    hasSolenoidNotWorkingFailure = false
     document.getElementById('oxygenFlush').removeAttribute('disabled')
     document.getElementById('mavOxygen').removeAttribute('disabled')
     document.getElementById('fc13icon').classList.toggle('has-text-danger')
@@ -372,7 +381,7 @@ function runFC13 () {
     document.getElementById('FC13no').classList.remove('has-text-danger')
     document.getElementById('solutionFC13').classList.add('is-hidden')
   } else {
-    hasO2RunawayFailure = true
+    hasSolenoidNotWorkingFailure = true
     document.getElementById('oxygenFlush').setAttribute('disabled', '')
     document.getElementById('mavOxygen').setAttribute('disabled', '')
     document.getElementById('fc13icon').classList.toggle('has-text-danger')
