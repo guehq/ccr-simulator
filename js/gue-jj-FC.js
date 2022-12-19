@@ -181,6 +181,7 @@ function runControllerFailure () {
   document.getElementById('hideNerd').disabled = true
   document.getElementById('showNerd').disabled = true
   document.getElementById('sp_7').checked = true
+  document.getElementById('sp_12').setAttribute('disabled', '')
 }
 
 // Stop Controller Failure 
@@ -190,6 +191,7 @@ function stopControllerFailure () {
   document.getElementById('nerd_bottom_row').classList.remove('is-hidden')
   document.getElementById('hideNerd').disabled = false
   document.getElementById('showNerd').disabled = false
+  document.getElementById('sp_12').removeAttribute('disabled')
 }
 
 // FC6
