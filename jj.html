@@ -37,7 +37,7 @@
         <div class='navbar-item'>
           <div class='buttons are-small'>
             <button id='mavDiluent' class='button is-success is-rounded' onclick='mavDiluent ()'>ADV</button>
-            <button id='mavOxygen' class='button is-success is-rounded' onclick='mavOxygen ()'>O<sup>2</sup>&nbsp;MAV</button>
+            <button id='mavOxygen' class='button is-success is-rounded' onclick='mavO2Addition ()'>O<sup>2</sup>&nbsp;MAV</button>
           </div>
         </div>
         <div class='navbar-item'>
@@ -79,12 +79,12 @@
         <div class='navbar-item'>
           <p class='is-size-7 has-text-white'>Diver Actions:&nbsp;</p>
           <div class='buttons are-small'>
-            <button id='' class='button is-black is-rounded' onclick='' title=''>Breath Hold</button>
-            <button id='' class='button is-black is-rounded' onclick='' title=''>Head-up Trim</button>
-            <button id='' class='button is-black is-rounded' onclick='' title=''>Disconnect O<sup>2</sup>&nbsp;MAV</button>
-            <button id='' class='button is-black is-rounded' onclick='' title=''>Switch BO</button>
-            <button id='' class='button is-black is-rounded' onclick='' title=''>Full BO</button>
-            <button id='' class='button is-black is-rounded' onclick='' title=''>Exhale Deeply</button>
+            <button id='' class='button is-dark has-background-black-ter is-rounded' onclick='' title=''>Breath Hold</button>
+            <button id='' class='button is-dark has-background-black-ter is-rounded' onclick='' title=''>Head-up Trim</button>
+            <button id='o2MavConnection' class='button is-black is-rounded has-text-success' onclick='toggleO2MavConnection ()' title='Toggle O2 MAV connection'>O<sup>2</sup>&nbsp;MAV&nbsp;<span id="o2MavDisconnect" class="is-hidden">Disconnected</span><span id="o2MavConnect">Connected</span></button>
+            <button id='' class='button is-dark has-background-black-ter is-rounded' onclick='' title=''>Switch BO</button>
+            <button id='' class='button is-dark has-background-black-ter is-rounded' onclick='' title=''>Full BO</button>
+            <button id='' class='button is-dark has-background-black-ter is-rounded' onclick='' title=''>Exhale Deeply</button>
           </div>
         </div>
       </div>
@@ -95,22 +95,21 @@
     <div class='navbar-menu'>
       <div class='navbar-start'>
         <div class='navbar-item'>
-          <p class='is-size-7 has-text-white'>Open/Close:&nbsp;</p>
+          <p class='is-size-7 has-text-white'>Open/Close Valves:&nbsp;</p>
           <div class='buttons are-small'>
-            <button id='o2tankValve' class='button is-success is-rounded' onclick='o2ValveToggle ()' title='O2 Tank Valve'>O<sup>2</sup>&nbsp;</button>
-            <button id='rightValve' class='button is-success is-rounded' onclick='rightValveToggle ()' title='Right Post Valve'>Right</button>
-            <button id='rightIsoValve' class='button is-success is-rounded' onclick='rightIsoValveToggle ()' title='Right Post Valve'>Right Iso</button>
-            <button id='leftIsoValve' class='button is-success is-rounded' onclick='leftIsoValveToggle ()' title='Right Post Valve'>Left Iso</button>
-            <button id='leftValve' class='button is-success is-rounded' onclick='leftValveToggle ()' title='Left Post Valve'>Left</button>
+            <button id='o2tankValve' class='button is-black has-text-success is-rounded' onclick='o2ValveToggle ()' title='O2 Tank Valve'>O<sup>2</sup>&nbsp;</button>
+            <button id='rightValve' class='button is-dark has-text-successX is-rounded' onclick='rightValveToggle ()' title='Right Post Valve'>Right</button>
+            <button id='rightIsoValve' class='button is-dark has-text-successX is-rounded' onclick='rightIsoValveToggle ()' title='Right Post Valve'>Right Iso</button>
+            <button id='leftIsoValve' class='button is-dark has-text-successX is-rounded' onclick='leftIsoValveToggle ()' title='Right Post Valve'>Left Iso</button>
+            <button id='leftValve' class='button is-dark has-text-successX is-rounded' onclick='leftValveToggle ()' title='Left Post Valve'>Left</button>
           </div>
         </div>
 
         <div class='navbar-item'>
           <p class='is-size-7 has-text-white'>Check:&nbsp;</p>
           <div class='buttons are-small'>
-            <button id='' class='button is-dark is-rounded' onclick='alert("O2 tank status: OPEN")' title=''>O<sup>2</sup>&nbsp;tank valve</button>
-            <button id='' class='button is-dark is-rounded' onclick='alert("O2 tank pressure: " + spgO2 + " bar")' title=''>O<sup>2</sup>&nbsp;SPG</button>
-            <button id='' class='button is-dark is-rounded' onclick='alert("Diluent tank pressure: " + spgDil + " bar")' title=''>Dil. SPG</button>
+            <button id='' class='button is-black is-rounded' onclick='alert("O2 tank pressure: " + spgO2 + " bar")' title=''>O<sup>2</sup>&nbsp;SPG</button>
+            <button id='' class='button is-black is-rounded' onclick='alert("Diluent tank pressure: " + spgDil + " bar")' title=''>Dil. SPG</button>
           </div>
         </div>
       </div>
@@ -184,7 +183,7 @@
 
             <li title='O2 runaway - Malfunctioning addition'>
               <a class='has-text-white' onclick='runFC8 ()'>
-                <i id='fc8icon' class='fa-solid fa-flag has-text-successX'></i>&nbsp;<span id='FC8no'>FC8</span> <span id='FC8hint'>- O<sub>2</sub> Runaway</span>
+                <i id='fc8icon' class='fa-solid fa-flag has-text-success'></i>&nbsp;<span id='FC8no'>FC8</span> <span id='FC8hint'>- O<sub>2</sub> Runaway</span>
               </a>
             </li>
 
@@ -489,7 +488,7 @@
           </div>
 
           <div class='column is-5'>
-            <section id="hud-section" class="mt-4 has-background-info">
+            <section id="hud-section" class="mt-4">
               <!-- ############################### -->
               <!-- ############# HUD ############# -->
               <!-- ############################### -->
@@ -532,7 +531,7 @@
               </div>
             </section>
 
-            <section id="nerd-section" class="has-background-info mt-calc-nav-1">
+            <section id="nerd-section" class="mt-calc-nav-1">
               <!-- ############################### -->
               <!-- ############ NERD ############# -->
               <!-- ############################### -->
