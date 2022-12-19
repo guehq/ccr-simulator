@@ -196,7 +196,7 @@ function mavDiluent () {
   ATA = depth.value / 10 + 1
   ppO2 = fO2 * ATA
 
-  if ( (loopO2 / ATA) > (ppO2 + 0.04) ) {
+  if ( loopO2 > (ppO2 + 0.04) ) {
     loopO2 = loopO2 - 0.05
   } else {
     loopO2 = ppO2
