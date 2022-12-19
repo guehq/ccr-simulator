@@ -402,68 +402,87 @@ function runFC13 () {
   }
 }
 
+// Run Caustic Cocktail
 // FC14
 function runFC14 () {
-  if (causticCocktail == false) {
-    causticCocktail = true
+  if ( !isFC14Active ) {
+    isFC14Active = true
     document.getElementById('fc14icon').classList.remove('has-text-success')
     document.getElementById('fc14icon').classList.add('has-text-danger')
     document.getElementById('FC14no').classList.add('has-text-danger')
+    document.getElementById('solutionFC14').classList.remove('is-hidden')
     document.getElementById('symptoms').classList.remove('is-hidden')
     document.getElementById('fc14symptoms').classList.remove('is-hidden')
-    document.getElementById('solutionFC14').classList.remove('is-hidden')
   } else {
-    causticCocktail = false
+    isFC14Active = false
     document.getElementById('fc14icon').classList.remove('has-text-danger')
     document.getElementById('fc14icon').classList.add('has-text-success')
     document.getElementById('FC14no').classList.remove('has-text-danger')
+    document.getElementById('solutionFC14').classList.add('is-hidden')
     document.getElementById('symptoms').classList.add('is-hidden')
     document.getElementById('fc14symptoms').classList.add('is-hidden')
-    document.getElementById('solutionFC14').classList.add('is-hidden')
   }
+}
+
+// Run Hyperoxia (experience dive)
+function runHyperoxia () {
+  ifDepthLessThan15 ()
+  loopO2 = 2.4
 }
 
 // FC+1
 function runFCp1 () {
-  if ( !isFCp1Active) {
+  if ( !isFCp1Active ) {
     isFCp1Active = true
-    // TODO: O2 tank empty / Close
-    // TODO: pO2 .16
     document.getElementById('fc+1icon').classList.remove('has-text-success')
     document.getElementById('fc+1icon').classList.add('has-text-danger')
     document.getElementById('FC+1no').classList.add('has-text-danger')
-    document.getElementById('symptoms').classList.remove('is-hidden')
-    document.getElementById('fc+1symptoms').classList.remove('is-hidden')
     document.getElementById('solutionFC+1').classList.remove('is-hidden')
+    runHyperoxia ()
   } else {
     isFCp1Active = false
     document.getElementById('fc+1icon').classList.remove('has-text-danger')
     document.getElementById('fc+1icon').classList.add('has-text-success')
     document.getElementById('FC+1no').classList.remove('has-text-danger')
-    document.getElementById('symptoms').classList.add('is-hidden')
-    document.getElementById('fc+1symptoms').classList.add('is-hidden')
     document.getElementById('solutionFC+1').classList.add('is-hidden')
   }
 }
 
+// Run DCI (experience dive)
 // FC+2
 function runFCp2 () {
   if ( !isFCp2Active ) {
+    // TODO: yükselmeyi durdurup geri derin kisima giderek deco tamamlanabilir
     isFCp2Active = true
     document.getElementById('fc+2icon').classList.remove('has-text-success')
     document.getElementById('fc+2icon').classList.add('has-text-danger')
     document.getElementById('FC+2no').classList.add('has-text-danger')
+    document.getElementById('solutionFC+2').classList.remove('is-hidden')
     document.getElementById('symptoms').classList.remove('is-hidden')
     document.getElementById('fc+2symptoms').classList.remove('is-hidden')
-    document.getElementById('solutionFC+2').classList.remove('is-hidden')
   } else {
     isFCp2Active = false
     document.getElementById('fc+2icon').classList.remove('has-text-danger')
     document.getElementById('fc+2icon').classList.add('has-text-success')
     document.getElementById('FC+2no').classList.remove('has-text-danger')
+    document.getElementById('solutionFC+2').classList.add('is-hidden')
     document.getElementById('symptoms').classList.add('is-hidden')
     document.getElementById('fc+2symptoms').classList.add('is-hidden')
-    document.getElementById('solutionFC+2').classList.add('is-hidden')
+  }
+}
+
+// Run BOOM! Failure
+function runBoomFailure () {
+  r = Math.floor(Math.random() * 3) + 1;
+
+  if ( r == 1 ) {
+    alert ('O2 tank Valve Failure')
+  } else if ( r == 2 ) {
+    alert ('Diluent Right Post Valve Failure')
+  } else if ( r == 3 ) {
+    alert ('Diluent Manifold Failure')
+  } else if ( r == 4 ) {
+    alert ('Diluent Left Post Valve Failure')
   }
 }
 
@@ -474,6 +493,7 @@ function runFCp3 () {
     document.getElementById('fc+3icon').classList.remove('has-text-success')
     document.getElementById('fc+3icon').classList.add('has-text-danger')
     document.getElementById('FC+3no').classList.add('has-text-danger')
+    runBoomFailure ()
   } else {
     isFCp3Active = false
     document.getElementById('fc+3icon').classList.remove('has-text-danger')
@@ -483,25 +503,25 @@ function runFCp3 () {
 }
 
 function randomFailure () {
-  randomNo = Math.floor(Math.random() * 17) + 1;
+  r = Math.floor(Math.random() * 17) + 1;
 
-  if ( randomNo == 1 ) { runFC1 () } 
-  else if ( randomNo == 2 ) { runFC2 () }
-  else if ( randomNo == 3 ) { runFC3 () }
-  else if ( randomNo == 4 ) { runFC4 () }
-  else if ( randomNo == 5 ) { runFC5 () }
-  else if ( randomNo == 6 ) { runFC6 () }
-  else if ( randomNo == 7 ) { runFC7 () }
-  else if ( randomNo == 8 ) { runFC8 () }
-  else if ( randomNo == 9 ) { runFC9 () }
-  else if ( randomNo == 10 ) { runFC10 () }
-  else if ( randomNo == 11 ) { runFC11 () }
-  else if ( randomNo == 12 ) { runFC12 () }
-  else if ( randomNo == 13 ) { runFC13 () }
-  else if ( randomNo == 14 ) { runFC14 () }
-  else if ( randomNo == 15 ) { runFCp1 () }
-  else if ( randomNo == 16 ) { runFCp2 () }
-  else if ( randomNo == 17 ) { runFCp3 () }
+  if ( r == 1 ) { runFC1 () } 
+  else if ( r == 2 ) { runFC2 () }
+  else if ( r == 3 ) { runFC3 () }
+  else if ( r == 4 ) { runFC4 () }
+  else if ( r == 5 ) { runFC5 () }
+  else if ( r == 6 ) { runFC6 () }
+  else if ( r == 7 ) { runFC7 () }
+  else if ( r == 8 ) { runFC8 () }
+  else if ( r == 9 ) { runFC9 () }
+  else if ( r == 10 ) { runFC10 () }
+  else if ( r == 11 ) { runFC11 () }
+  else if ( r == 12 ) { runFC12 () }
+  else if ( r == 13 ) { runFC13 () }
+  else if ( r == 14 ) { runFC14 () }
+  else if ( r == 15 ) { runFCp1 () }
+  else if ( r == 16 ) { runFCp2 () }
+  else if ( r == 17 ) { runFCp3 () }
 }
 
 function toggleHint () {

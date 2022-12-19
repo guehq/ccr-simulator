@@ -97,19 +97,19 @@
         <div class='navbar-item'>
           <p class='is-size-7 has-text-white'>Open/Close Valves:&nbsp;</p>
           <div class='buttons are-small'>
-            <button id='o2tankValve' class='button is-black has-text-success is-rounded' onclick='o2ValveToggle ()' title='O2 Tank Valve'>O<sup>2</sup>&nbsp;</button>
-            <button id='rightValve' class='button is-dark has-text-successX is-rounded' onclick='rightValveToggle ()' title='Right Post Valve' disabled>Right</button>
-            <button id='rightIsoValve' class='button is-dark has-text-successX is-rounded' onclick='rightIsoValveToggle ()' title='Right Post Valve' disabled>Right Iso</button>
-            <button id='leftIsoValve' class='button is-dark has-text-successX is-rounded' onclick='leftIsoValveToggle ()' title='Right Post Valve' disabled>Left Iso</button>
             <button id='leftValve' class='button is-dark has-text-successX is-rounded' onclick='leftValveToggle ()' title='Left Post Valve' disabled>Left</button>
+            <button id='leftIsoValve' class='button is-dark has-text-successX is-rounded' onclick='leftIsoValveToggle ()' title='Right Post Valve' disabled>Left Iso</button>
+            <button id='rightIsoValve' class='button is-dark has-text-successX is-rounded' onclick='rightIsoValveToggle ()' title='Right Post Valve' disabled>Right Iso</button>
+            <button id='rightValve' class='button is-black has-text-success is-rounded' onclick='rightValveToggle ()' title='Right Post Valve'>Right</button>
+            <button id='o2tankValve' class='button is-black has-text-success is-rounded' onclick='o2ValveToggle ()' title='O2 Tank Valve'>O<sup>2</sup>&nbsp;</button>
           </div>
         </div>
 
         <div class='navbar-item'>
           <p class='is-size-7 has-text-white'>Check SPG:&nbsp;</p>
           <div class='buttons are-small'>
-            <button id='' class='button is-black is-rounded' onclick='alert("O2 tank pressure: " + spgO2 + " bar")' title=''>O<sup>2</sup></button>
             <button id='' class='button is-black is-rounded' onclick='alert("Diluent tank pressure: " + spgDil + " bar")' title=''>Dil.</button>
+            <button id='' class='button is-black is-rounded' onclick='alert("O2 tank pressure: " + spgO2 + " bar")' title=''>O<sup>2</sup></button>
           </div>
         </div>
       </div>
@@ -189,7 +189,7 @@
 
             <li title='Diluent runaway - Malfunctioning ADV'>
               <a class='has-text-white' onclick='runFC9 ()'>
-                <i id='fc9icon' class='fa-solid fa-flag has-text-successX'></i>&nbsp;<span id='FC9no'>FC9</span> <span id='FC9hint'>- Dil. Runaway</span>
+                <i id='fc9icon' class='fa-solid fa-flag has-text-warning'></i>&nbsp;<span id='FC9no'>FC9</span> <span id='FC9hint'>- Dil. Runaway</span>
               </a>
             </li>
 
@@ -207,7 +207,7 @@
 
             <li title='Released counterlung OPV'>
               <a class='has-text-white' onclick='runFC12 ()'>
-                <i id='fc12icon' class='fa-solid fa-flag has-text-successX'></i>&nbsp;<span id='FC12no'>FC12</span> <span id='FC12hint'>- Counterlung OPV</span>
+                <i id='fc12icon' class='fa-solid fa-flag has-text-warning'></i>&nbsp;<span id='FC12no'>FC12</span> <span id='FC12hint'>- Counterlung OPV</span>
               </a>
             </li>
 
@@ -219,25 +219,25 @@
 
             <li title='Caustic Cocktail'>
               <a class='has-text-white' onclick='runFC14 ()'>
-                <i id='fc14icon' class='fa-solid fa-flag has-text-successX'></i>&nbsp;<span id='FC14no'>FC14</span> <span id='FC14hint'>- Caustic Cocktail</span>
+                <i id='fc14icon' class='fa-solid fa-flag has-text-success'></i>&nbsp;<span id='FC14no'>FC14</span> <span id='FC14hint'>- Caustic Cocktail</span>
               </a>
             </li>
 
             <li title='Hyperoxia (experience dive)'>
               <a class='has-text-white' onclick='runFCp1 ()'>
-                <i id='fc+1icon' class='fa-solid fa-flag has-text-successX'></i>&nbsp;<span id='FC+1no'>FC+1</span> <span id='FC+1hint'>- Hyperoxia</span>
+                <i id='fc+1icon' class='fa-solid fa-flag has-text-success'></i>&nbsp;<span id='FC+1no'>FC+1</span> <span id='FC+1hint'>- Hyperoxia</span>
               </a>
             </li>
 
             <li title='DCI (experience dive)'>
               <a class='has-text-white' onclick='runFCp2 ()'>
-                <i id='fc+2icon' class='fa-solid fa-flag has-text-successX'></i>&nbsp;<span id='FC+2no'>FC+2</span> <span id='FC+2hint'>- DCI</span>
+                <i id='fc+2icon' class='fa-solid fa-flag has-text-success'></i>&nbsp;<span id='FC+2no'>FC+2</span> <span id='FC+2hint'>- DCI</span>
               </a>
             </li>
 
             <li title='BOOM!'>
               <a class='has-text-white' onclick='runFCp3 ()'>
-                <i id='fc+3icon' class='fa-solid fa-flag has-text-successX'></i>&nbsp;<span id='FC+3no'>FC+3</span> <span id='FC+3hint'>- BOOM!</span>
+                <i id='fc+3icon' class='fa-solid fa-flag has-text-success'></i>&nbsp;<span id='FC+3no'>FC+3</span> <span id='FC+3hint'>- BOOM!</span>
               </a>
             </li>
           </ul>

@@ -70,9 +70,7 @@ let adv = document.getElementById('adv_valve')
 adv.textContent = '- ADV'
 let refreshADV
 
-// Symptomic Failures
-let causticCocktail = false
-
+// Failure Cards
 let showSolutions = false
 let isFC1Active = false
 let isFC2Active = false
@@ -92,7 +90,6 @@ let isFCp1Active = false
 let isFCp2Active = false
 let isFCp3Active = false
 
-let randomNo
 let isTimeSpeedx1 = true
 let isTimeSpeedx2 = false
 
