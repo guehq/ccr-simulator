@@ -1,69 +1,12 @@
 const ascentRate = 9
+
+// Controller Data - Depth
 let depth = document.getElementById('depth')
 depth.value = 0
 depth.innerHTML = depth.value
 let ATA = depth.value / 10 + 1
 
-let sensor1 = document.getElementById('sensor1')
-let sensor2 = document.getElementById('sensor2')
-let sensor3 = document.getElementById('sensor3')
-
-let fO2 = document.getElementById('fO2').value / 100
-let fHe = document.getElementById('fHe').value / 100
-let fN2 = 1 - fO2 - fHe
-let ppO2 = fO2 * ATA
-let ppHe = fHe * ATA
-let loopO2 = ppO2
-let o2spg = 60
-let dilspg = 100
-
-let tts = document.getElementById('tts')
-tts.value = Math.ceil(depth.value / ascentRate)
-tts.innerHTML = tts.value
-
-let discrepancyFactor1 = 1
-let discrepancyFactor2 = 1
-let discrepancyFactor3 = 1
-let svFailure = false
-let sv = document.getElementById('solenoid_valve')
-let votingFailure = false
-let nerdCenter = document.getElementById('nerd_center_row')
-let warningMessageFC10 = document.getElementById('nerd-warning-FC10')
-let o2RunawayFailure = false
-let diluentRunawayFailure = false
-let co2AbsorbentFailure = false
-let counterlungADVFailure = false
-let adv = document.getElementById('adv_valve')
-adv.textContent = '- ADV'
-let refreshADV
-let causticCocktail = false
-let randomNo
-
-let showSolutions = false
-let isFC1Active = false
-let isFC2Active = false
-let isFC3Active = false
-let isFC4Active = false
-let isFC5Active = false
-let isFC6Active = false
-let isFC7Active = false
-let isFC8Active = false
-let isFC9Active = false
-let isFC10Active = false
-let isFC11Active = false
-let isFC12Active = false
-let isFC13Active = false
-let isFC14Active = false
-let isFC15Active = false
-let isFC16Active = false
-let isFC17Active = false
-
-let isTimeSpeedx1 = true
-let isTimeSpeedx2 = false
-
-
-
-// TIMER
+// Controller Data - Timer
 let minutesLabel = document.getElementById('minutes')
 let secondsLabel = document.getElementById('seconds')
 let totalSeconds = 0
@@ -84,9 +27,74 @@ function pad(val) {
   }
 }
 
+// Controller Data - Sensors
+let sensor1 = document.getElementById('sensor1')
+let sensor2 = document.getElementById('sensor2')
+let sensor3 = document.getElementById('sensor3')
 
+// Controller Data - TTS
+let tts = document.getElementById('tts')
+tts.value = Math.ceil(depth.value / ascentRate)
+tts.innerHTML = tts.value
 
-// SENSORS
+// Gas Data
+let fO2 = document.getElementById('fO2').value / 100
+let fHe = document.getElementById('fHe').value / 100
+let fN2 = 1 - fO2 - fHe
+let ppO2 = fO2 * ATA
+let ppHe = fHe * ATA
+let loopO2 = ppO2
+let spgO2 = 60
+let spgDil = 100
+
+// Sensor Failures
+let discrepancyFactor1 = 1
+let discrepancyFactor2 = 1
+let discrepancyFactor3 = 1
+let votingFailure = false
+let nerdCenter = document.getElementById('nerd_center_row')
+let warningMessageFC10 = document.getElementById('nerd-warning-FC10')
+
+// O2 Failures
+let sv = document.getElementById('solenoid_valve')
+let hasSolenoidValveFailure = false
+let hasO2RunawayFailure = false
+
+// Dil Failures
+let diluentRunawayFailure = false
+let counterlungADVFailure = false
+let adv = document.getElementById('adv_valve')
+adv.textContent = '- ADV'
+let refreshADV
+
+// Symptomic Failures
+let co2AbsorbentFailure = false
+let causticCocktail = false
+
+let showSolutions = false
+let isFC1Active = false
+let isFC2Active = false
+let isFC3Active = false
+let isFC4Active = false
+let isFC5Active = false
+let isFC6Active = false
+let isFC7Active = false
+let isFC8Active = false
+let isFC9Active = false
+let isFC10Active = false
+let isFC11Active = false
+let isFC12Active = false
+let isFC13Active = false
+let isFC14Active = false
+let isFCp1Active = false
+let isFCp2Active = false
+let isFCp3Active = false
+
+let randomNo
+let isTimeSpeedx1 = true
+let isTimeSpeedx2 = false
+
+// SENSOR ACTIVITIES
 function checkSensors () {
   ATA = depth.value / 10 + 1
   fO2 = document.getElementById('fO2').value / 100
@@ -250,29 +258,34 @@ function ascend () {
 }
 
 function autoAscend () {
-  document.getElementById('descend').disabled = true
-  document.getElementById('ascend').disabled = true
-  document.getElementById('auto_ascend').disabled = true
-  // TODO: setpoint .19 active hale getir
-  // TODO: negatif derinlik problemini çöz
+  if ( depth.value > 0 ) {
+    document.getElementById('descend').disabled = true
+    document.getElementById('ascend').disabled = true
+    document.getElementById('auto_ascend').disabled = true
+  
+    setTimeout( function () {
+      depth.value = depth.value - 1;
+      depth.innerHTML = depth.value;
+      tts.value = Math.ceil(depth.value / ascentRate);
+      tts.innerHTML = tts.value;
+      ATA = depth.value / 10 + 1
+      loopO2 = loopO2 / (ATA + .1) * ATA
+      checkSensors ()
 
-  setTimeout( function () {
-    depth.value = depth.value - 1;
-    depth.innerHTML = depth.value;
-    tts.value = Math.ceil(depth.value / ascentRate);
-    tts.innerHTML = tts.value;
-    ATA = depth.value / 10 + 1
-    loopO2 = loopO2 / (ATA + .1) * ATA
-    checkSensors ()
-
-    if (0 < depth.value) {
-      autoAscend ();
-    } else {
-      document.getElementById('descend').disabled = false
-      document.getElementById('ascend').disabled = false
-      document.getElementById('auto_ascend').disabled = false
-    }
-  }, 1000)
+      if ( depth.value == 4 ) {
+        document.getElementById('sp_7').checked = true
+      }
+      
+      if ( depth.value > 0 ) {
+        autoAscend ();
+      } else {
+        document.getElementById('descend').disabled = false
+        document.getElementById('ascend').disabled = false
+        document.getElementById('auto_ascend').disabled = false
+        document.getElementById('sp_19').disabled = false
+      }
+    }, 1000)
+  }
 }
 
 // FLUSHES
@@ -292,13 +305,13 @@ function oxygenFlush () {
 
 // SETPOINT
 function checkSetpoint () {
-  if ( svFailure ) {
+  if ( hasSolenoidValveFailure ) {
     return
   } else {
     let setpoint = document.querySelector('#setpoint input:checked')
     
     if (sensor1.value < setpoint.value) {
-      if ( !o2RunawayFailure ) {
+      if ( hasO2RunawayFailure == false ) {
         mavOxygen ()
       }
 
@@ -315,13 +328,13 @@ setInterval(checkSetpoint, 1500);
 
 // NERD
 function showNerd () {
-  document.getElementById('nerd-section').classList.remove('is-hidden')
+  document.getElementById('nerd-section').classList.remove('is-invisible')
   document.getElementById('showNerd').classList.add('is-hidden')
   document.getElementById('hideNerd').classList.remove('is-hidden')
 }
 
 function hideNerd () {
-  document.getElementById('nerd-section').classList.add('is-hidden')
+  document.getElementById('nerd-section').classList.add('is-invisible')
   document.getElementById('hideNerd').classList.add('is-hidden')
   document.getElementById('showNerd').classList.remove('is-hidden')
 }
@@ -329,13 +342,13 @@ function hideNerd () {
 // HUD
 
 function showHud () {
-  document.getElementById('hud-section').classList.remove('is-hidden')
+  document.getElementById('hud-section').classList.remove('is-invisible')
   document.getElementById('showHud').classList.add('is-hidden')
   document.getElementById('hideHud').classList.remove('is-hidden')
 }
 
 function hideHud () {
-  document.getElementById('hud-section').classList.add('is-hidden')
+  document.getElementById('hud-section').classList.add('is-invisible')
   document.getElementById('hideHud').classList.add('is-hidden')
   document.getElementById('showHud').classList.remove('is-hidden')
 }
@@ -343,8 +356,8 @@ function hideHud () {
 // RESET DATA
 function resetData () {
   depth.value = 0
-  // TODO: setpoint .19 active olmali
   depth.innerHTML = depth.value
+  document.getElementById('sp_19').checked = true
 
   diluentFlush ()
 }

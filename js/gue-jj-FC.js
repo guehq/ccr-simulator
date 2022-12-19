@@ -8,6 +8,7 @@ function toggleSolutions () {
 
 // Run Oxygen Sensor Discrepancy Failure
 function runO2SensorDiscrepancy () {
+  // TODO: eger sensor 1 hatali ise solenoid değeri yakalayana kadar basmaya devam ediyor.
   r = Math.floor(Math.random() * 3) + 1
   
   if ( r == 1 ) {
@@ -104,12 +105,12 @@ function runLowPO2Unsafe () {
   r = Math.floor(Math.random() * 3) + 1
   
   if ( r == 1 ) {
-    svFailure = true
+    hasSolenoidValveFailure = true
   } else if ( r == 2 ) {
-    svFailure = true
-    o2spg = 0
+    hasSolenoidValveFailure = true
+    spgO2 = 0
   } else {
-    svFailure = true
+    hasSolenoidValveFailure = true
     o2valve = false
   }
 
@@ -118,8 +119,8 @@ function runLowPO2Unsafe () {
 
 // Stop Low Unsafe PO2 - Hypoxic Warning Failure
 function stopLowPO2Unsafe () {
-  svFailure = false
-  o2spg = 60
+  hasSolenoidValveFailure = false
+  spgO2 = 60
   o2valve = true
 }
 
@@ -204,50 +205,75 @@ function runFC6 () {
   }
 }
 
+// Run Solenoid Alert, Interrupted O2 Supply
+function runSolenoidAlert () {
+  hasSolenoidValveFailure = true
+  sv.textContent = '- Solenoid Valve [FAIL - Stop Working]'
+  sv.classList.remove('active')
+}
+
+// Stop Solenoid Alert, Interrupted O2 Supply
+function stopSolenoidAlert () {
+  hasSolenoidValveFailure = false
+  sv.textContent = '- Solenoid Valve'
+}
+
 // FC7
 function runFC7 () {
-  if (svFailure == false) {
-    svFailure = true
-    sv.textContent = '- Solenoid Valve [FAIL]'
+  if ( !isFC7Active ) {
+    isFC7Active = true
     document.getElementById('fc7icon').classList.remove('has-text-success')
     document.getElementById('fc7icon').classList.add('has-text-danger')
     document.getElementById('FC7no').classList.add('has-text-danger')
     document.getElementById('solutionFC7').classList.remove('is-hidden')
+    runSolenoidAlert ()
   } else {
-    svFailure = false
-    sv.textContent = '- Solenoid Valve'
+    isFC7Active = false
     document.getElementById('fc7icon').classList.remove('has-text-danger')
     document.getElementById('fc7icon').classList.add('has-text-success')
     document.getElementById('FC7no').classList.remove('has-text-danger')
     document.getElementById('solutionFC7').classList.add('is-hidden')
+    stopSolenoidAlert ()
   }
+}
+
+// Run O2 Runaway – Malfunctioning Addition Failure
+function runO2RunawayFailure () {
+  hasO2RunawayFailure = true
+  document.getElementById('oxygenFlush').setAttribute('disabled', '')
+  document.getElementById('mavOxygen').setAttribute('disabled', '')
+}
+
+// Stop O2 Runaway – Malfunctioning Addition Failure
+function stopO2RunawayFailure () {
+  hasO2RunawayFailure = false
+  document.getElementById('oxygenFlush').removeAttribute('disabled')
+  document.getElementById('mavOxygen').removeAttribute('disabled')
 }
 
 // FC8
 function runFC8 () {
-  if (o2RunawayFailure) {
-    o2RunawayFailure = false
-    document.getElementById('oxygenFlush').removeAttribute('disabled')
-    document.getElementById('mavOxygen').removeAttribute('disabled')
-    document.getElementById('fc8icon').classList.add('has-text-danger')
+  if ( !isFC8Active ) {
+    isFC8Active = true
     document.getElementById('fc8icon').classList.remove('has-text-success')
-    document.getElementById('FC8no').classList.remove('has-text-danger')
-    document.getElementById('solutionFC8').classList.add('is-hidden')
-  } else {
-    o2RunawayFailure = true
-    document.getElementById('oxygenFlush').setAttribute('disabled', '')
-    document.getElementById('mavOxygen').setAttribute('disabled', '')
-    document.getElementById('fc8icon').classList.remove('has-text-danger')
-    document.getElementById('fc8icon').classList.add('has-text-success')
+    document.getElementById('fc8icon').classList.add('has-text-danger')
     document.getElementById('FC8no').classList.add('has-text-danger')
     document.getElementById('solutionFC8').classList.remove('is-hidden')
+    runO2RunawayFailure ()
+  } else {
+    isFC8Active = false
+    document.getElementById('fc8icon').classList.remove('has-text-danger')
+    document.getElementById('fc8icon').classList.add('has-text-success')
+    document.getElementById('FC8no').classList.remove('has-text-danger')
+    document.getElementById('solutionFC8').classList.add('is-hidden')
+    stopO2RunawayFailure ()
   }
 }
 
 // FC9
 function runFC9 () {
-  if (o2RunawayFailure) {
-    o2RunawayFailure = false
+  if ( hasO2RunawayFailure ) {
+    hasO2RunawayFailure = false
     document.getElementById('diluentFlush').removeAttribute('disabled')
     document.getElementById('mavDiluent').removeAttribute('disabled')
     document.getElementById('fc9icon').classList.toggle('has-text-danger')
@@ -255,7 +281,7 @@ function runFC9 () {
     document.getElementById('FC9no').classList.remove('has-text-danger')
     document.getElementById('solutionFC9').classList.add('is-hidden')
   } else {
-    o2RunawayFailure = true
+    hasO2RunawayFailure = true
     document.getElementById('diluentFlush').setAttribute('disabled', '')
     document.getElementById('mavDiluent').setAttribute('disabled', '')
     document.getElementById('fc9icon').classList.toggle('has-text-danger')
@@ -337,8 +363,8 @@ function runFC12 () {
 
 // FC13
 function runFC13 () {
-  if (o2RunawayFailure) {
-    o2RunawayFailure = false
+  if ( hasO2RunawayFailure ) {
+    hasO2RunawayFailure = false
     document.getElementById('oxygenFlush').removeAttribute('disabled')
     document.getElementById('mavOxygen').removeAttribute('disabled')
     document.getElementById('fc13icon').classList.toggle('has-text-danger')
@@ -346,7 +372,7 @@ function runFC13 () {
     document.getElementById('FC13no').classList.remove('has-text-danger')
     document.getElementById('solutionFC13').classList.add('is-hidden')
   } else {
-    o2RunawayFailure = true
+    hasO2RunawayFailure = true
     document.getElementById('oxygenFlush').setAttribute('disabled', '')
     document.getElementById('mavOxygen').setAttribute('disabled', '')
     document.getElementById('fc13icon').classList.toggle('has-text-danger')
@@ -377,67 +403,67 @@ function runFC14 () {
   }
 }
 
-// FC15
-function runFC15 () {
-  if ( !isFC15Active) {
-    isFC15Active = true
+// FC+1
+function runFCp1 () {
+  if ( !isFCp1Active) {
+    isFCp1Active = true
     // TODO: O2 tank empty / Close
     // TODO: pO2 .16
-    document.getElementById('fc15icon').classList.remove('has-text-success')
-    document.getElementById('fc15icon').classList.add('has-text-danger')
-    document.getElementById('FC15no').classList.add('has-text-danger')
+    document.getElementById('fc+1icon').classList.remove('has-text-success')
+    document.getElementById('fc+1icon').classList.add('has-text-danger')
+    document.getElementById('FC+1no').classList.add('has-text-danger')
     document.getElementById('symptoms').classList.remove('is-hidden')
-    document.getElementById('fc15symptoms').classList.remove('is-hidden')
-    document.getElementById('solutionFC15').classList.remove('is-hidden')
+    document.getElementById('fc+1symptoms').classList.remove('is-hidden')
+    document.getElementById('solutionFC+1').classList.remove('is-hidden')
   } else {
-    isFC15Active = false
-    document.getElementById('fc15icon').classList.remove('has-text-danger')
-    document.getElementById('fc15icon').classList.add('has-text-success')
-    document.getElementById('FC15no').classList.remove('has-text-danger')
+    isFCp1Active = false
+    document.getElementById('fc+1icon').classList.remove('has-text-danger')
+    document.getElementById('fc+1icon').classList.add('has-text-success')
+    document.getElementById('FC+1no').classList.remove('has-text-danger')
     document.getElementById('symptoms').classList.add('is-hidden')
-    document.getElementById('fc15symptoms').classList.add('is-hidden')
-    document.getElementById('solutionFC15').classList.add('is-hidden')
+    document.getElementById('fc+1symptoms').classList.add('is-hidden')
+    document.getElementById('solutionFC+1').classList.add('is-hidden')
   }
 }
 
-// FC16
-function runFC16 () {
-  if ( !isFC16Active ) {
-    isFC16Active = true
-    document.getElementById('fc16icon').classList.remove('has-text-success')
-    document.getElementById('fc16icon').classList.add('has-text-danger')
-    document.getElementById('FC16no').classList.add('has-text-danger')
+// FC+2
+function runFCp2 () {
+  if ( !isFCp2Active ) {
+    isFCp2Active = true
+    document.getElementById('fc+2icon').classList.remove('has-text-success')
+    document.getElementById('fc+2icon').classList.add('has-text-danger')
+    document.getElementById('FC+2no').classList.add('has-text-danger')
     document.getElementById('symptoms').classList.remove('is-hidden')
-    document.getElementById('fc16symptoms').classList.remove('is-hidden')
-    document.getElementById('solutionFC16').classList.remove('is-hidden')
+    document.getElementById('fc+2symptoms').classList.remove('is-hidden')
+    document.getElementById('solutionFC+2').classList.remove('is-hidden')
   } else {
-    isFC16Active = false
-    document.getElementById('fc16icon').classList.remove('has-text-danger')
-    document.getElementById('fc16icon').classList.add('has-text-success')
-    document.getElementById('FC16no').classList.remove('has-text-danger')
+    isFCp2Active = false
+    document.getElementById('fc+2icon').classList.remove('has-text-danger')
+    document.getElementById('fc+2icon').classList.add('has-text-success')
+    document.getElementById('FC+2no').classList.remove('has-text-danger')
     document.getElementById('symptoms').classList.add('is-hidden')
-    document.getElementById('fc16symptoms').classList.add('is-hidden')
-    document.getElementById('solutionFC16').classList.add('is-hidden')
+    document.getElementById('fc+2symptoms').classList.add('is-hidden')
+    document.getElementById('solutionFC+2').classList.add('is-hidden')
   }
 }
 
-// FC17
-function runFC17 () {
-  if ( !isFC17Active ) {
-    isFC17Active = true
-    document.getElementById('fc17icon').classList.remove('has-text-success')
-    document.getElementById('fc17icon').classList.add('has-text-danger')
-    document.getElementById('FC17no').classList.add('has-text-danger')
+// FC+3
+function runFCp3 () {
+  if ( !isFCp3Active ) {
+    isFCp3Active = true
+    document.getElementById('fc+3icon').classList.remove('has-text-success')
+    document.getElementById('fc+3icon').classList.add('has-text-danger')
+    document.getElementById('FC+3no').classList.add('has-text-danger')
   } else {
-    isFC17Active = false
-    document.getElementById('fc17icon').classList.remove('has-text-danger')
-    document.getElementById('fc17icon').classList.add('has-text-success')
-    document.getElementById('FC17no').classList.remove('has-text-danger')
+    isFCp3Active = false
+    document.getElementById('fc+3icon').classList.remove('has-text-danger')
+    document.getElementById('fc+3icon').classList.add('has-text-success')
+    document.getElementById('FC+3no').classList.remove('has-text-danger')
   }
 }
 
 function randomFailure () {
-  randomNo = Math.floor(Math.random() * 18) + 1;
+  randomNo = Math.floor(Math.random() * 17) + 1;
 
   if ( randomNo == 1 ) { runFC1 () } 
   else if ( randomNo == 2 ) { runFC2 () }
@@ -453,10 +479,9 @@ function randomFailure () {
   else if ( randomNo == 12 ) { runFC12 () }
   else if ( randomNo == 13 ) { runFC13 () }
   else if ( randomNo == 14 ) { runFC14 () }
-  else if ( randomNo == 15 ) { runFC15 () }
-  else if ( randomNo == 16 ) { runFC16 () }
-  else if ( randomNo == 17 ) { runFC17 () }
-  else if ( randomNo == 18 ) { runFC18 () }
+  else if ( randomNo == 15 ) { runFCp1 () }
+  else if ( randomNo == 16 ) { runFCp2 () }
+  else if ( randomNo == 17 ) { runFCp3 () }
 }
 
 function toggleHint () {
@@ -475,8 +500,7 @@ function toggleHint () {
   document.getElementById('FC12hint').classList.toggle('is-hidden')
   document.getElementById('FC13hint').classList.toggle('is-hidden')
   document.getElementById('FC14hint').classList.toggle('is-hidden')
-  document.getElementById('FC15hint').classList.toggle('is-hidden')
-  document.getElementById('FC16hint').classList.toggle('is-hidden')
-  document.getElementById('FC17hint').classList.toggle('is-hidden')
-  document.getElementById('FC18hint').classList.toggle('is-hidden')
+  document.getElementById('FC+1hint').classList.toggle('is-hidden')
+  document.getElementById('FC+2hint').classList.toggle('is-hidden')
+  document.getElementById('FC+3hint').classList.toggle('is-hidden')
 }

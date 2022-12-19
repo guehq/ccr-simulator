@@ -109,8 +109,8 @@
           <p class='is-size-7 has-text-white'>Check:&nbsp;</p>
           <div class='buttons are-small'>
             <button id='' class='button is-dark is-rounded' onclick='alert("O2 tank status: OPEN")' title=''>O<sup>2</sup>&nbsp;tank valve</button>
-            <button id='' class='button is-dark is-rounded' onclick='alert("O2 tank pressure: " + o2spg + " bar")' title=''>O<sup>2</sup>&nbsp;SPG</button>
-            <button id='' class='button is-dark is-rounded' onclick='alert("Diluent tank pressure: " + dilspg + " bar")' title=''>Dil. SPG</button>
+            <button id='' class='button is-dark is-rounded' onclick='alert("O2 tank pressure: " + spgO2 + " bar")' title=''>O<sup>2</sup>&nbsp;SPG</button>
+            <button id='' class='button is-dark is-rounded' onclick='alert("Diluent tank pressure: " + spgDil + " bar")' title=''>Dil. SPG</button>
           </div>
         </div>
       </div>
@@ -142,103 +142,103 @@
           <ul class='menu-list'>
             <li title='O2 sensor discrepancy'>
               <a class='has-text-white' onclick='runFC1 ()'>
-                <i id='fc1icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;<span id='FC1no'>FC1</span> <span id='FC1hint'>- O<sub>2</sub> Sensor</span>
+                <i id='fc1icon' class='fa-solid fa-flag has-text-success'></i>&nbsp;<span id='FC1no'>FC1</span> <span id='FC1hint'>- O<sub>2</sub> Sensor</span>
               </a>
             </li>
 
             <li title='Moderately high but safe PO2'>
               <a class='has-text-white' onclick='runFC2 ()'>
-                <i id='fc2icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;<span id='FC2no'>FC2</span> <span id='FC2hint'>- High PO<sub>2</sub> (safe)</span>
+                <i id='fc2icon' class='fa-solid fa-flag has-text-success'></i>&nbsp;<span id='FC2no'>FC2</span> <span id='FC2hint'>- High PO<sub>2</sub> (safe)</span>
               </a>
             </li>
 
             <li title='High unsafe PO2 - Hyperoxic warning'>
               <a class='has-text-white' onclick='runFC3 ()'>
-                <i id='fc3icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;<span id='FC3no'>FC3</span> <span id='FC3hint'>- High PO<sub>2</sub> (unsafe)</span>
+                <i id='fc3icon' class='fa-solid fa-flag has-text-success'></i>&nbsp;<span id='FC3no'>FC3</span> <span id='FC3hint'>- High PO<sub>2</sub> (unsafe)</span>
               </a>
             </li>
 
             <li title='Low unsafe PO2 - Hypoxic warning'>
               <a class='has-text-white' onclick='runFC4 ()'>
-                <i id='fc4icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;<span id='FC4no'>FC4</span> <span id='FC4hint'>- Low PO<sub>2</sub></span>
+                <i id='fc4icon' class='fa-solid fa-flag has-text-success'></i>&nbsp;<span id='FC4no'>FC4</span> <span id='FC4hint'>- Low PO<sub>2</sub></span>
               </a>
             </li>
 
             <li title='Sensor current limitation and voting logic failure'>
               <a class='has-text-white' onclick='runFC5 ()'>
-                <i id='fc5icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;<span id='FC5no'>FC5</span> <span id='FC5hint'>- Sensor Limitation</span>
+                <i id='fc5icon' class='fa-solid fa-flag has-text-success'></i>&nbsp;<span id='FC5no'>FC5</span> <span id='FC5hint'>- Sensor Limitation</span>
               </a>
             </li>
 
             <li title='Controller failure'>
               <a class='has-text-white' onclick='runFC6 ()'>
-                <i id='fc6icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;<span id='FC6no'>FC6</span> <span id='FC6hint'>- Controller Failure</span>
+                <i id='fc6icon' class='fa-solid fa-flag has-text-success'></i>&nbsp;<span id='FC6no'>FC6</span> <span id='FC6hint'>- Controller Failure</span>
               </a>
             </li>
 
             <li title='Solenoid alert, interrupted O2 supply'>
               <a class='has-text-white' onclick='runFC7 ()'>
-                <i id='fc7icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;<span id='FC7no'>FC7</span> <span id='FC7hint'>- Solenoid Alert</span>
+                <i id='fc7icon' class='fa-solid fa-flag has-text-success'></i>&nbsp;<span id='FC7no'>FC7</span> <span id='FC7hint'>- Solenoid Alert</span>
               </a>
             </li>
 
             <li title='O2 runaway - Malfunctioning addition'>
               <a class='has-text-white' onclick='runFC8 ()'>
-                <i id='fc8icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;<span id='FC8no'>FC8</span> <span id='FC8hint'>- O<sub>2</sub> Runaway</span>
+                <i id='fc8icon' class='fa-solid fa-flag has-text-successX'></i>&nbsp;<span id='FC8no'>FC8</span> <span id='FC8hint'>- O<sub>2</sub> Runaway</span>
               </a>
             </li>
 
             <li title='Diluent runaway - Malfunctioning ADV'>
               <a class='has-text-white' onclick='runFC9 ()'>
-                <i id='fc9icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;<span id='FC9no'>FC9</span> <span id='FC9hint'>- Dil. Runaway</span>
+                <i id='fc9icon' class='fa-solid fa-flag has-text-successX'></i>&nbsp;<span id='FC9no'>FC9</span> <span id='FC9hint'>- Dil. Runaway</span>
               </a>
             </li>
 
             <li title='Voting failed - Voting logic failure'>
               <a class='has-text-white' onclick='runFC10 ()'>
-                <i id='fc10icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;<span id='FC10no'>FC10</span> <span id='FC10hint'>- Voting Failed</span>
+                <i id='fc10icon' class='fa-solid fa-flag has-text-successX'></i>&nbsp;<span id='FC10no'>FC10</span> <span id='FC10hint'>- Voting Failed</span>
               </a>
             </li>
 
             <li title='Hypercapnia - CO2 absorbent failure'>
               <a class='has-text-white' onclick='runFC11 ()'>
-                <i id='fc11icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;<span id='FC11no'>FC11</span> <span id='FC11hint'>- Hypercapnia</span>
+                <i id='fc11icon' class='fa-solid fa-flag has-text-successX'></i>&nbsp;<span id='FC11no'>FC11</span> <span id='FC11hint'>- Hypercapnia</span>
               </a>
             </li>
 
             <li title='Released counterlung OPV'>
               <a class='has-text-white' onclick='runFC12 ()'>
-                <i id='fc12icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;<span id='FC12no'>FC12</span> <span id='FC12hint'>- Counterlung OPV</span>
+                <i id='fc12icon' class='fa-solid fa-flag has-text-successX'></i>&nbsp;<span id='FC12no'>FC12</span> <span id='FC12hint'>- Counterlung OPV</span>
               </a>
             </li>
 
             <li title='Semi-closed operation'>
-              <a class='has-text-white'  onclick='runFC13 ()'>
-                <i id='fc13icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;<span id='FC13no'>FC13</span> <span id='FC13hint'>- SCR Operation</span>
+              <a class='has-text-white' onclick='runFC13 ()'>
+                <i id='fc13icon' class='fa-solid fa-flag has-text-successX'></i>&nbsp;<span id='FC13no'>FC13</span> <span id='FC13hint'>- SCR Operation</span>
               </a>
             </li>
 
             <li title='Caustic Cocktail'>
-              <a class='has-text-white'  onclick='runFC14 ()'>
-                <i id='fc14icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;<span id='FC14no'>FC14</span> <span id='FC14hint'>- Caustic Cocktail</span>
+              <a class='has-text-white' onclick='runFC14 ()'>
+                <i id='fc14icon' class='fa-solid fa-flag has-text-successX'></i>&nbsp;<span id='FC14no'>FC14</span> <span id='FC14hint'>- Caustic Cocktail</span>
               </a>
             </li>
 
             <li title='Hyperoxia (experience dive)'>
-              <a class='has-text-white'  onclick='runFC15 ()'>
-                <i id='fc15icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;<span id='FC15no'>FC+1</span> <span id='FC15hint'>- Hyperoxia</span>
+              <a class='has-text-white' onclick='runFCp1 ()'>
+                <i id='fc+1icon' class='fa-solid fa-flag has-text-successX'></i>&nbsp;<span id='FC+1no'>FC+1</span> <span id='FC+1hint'>- Hyperoxia</span>
               </a>
             </li>
 
             <li title='DCI (experience dive)'>
-              <a class='has-text-white'  onclick='runFC16 ()'>
-                <i id='fc16icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;<span id='FC16no'>FC+2</span> <span id='FC16hint'>- DCI</span>
+              <a class='has-text-white' onclick='runFCp2 ()'>
+                <i id='fc+2icon' class='fa-solid fa-flag has-text-successX'></i>&nbsp;<span id='FC+2no'>FC+2</span> <span id='FC+2hint'>- DCI</span>
               </a>
             </li>
 
             <li title='BOOM!'>
-              <a class='has-text-white'  onclick='runFC17 ()'>
-                <i id='fc17icon' class='fa-regular fa-circle-exclamation has-text-success'></i>&nbsp;<span id='FC17no'>FC+3</span> <span id='FC17hint'>- BOOM!</span>
+              <a class='has-text-white' onclick='runFCp3 ()'>
+                <i id='fc+3icon' class='fa-solid fa-flag has-text-successX'></i>&nbsp;<span id='FC+3no'>FC+3</span> <span id='FC+3hint'>- BOOM!</span>
               </a>
             </li>
           </ul>
@@ -286,7 +286,7 @@
                     <li>Coughing and gagging</li>
                   </ul>
 
-                  <ul id='fc15symptoms' class='is-hidden' style='list-style-type: circle; margin-left: 1.5em'>
+                  <ul id='fc+1symptoms' class='is-hidden' style='list-style-type: circle; margin-left: 1.5em'>
                     <li>Visual disturbance</li>
                     <li>Ear ringing</li>
                     <li>Nausea</li>
@@ -295,7 +295,7 @@
                     <li>Dizziness</li>
                   </ul>
 
-                  <ul id='fc16symptoms' class='is-hidden' style='list-style-type: circle; margin-left: 1.5em'>
+                  <ul id='fc+2symptoms' class='is-hidden' style='list-style-type: circle; margin-left: 1.5em'>
                     <li>Pain</li>
                     <li>Numbness</li>
                     <li>Motoric weakness</li>
@@ -459,8 +459,8 @@
                     <li>Bailout</li>
                   </ol>
 
-                  <ol id='solutionFC15' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
-                    <p class='mb-3 is-uppercase	has-text-weight-bold'>HYPEROXIA (experience dive), <span class='has-text-info'>FC15</span> SOLUTION:</p>
+                  <ol id='solutionFC+1' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
+                    <p class='mb-3 is-uppercase	has-text-weight-bold'>HYPEROXIA (experience dive), <span class='has-text-info'>FC+1</span> SOLUTION:</p>
                     <li>Signal team and stabilize</li>
                     <li>Stop and stabilize</li>
                     <li>Switch CTRL to low setpoint 0.7</li>
@@ -468,8 +468,8 @@
                     <li>Evaluate circumstances</li>
                   </ol>
 
-                  <ol id='solutionFC16' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
-                    <p class='mb-3 is-uppercase	has-text-weight-bold'>DCI (experience dive), <span class='has-text-info'>FC16</span> SOLUTION:</p>
+                  <ol id='solutionFC+2' class='is-hidden p-5' style='list-style-type: numbers; margin-left: 1.5em'>
+                    <p class='mb-3 is-uppercase	has-text-weight-bold'>DCI (experience dive), <span class='has-text-info'>FC+2</span> SOLUTION:</p>
                     <li>Descend 3m or deeper</li>
                     <li>Restart deco from this depth
                     <li>Evaluate circumstances</li>
