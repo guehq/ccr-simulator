@@ -402,68 +402,72 @@ function runFC13 () {
   }
 }
 
+// Run Caustic Cocktail
 // FC14
 function runFC14 () {
-  if (causticCocktail == false) {
-    causticCocktail = true
+  if ( !isFC14Active ) {
+    isFC14Active = true
     document.getElementById('fc14icon').classList.remove('has-text-success')
     document.getElementById('fc14icon').classList.add('has-text-danger')
     document.getElementById('FC14no').classList.add('has-text-danger')
+    document.getElementById('solutionFC14').classList.remove('is-hidden')
     document.getElementById('symptoms').classList.remove('is-hidden')
     document.getElementById('fc14symptoms').classList.remove('is-hidden')
-    document.getElementById('solutionFC14').classList.remove('is-hidden')
   } else {
-    causticCocktail = false
+    isFC14Active = false
     document.getElementById('fc14icon').classList.remove('has-text-danger')
     document.getElementById('fc14icon').classList.add('has-text-success')
     document.getElementById('FC14no').classList.remove('has-text-danger')
+    document.getElementById('solutionFC14').classList.add('is-hidden')
     document.getElementById('symptoms').classList.add('is-hidden')
     document.getElementById('fc14symptoms').classList.add('is-hidden')
-    document.getElementById('solutionFC14').classList.add('is-hidden')
   }
+}
+
+// Run Hyperoxia (experience dive)
+function runHyperoxia () {
+  ifDepthLessThan15 ()
+  loopO2 = 2.4
 }
 
 // FC+1
 function runFCp1 () {
-  if ( !isFCp1Active) {
+  if ( !isFCp1Active ) {
     isFCp1Active = true
-    // TODO: O2 tank empty / Close
-    // TODO: pO2 .16
     document.getElementById('fc+1icon').classList.remove('has-text-success')
     document.getElementById('fc+1icon').classList.add('has-text-danger')
     document.getElementById('FC+1no').classList.add('has-text-danger')
-    document.getElementById('symptoms').classList.remove('is-hidden')
-    document.getElementById('fc+1symptoms').classList.remove('is-hidden')
     document.getElementById('solutionFC+1').classList.remove('is-hidden')
+    runHyperoxia ()
   } else {
     isFCp1Active = false
     document.getElementById('fc+1icon').classList.remove('has-text-danger')
     document.getElementById('fc+1icon').classList.add('has-text-success')
     document.getElementById('FC+1no').classList.remove('has-text-danger')
-    document.getElementById('symptoms').classList.add('is-hidden')
-    document.getElementById('fc+1symptoms').classList.add('is-hidden')
     document.getElementById('solutionFC+1').classList.add('is-hidden')
   }
 }
 
+// Run DCI (experience dive)
 // FC+2
 function runFCp2 () {
   if ( !isFCp2Active ) {
+    // TODO: yükselmeyi durdurup geri derin kisima giderek deco tamamlanabilir
     isFCp2Active = true
     document.getElementById('fc+2icon').classList.remove('has-text-success')
     document.getElementById('fc+2icon').classList.add('has-text-danger')
     document.getElementById('FC+2no').classList.add('has-text-danger')
+    document.getElementById('solutionFC+2').classList.remove('is-hidden')
     document.getElementById('symptoms').classList.remove('is-hidden')
     document.getElementById('fc+2symptoms').classList.remove('is-hidden')
-    document.getElementById('solutionFC+2').classList.remove('is-hidden')
   } else {
     isFCp2Active = false
     document.getElementById('fc+2icon').classList.remove('has-text-danger')
     document.getElementById('fc+2icon').classList.add('has-text-success')
     document.getElementById('FC+2no').classList.remove('has-text-danger')
+    document.getElementById('solutionFC+2').classList.add('is-hidden')
     document.getElementById('symptoms').classList.add('is-hidden')
     document.getElementById('fc+2symptoms').classList.add('is-hidden')
-    document.getElementById('solutionFC+2').classList.add('is-hidden')
   }
 }
 
