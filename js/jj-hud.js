@@ -12,7 +12,6 @@ const S3L3 = document.getElementById('hud_sensor3_led3')
 const S3L4 = document.getElementById('hud_sensor3_led4')
 const BL = document.getElementById('hud_buddy_led')
 // TODO: BL sadece sensor 1 e bakiyor. ortalamayı almalı
-let maxT
 let hudTimer
 let reading
 
@@ -248,12 +247,13 @@ function setHudTimer () {
   let t1 = Math.abs( 10 - Math.round(s1val * 10) )
   let t2 = Math.abs( 10 - Math.round(s2val * 10) )
   let t3 = Math.abs( 10 - Math.round(s3val * 10) )
-  
-  // TODO: ARRAYli birşeyler yap
-  if ( t1 > t2 ) { maxT = t1 } else { maxT = t2 }
-  if ( t3 > maxT ) { maxT = t3 }
-  hudTimer = 750 * maxT + 3000
-  hudTimer = 10000
+
+  let maxTarray = []
+  maxTarray.push(t1, t2, t3)
+  maxTarray.sort ( function(a, b){return b-a} )
+
+  hudTimer = 750 * maxTarray[0] + 3000
+  hudTimer = 10000 // TODO: hudTimer yukarıdaki gibi dinamik olmali
 }
 
 function hudRealtime () {

@@ -300,48 +300,60 @@ function runFC9 () {
   }
 }
 
+// Run Voting Failure
+function runVotingFailedFailure () {
+  // TODO:
+  // 1 - her sensor icin ayri bir katsayı ver
+  // 2 - sensorler birbirinden uzaksa bu uyarıyı göster
+  // 3 - hud ne olacak?
+  nerdCenter.classList.add('is-hidden')
+  warningMessageFC10.classList.remove('is-hidden')
+}
+
+// Stop Voting Failure
+function stopVotingFailedFailure () {
+  nerdCenter.classList.remove('is-hidden')
+  warningMessageFC10.classList.add('is-hidden')
+}
+
 // FC10
 function runFC10 () {
-  if (votingFailure == false) {
-    votingFailure = true
-    // TODO: her sensor icin ayri bir katsayı ver
-    // TODO: sensorler birbirinden uzaksa bu uyarıyı göster
-    // TODO: hud ne olacak?
-    nerdCenter.classList.add('is-hidden')
-    warningMessageFC10.classList.remove('is-hidden')
+  if ( !isFC10Active ) {
+    isFC10Active = true
     document.getElementById('fc10icon').classList.remove('has-text-success')
     document.getElementById('fc10icon').classList.add('has-text-danger')
     document.getElementById('FC10no').classList.add('has-text-danger')
     document.getElementById('solutionFC10').classList.remove('is-hidden')
+    runVotingFailedFailure ()
   } else {
-    votingFailure = false
-    nerdCenter.classList.remove('is-hidden')
-    warningMessageFC10.classList.add('is-hidden')
+    isFC10Active = false
     document.getElementById('fc10icon').classList.remove('has-text-danger')
     document.getElementById('fc10icon').classList.add('has-text-success')
     document.getElementById('FC10no').classList.remove('has-text-danger')
     document.getElementById('solutionFC10').classList.add('is-hidden')
+    stopVotingFailedFailure ()
   }
 }
 
+// Run Hypercapnia - CO2 Absorbent Failure
 // FC11
 function runFC11 () {
-  if (co2AbsorbentFailure == false) {
-    co2AbsorbentFailure = true
+  if ( !isFC10Active ) {
+    isFC10Active = true
     document.getElementById('fc11icon').classList.remove('has-text-success')
     document.getElementById('fc11icon').classList.add('has-text-danger')
     document.getElementById('FC11no').classList.add('has-text-danger')
+    document.getElementById('solutionFC11').classList.remove('is-hidden')
     document.getElementById('symptoms').classList.remove('is-hidden')
     document.getElementById('fc11symptoms').classList.remove('is-hidden')
-    document.getElementById('solutionFC11').classList.remove('is-hidden')
   } else {
-    co2AbsorbentFailure = false
+    isFC10Active = false
     document.getElementById('fc11icon').classList.remove('has-text-danger')
     document.getElementById('fc11icon').classList.add('has-text-success')
     document.getElementById('FC11no').classList.remove('has-text-danger')
+    document.getElementById('solutionFC11').classList.add('is-hidden')
     document.getElementById('symptoms').classList.add('is-hidden')
     document.getElementById('fc11symptoms').classList.add('is-hidden')
-    document.getElementById('solutionFC11').classList.add('is-hidden')
   }
 }
 
@@ -370,24 +382,23 @@ function runFC12 () {
   }
 }
 
+// Run Semi-closed Operation
 // FC13
 function runFC13 () {
-  if ( hasSolenoidNotWorkingFailure ) {
-    hasSolenoidNotWorkingFailure = false
-    document.getElementById('oxygenFlush').removeAttribute('disabled')
-    document.getElementById('mavOxygen').removeAttribute('disabled')
-    document.getElementById('fc13icon').classList.toggle('has-text-danger')
-    document.getElementById('fc13icon').classList.toggle('has-text-success')
-    document.getElementById('FC13no').classList.remove('has-text-danger')
-    document.getElementById('solutionFC13').classList.add('is-hidden')
-  } else {
-    hasSolenoidNotWorkingFailure = true
-    document.getElementById('oxygenFlush').setAttribute('disabled', '')
-    document.getElementById('mavOxygen').setAttribute('disabled', '')
-    document.getElementById('fc13icon').classList.toggle('has-text-danger')
-    document.getElementById('fc13icon').classList.toggle('has-text-success')
+  if ( !isFC13Active ) {
+    isFC13Active = true
+    document.getElementById('fc13icon').classList.remove('has-text-success')
+    document.getElementById('fc13icon').classList.add('has-text-danger')
     document.getElementById('FC13no').classList.add('has-text-danger')
     document.getElementById('solutionFC13').classList.remove('is-hidden')
+    spgO2 = 0
+  } else {
+    isFC13Active = false
+    document.getElementById('fc13icon').classList.remove('has-text-danger')
+    document.getElementById('fc13icon').classList.add('has-text-success')
+    document.getElementById('FC13no').classList.remove('has-text-danger')
+    document.getElementById('solutionFC13').classList.add('is-hidden')
+    spgO2 = 60
   }
 }
 

@@ -52,7 +52,6 @@ let spgDil = 100
 let discrepancyFactor1 = 1
 let discrepancyFactor2 = 1
 let discrepancyFactor3 = 1
-let votingFailure = false
 let nerdCenter = document.getElementById('nerd_center_row')
 let warningMessageFC10 = document.getElementById('nerd-warning-FC10')
 
@@ -72,7 +71,6 @@ adv.textContent = '- ADV'
 let refreshADV
 
 // Symptomic Failures
-let co2AbsorbentFailure = false
 let causticCocktail = false
 
 let showSolutions = false
@@ -317,10 +315,12 @@ function diluentFlush () {
 }
 
 function oxygenFlush () {
-  ATA = depth.value / 10 + 1
-  loopO2 = 1 * ATA
-
-  checkSensors ()
+  if ( isO2TankValveOpen && spgO2 > 0 && isO2MavConnected ) {
+    ATA = depth.value / 10 + 1
+    loopO2 = 1 * ATA
+    
+    checkSensors ()
+  }
 }
 
 // SETPOINT
