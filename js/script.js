@@ -90,7 +90,6 @@ let isFCp1Active = false
 let isFCp2Active = false
 let isFCp3Active = false
 
-let randomNo
 let isTimeSpeedx1 = true
 let isTimeSpeedx2 = false
 
