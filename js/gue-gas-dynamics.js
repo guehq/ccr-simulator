@@ -3,7 +3,6 @@
 
 // NARCOSIS
 function checkNarcosis () {
-  ATA = depth.value / 10 + 1
   fO2 = document.getElementById('fO2').value / 100
   fHe = document.getElementById('fHe').value / 100
   fN2 = 1 - fO2 - fHe
@@ -18,7 +17,6 @@ function checkNarcosis () {
 
 // GAS DENSITY
 function checkDensity () {
-  ATA = depth.value / 10 + 1
   fO2 = document.getElementById('fO2').value / 100
   fHe = document.getElementById('fHe').value / 100
   fN2 = 1 - fO2 - fHe

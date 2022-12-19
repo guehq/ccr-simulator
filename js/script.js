@@ -69,6 +69,10 @@ let counterlungADVFailure = false
 let adv = document.getElementById('adv_valve')
 adv.textContent = '- ADV'
 let refreshADV
+let isDilRightValveOpen = true
+let isDilRightIsoValveOpen = true
+let isDilLeftIsoValveOpen = true
+let isDilLeftValveOpen = true
 
 // Failure Cards
 let showSolutions = false
@@ -173,10 +177,10 @@ checkSensors ();
 
 // O2 USAGE
 function o2consumption () {
-  o2scr = 0.003
-  setInterval(seto2scr, 1000)
+  o2scr = 0.003 // 1 lt/min --> .3 bar/min
+  setInterval(setO2Scr, 1000)
 
-  function seto2scr () {
+  function setO2Scr () {
     loopO2 = loopO2 - o2scr
     checkSensors ()
     checkNarcosis ()
@@ -188,16 +192,18 @@ o2consumption ()
 
 // MANUEL ADDITIONAL VALVES
 function mavDiluent () {
-  ATA = depth.value / 10 + 1
-  ppO2 = fO2 * ATA
-
-  if ( loopO2 > (ppO2 + 0.04) ) {
-    loopO2 = loopO2 - 0.05
-  } else {
-    loopO2 = ppO2
+  if ( isDilRightValveOpen && spgDil > 0 ) {
+    ATA = depth.value / 10 + 1
+    ppO2 = fO2 * ATA
+    
+    if ( loopO2 > (ppO2 + 0.04) ) {
+      loopO2 = loopO2 - 0.05
+    } else {
+      loopO2 = ppO2
+    }
+    
+    checkSensors ()
   }
-
-  checkSensors ()
 }
 
 function o2addition () {
@@ -305,15 +311,15 @@ function autoAscend () {
 
 // FLUSHES
 function diluentFlush () {
-  ATA = depth.value / 10 + 1
-  loopO2 = fO2 * ATA
+  if ( isDilRightValveOpen && spgDil > 0 ) {
+    loopO2 = fO2 * ATA
 
-  checkSensors ()
+    checkSensors ()
+  }
 }
 
 function oxygenFlush () {
   if ( isO2TankValveOpen && spgO2 > 0 && isO2MavConnected ) {
-    ATA = depth.value / 10 + 1
     loopO2 = 1 * ATA
     
     checkSensors ()
@@ -416,6 +422,7 @@ function o2ValveToggle () {
 function rightValveToggle () {
   document.getElementById('rightValve').classList.toggle('has-text-success')
   document.getElementById('rightValve').classList.toggle('has-text-danger')
+  isDilRightValveOpen = !isDilRightValveOpen
 }
 
 function rightIsoValveToggle () {
