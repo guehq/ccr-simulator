@@ -97,19 +97,19 @@
         <div class='navbar-item'>
           <p class='is-size-7 has-text-white'>Open/Close Valves:&nbsp;</p>
           <div class='buttons are-small'>
-            <button id='o2tankValve' class='button is-black has-text-success is-rounded' onclick='o2ValveToggle ()' title='O2 Tank Valve'>O<sup>2</sup>&nbsp;</button>
-            <button id='rightValve' class='button is-dark has-text-successX is-rounded' onclick='rightValveToggle ()' title='Right Post Valve' disabled>Right</button>
-            <button id='rightIsoValve' class='button is-dark has-text-successX is-rounded' onclick='rightIsoValveToggle ()' title='Right Post Valve' disabled>Right Iso</button>
-            <button id='leftIsoValve' class='button is-dark has-text-successX is-rounded' onclick='leftIsoValveToggle ()' title='Right Post Valve' disabled>Left Iso</button>
             <button id='leftValve' class='button is-dark has-text-successX is-rounded' onclick='leftValveToggle ()' title='Left Post Valve' disabled>Left</button>
+            <button id='leftIsoValve' class='button is-dark has-text-successX is-rounded' onclick='leftIsoValveToggle ()' title='Right Post Valve' disabled>Left Iso</button>
+            <button id='rightIsoValve' class='button is-dark has-text-successX is-rounded' onclick='rightIsoValveToggle ()' title='Right Post Valve' disabled>Right Iso</button>
+            <button id='rightValve' class='button is-black has-text-success is-rounded' onclick='rightValveToggle ()' title='Right Post Valve'>Right</button>
+            <button id='o2tankValve' class='button is-black has-text-success is-rounded' onclick='o2ValveToggle ()' title='O2 Tank Valve'>O<sup>2</sup>&nbsp;</button>
           </div>
         </div>
 
         <div class='navbar-item'>
           <p class='is-size-7 has-text-white'>Check SPG:&nbsp;</p>
           <div class='buttons are-small'>
-            <button id='' class='button is-black is-rounded' onclick='alert("O2 tank pressure: " + spgO2 + " bar")' title=''>O<sup>2</sup></button>
             <button id='' class='button is-black is-rounded' onclick='alert("Diluent tank pressure: " + spgDil + " bar")' title=''>Dil.</button>
+            <button id='' class='button is-black is-rounded' onclick='alert("O2 tank pressure: " + spgO2 + " bar")' title=''>O<sup>2</sup></button>
           </div>
         </div>
       </div>
