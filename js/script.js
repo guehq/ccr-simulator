@@ -64,8 +64,8 @@ let isO2MavConnected = true
 let isO2TankValveOpen = true
 
 // Dil Failures
-let diluentRunawayFailure = false
-let counterlungADVFailure = false
+let hasDilMavFailure = false
+let hasCLOpvFailure = false
 let adv = document.getElementById('adv_valve')
 adv.textContent = '- ADV'
 let refreshADV
@@ -193,15 +193,26 @@ o2consumption ()
 // MANUEL ADDITIONAL VALVES
 function mavDiluent () {
   if ( isDilRightValveOpen && spgDil > 0 ) {
+
+    setTimeout( function () {
+      adv.textContent = '- ADV [ACTIVE]'
+      adv.classList.add('active')
+    }, 100 )
+
+    setTimeout( function () {
+      adv.textContent = '- ADV'
+      adv.classList.remove('active')
+    }, 1000 )
+    
     ATA = depth.value / 10 + 1
     ppO2 = fO2 * ATA
-    
+
     if ( loopO2 > (ppO2 + 0.04) ) {
       loopO2 = loopO2 - 0.05
     } else {
       loopO2 = ppO2
     }
-    
+
     checkSensors ()
   }
 }
