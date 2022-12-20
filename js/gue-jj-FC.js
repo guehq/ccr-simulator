@@ -350,8 +350,8 @@ function runFC10 () {
 // Run Hypercapnia - CO2 Absorbent Failure
 // FC11
 function runFC11 () {
-  if ( !isFC10Active ) {
-    isFC10Active = true
+  if ( !isFC11Active ) {
+    isFC11Active = true
     document.getElementById('fc11icon').classList.remove('has-text-success')
     document.getElementById('fc11icon').classList.add('has-text-danger')
     document.getElementById('FC11no').classList.add('has-text-danger')
@@ -359,7 +359,7 @@ function runFC11 () {
     document.getElementById('symptoms').classList.remove('is-hidden')
     document.getElementById('fc11symptoms').classList.remove('is-hidden')
   } else {
-    isFC10Active = false
+    isFC11Active = false
     document.getElementById('fc11icon').classList.remove('has-text-danger')
     document.getElementById('fc11icon').classList.add('has-text-success')
     document.getElementById('FC11no').classList.remove('has-text-danger')
@@ -369,28 +369,23 @@ function runFC11 () {
   }
 }
 
+// Run Released Counterlung OPV Failure
 // FC12
 function runFC12 () {
-  if ( hasCLOpvFailure == false ) {
-    hasCLOpvFailure = true
+  if ( !isFC12Active ) {
+    isFC12Active = true
     document.getElementById('fc12icon').classList.remove('has-text-success')
     document.getElementById('fc12icon').classList.add('has-text-danger')
     document.getElementById('FC12no').classList.add('has-text-danger')
     document.getElementById('solutionFC12').classList.remove('is-hidden')
-
-    refreshADV = setInterval(mavDiluent, 1000)
-    adv.textContent = '- ADV [ACTIVE]'
-    adv.classList.add('active')
+    runDilRunawayFailure ()
   } else {
-    hasCLOpvFailure = false
+    isFC12Active = false
     document.getElementById('fc12icon').classList.remove('has-text-danger')
     document.getElementById('fc12icon').classList.add('has-text-success')
     document.getElementById('FC12no').classList.remove('has-text-danger')
     document.getElementById('solutionFC12').classList.add('is-hidden')
-
-    clearInterval(refreshADV)
-    adv.textContent = '- ADV'
-    adv.classList.remove('active')
+    stopDilRunawayFailure ()
   }
 }
 
