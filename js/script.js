@@ -65,7 +65,6 @@ let isO2TankValveOpen = true
 
 // Dil Failures
 let hasDilMavFailure = false
-let hasCLOpvFailure = false
 let adv = document.getElementById('adv_valve')
 adv.textContent = '- ADV'
 let refreshADV
