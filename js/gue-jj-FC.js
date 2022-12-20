@@ -181,6 +181,7 @@ function runControllerFailure () {
   document.getElementById('hideNerd').disabled = true
   document.getElementById('showNerd').disabled = true
   document.getElementById('sp_7').checked = true
+  document.getElementById('sp_12').setAttribute('disabled', '')
 }
 
 // Stop Controller Failure 
@@ -190,6 +191,7 @@ function stopControllerFailure () {
   document.getElementById('nerd_bottom_row').classList.remove('is-hidden')
   document.getElementById('hideNerd').disabled = false
   document.getElementById('showNerd').disabled = false
+  document.getElementById('sp_12').removeAttribute('disabled')
 }
 
 // FC6
@@ -279,24 +281,34 @@ function runFC8 () {
   }
 }
 
+// Run Diluent Runaway - Mulfunctioning ADV Failure
+function runDilRunawayFailure () {
+  hasDilMavFailure = true
+  refreshADV = setInterval(mavDiluent, 1000)
+}
+
+// Stop Diluent Runaway - Mulfunctioning ADV Failure
+function stopDilRunawayFailure () {
+  hasDilMavFailure = false
+  clearInterval(refreshADV)
+}
+
 // FC9
 function runFC9 () {
-  if ( hasSolenoidNotWorkingFailure ) {
-    hasSolenoidNotWorkingFailure = false
-    document.getElementById('diluentFlush').removeAttribute('disabled')
-    document.getElementById('mavDiluent').removeAttribute('disabled')
-    document.getElementById('fc9icon').classList.toggle('has-text-danger')
-    document.getElementById('fc9icon').classList.toggle('has-text-success')
-    document.getElementById('FC9no').classList.remove('has-text-danger')
-    document.getElementById('solutionFC9').classList.add('is-hidden')
-  } else {
-    hasSolenoidNotWorkingFailure = true
-    document.getElementById('diluentFlush').setAttribute('disabled', '')
-    document.getElementById('mavDiluent').setAttribute('disabled', '')
-    document.getElementById('fc9icon').classList.toggle('has-text-danger')
-    document.getElementById('fc9icon').classList.toggle('has-text-success')
+  if ( !isFC9Active ) {
+    isFC9Active = true
+    document.getElementById('fc9icon').classList.remove('has-text-success')
+    document.getElementById('fc9icon').classList.add('has-text-danger')
     document.getElementById('FC9no').classList.add('has-text-danger')
     document.getElementById('solutionFC9').classList.remove('is-hidden')
+    runDilRunawayFailure ()
+  } else {
+    isFC9Active = false
+    document.getElementById('fc9icon').classList.remove('has-text-danger')
+    document.getElementById('fc9icon').classList.add('has-text-success')
+    document.getElementById('FC9no').classList.remove('has-text-danger')
+    document.getElementById('solutionFC9').classList.add('is-hidden')
+    stopDilRunawayFailure ()
   }
 }
 
@@ -359,8 +371,8 @@ function runFC11 () {
 
 // FC12
 function runFC12 () {
-  if (counterlungADVFailure == false) {
-    counterlungADVFailure = true
+  if ( hasCLOpvFailure == false ) {
+    hasCLOpvFailure = true
     document.getElementById('fc12icon').classList.remove('has-text-success')
     document.getElementById('fc12icon').classList.add('has-text-danger')
     document.getElementById('FC12no').classList.add('has-text-danger')
@@ -370,7 +382,7 @@ function runFC12 () {
     adv.textContent = '- ADV [ACTIVE]'
     adv.classList.add('active')
   } else {
-    counterlungADVFailure = false
+    hasCLOpvFailure = false
     document.getElementById('fc12icon').classList.remove('has-text-danger')
     document.getElementById('fc12icon').classList.add('has-text-success')
     document.getElementById('FC12no').classList.remove('has-text-danger')
